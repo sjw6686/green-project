@@ -1,0 +1,64 @@
+MyBatis - 동적 쿼리 사용하기
+
+1. 기본적인 동적 쿼리
+    <select id="search" resultMap="boardVo" parameterType="map">
+      SELECT * FROM BOARD WHERE ${searchType} = #{keyword}
+    </select>
+
+map 형식으로 검색 타입과 키워드를 받아와서 처리
+  WHERE 절에서 검색 타입은 ${ } 로 전달하며 키워드는 #{ } 로 전달한다.
+
+${ } 는 파라미터 값이 그대로 들어가며 #{ } 는 파라미터 값이 ' ' 으로 감싸진다.
+
+2. if문을 이용한 동적 쿼리
+    <select id="search" resultMap="boardVo">
+      SELECT * FROM BOARD WHERE 1=1 
+      <if test="searchType != null and searchType != ''">
+          AND NAME LIKE '%' || #{keyword} || '%'
+      </if> 
+      <if test="gender != null and gender != ''">
+          AND GENDER = #{gender}
+      </if>      
+    </select>
+
+3. choose, when, otherwise 를 이용한 동적 쿼리
+  
+    <select id="search" resultMap="boardVo">
+      SELECT * FROM BOARD WHERE 1=1 
+      <choose>
+       <when test="searchType != null and searchType != ''">
+          AND NAME LIKE '%' || #{keyword} || '%'
+       </when> 
+       <when test="gender != null and gender != ''">
+          AND GENDER = #{gender}
+       </when>
+       <otherwise>
+          AND BOARD_ID = 1
+       </otherwise>
+      </choose>
+    </select>
+
+4. foreach문을 이용한 동적 쿼리
+    <select id="search3" parameterType="map" resultMap="boardVo"> 
+      SELECT BOARD WHERE BOARD_ID IN
+      <foreach collection="jobList" item='job' index='i' open="(" close=")" separator=",">
+          #{job}              
+      </foreach>
+    </select>
+
+foreach문을 이용하면 배열이나 List 등으로 값이 넘어왔을 때 처리해줄 수 있다.
+
+collection 속성에 배열, List 객체가 들어가며 item 속성은 변수 이름을 지정한다.
+index 속성은 인덱스 변수 이름을 지정한다.
+
+open과 close 속성은 collection을 처리할 때 열고 닫는 문자열을 정하는 것이다.
+separator 속성은 구분자이다.
+
+open="(" close=")" separator="," 로 설정했기 때문에
+(1, 2, 3, 4) 처럼 값이 들어갈 것 이다.
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="User">
+
+    <select id="UserList"
+      resultType="com.green.restaurant.user.vo.UserVo">
+      	SELECT
+      		user_id as userId,
+      		user_pw as userPw,
+      		user_tel as userTel,
+      		join_date as joinDate,
+      		user_state as userState,
+      		like_restaurant as likeRestaurant,
+      		user_role as userRole
+        FROM
+        	tuser
+    </select>
+      
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

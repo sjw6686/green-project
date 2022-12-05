@@ -1,0 +1,59 @@
+로그인
+답변형
+댓글
+
+자료실 - 파일업로드
+페이징
+
+자료실(pds) - 파일업로드
+                                           nginx, apache
+클라이언트 컴                           -> 서버(웹)      -> was(tomcat) 
+게시글(title, cont, writer, menu_id )
+ + 파일첨부(류현진.jpg, 류현진.mp4)                          vo      -> sqlsession
+                          500mb                             TEXT data 
+                                                            writer 
+<form action="" method="POST"                               menu_id  
+    enctype="multipart/form-data">                          cont 
+<input type="hidden" name="menu_id" value="" />             title
+제목<input type="text" name="title" />                      
+저자<input type="text" name="writer" />
+<textarea name="cont"></textarea>                        binary data (라이브러리)
+<input type="file" name="file1" />                         file1  
+<input type="file" name="file2" />                         file2
+<input type="submit" />                                    업로드경로 <- 파일저장 
+</form>
+
+oracle 저장되는 정보
+  title    varchar2
+  menu_id  varchar2
+  writer   varchar2
+  cont     varchar2
+
+  file1    varchar2 (파일경로 + 파일이름) : X long -> clob   -> blob
+  file2    varchar2 (파일경로 + 파일이름)
+
+   board    files
+   3  c    1 손흥민.jpg,   3
+           2 손흥민2.jpg,  3 
+           3 손흥민3.mp4,  3
+           4 손흥민4.jpg   3
+   2  b   
+   1  a    5 류현진.png,  1
+           6 류현진.mp4   1
+
+0123456789012345678
+2022-11-02 11:13:10
+
+
+INSERT ALL 
+   INTO FILES VALUES ( GET_FILENUM(), , ,  )
+   INTO FILES VALUES ( GET_FILENUM(), , ,   )
+   INTO FILES VALUES ( GET_FILENUM(), , ,   )
+   INTO FILES VALUES ( GET_FILENUM(), , ,   )    
+SELECT * FROM DUAL;
+;      
+
+
+
+
+
