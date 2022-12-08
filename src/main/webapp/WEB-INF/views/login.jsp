@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 <body>
-	<h2>login</h2>
-	<form action="/restaurant/owner/loginProcess" method="post">
+	<h2>로그인</h2>
+	<form action="/restaurant/user/loginProcess" method="post">
 		아이디입력<br>
-		<input type="text" name="ownerId" /><br>
+		<input type="text" name="userId" /><br>
 		비밀번호입력<br>
-		<input type="password" name="ownerPw" />
+		<input type="password" name="userPw" />
 		<input type="submit" value="로그인" />
 	</form>
 </body>
