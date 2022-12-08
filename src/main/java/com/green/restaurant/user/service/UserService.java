@@ -1,11 +1,13 @@
 package com.green.restaurant.user.service;
 
-import java.util.List;
+import java.util.HashMap;
 
 import com.green.restaurant.user.vo.UserVo;
 
 public interface UserService {
 
-	List<UserVo> getUserList();
+	UserVo login(HashMap<String, Object> map);
+
+	void signUpUser(HashMap<String, Object> map);
 
 }

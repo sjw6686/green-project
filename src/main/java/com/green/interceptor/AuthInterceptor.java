@@ -28,19 +28,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestUrl: " + requestUrl);
 		// 하단의 Url 체크를 통해, login 페이지는 예외처리를
 		//    해주어야만 무한 리디렉션을 벗어날 수 있다.
-		if(requestUrl.contains("/home")) {
-			return true;
-		}
 		if(requestUrl.contains("/user")) {
 			return true;
 		}
-		if(requestUrl.contains("/loginProcess")) {
+		else if(requestUrl.contains("/loginProcess")) {
 			return true;
 		}
-		if(requestUrl.contains("/signUp")) {
+		else if(requestUrl.contains("/signUp")) {
 			return true;
 		}
-		if(requestUrl.contains("/signUpProcess")) {
+		else if(requestUrl.contains("/signUpProcess")) {
 			return true;
 		}
 		//-------------------------------------------------

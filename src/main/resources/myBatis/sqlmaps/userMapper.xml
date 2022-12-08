@@ -4,28 +4,68 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="User">
-
-    <select id="UserList"
-      resultType="com.green.restaurant.user.vo.UserVo">
-      	SELECT
-      		user_id as userId,
-      		user_pw as userPw,
-      		user_tel as userTel,
-      		join_date as joinDate,
-      		user_state as userState,
-      		like_restaurant as likeRestaurant,
-      		user_role as userRole
-        FROM
-        	tuser
+    
+    <select id = "login"
+    	resultType="com.green.restaurant.user.vo.UserVo">
+    	SELECT
+    		user_id as userId,
+    		user_pw as userPw,
+    		user_tel as userTel,
+    		join_date as joinDate,
+    		like_idx as likeIdx,
+    		user_role as userRole
+    	FROM
+    		tuser
+    	WHERE
+    		user_id = #{userId}
+    	AND
+    		user_pw = #{userPw}
+    </select>
+    
+    <select id="loginAuth"
+    	resultType="com.green.restaurant.user.vo.UserVo">
+    	SELECT
+    		u.user_id as userId,
+    		u.user_pw as userPw,
+    		u.user_tel as userTel,
+    		u.join_date as joinDate,
+    		u.like_idx as likeIdx,
+    		u.user_role as userRole,
+    		o.owner_idx as ownerIdx,
+    		o.owner_num as ownerNum,
+    		o.restaurant_idx as restaurantIdx,
+    		o.user_enable as userEnable
+    	FROM
+    		tuser u
+    	INNER JOIN
+    		towner o
+    	ON
+    		u.user_id = o.user_id
+    	WHERE
+    		u.user_id = #{userId}
+    	AND
+    		u.user_pw = #{userPw}
     </select>
       
+	<insert id="SignUp">
+		INSERT INTO
+			tuser(
+				user_id,
+				user_pw,
+				user_tel,
+				join_date,
+				user_role
+			)
+		VALUES(
+			#{userId},
+			#{userPw},
+			#{userTel},
+			SYSDATE,
+			'USER'
+		)
+	</insert>
+	
 </mapper>
-
-
-
-
-
-
 
 
 

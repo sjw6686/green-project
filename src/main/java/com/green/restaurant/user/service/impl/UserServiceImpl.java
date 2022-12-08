@@ -1,6 +1,6 @@
 package com.green.restaurant.user.service.impl;
 
-import java.util.List;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,16 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public List<UserVo> getUserList() {
-		List<UserVo> userList = this.userDao.getUserList();
-		return userList;
+	public UserVo login(HashMap<String, Object> map) {
+		System.out.println("ownerService>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>login() called");
+		UserVo userVo = this.userDao.login(map);
+		return userVo;
+	}
+
+	@Override
+	public void signUpUser(HashMap<String, Object> map) {
+		System.out.println("service.signUpUser>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
+		this.userDao.insertUser(map);
 	}
 	
 }

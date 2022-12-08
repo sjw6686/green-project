@@ -2,58 +2,32 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
 <mapper namespace="Owner">
 
-    <select id="OwnerList"
-      resultType="com.green.restaurant.owner.vo.OwnerVo">
-    	SELECT
-    		owner_id as ownerId,
-    		owner_num as ownerNum,
-    		owner_pw as ownerPw,
-    		owner_name as ownerName,
-    		owner_tel as ownerTel,
-    		owner_enable as ownerEnable,
-    		join_date as joinDate,
-    		user_role as userRole
-    	FROM
-    		towner
-    </select>
-    
-    <select id = "login"
-    	resultType="com.green.restaurant.owner.vo.OwnerVo">
-    	SELECT
-    		owner_id as ownerId,
-    		owner_pw as ownerPw
-    	FROM
-    		towner
-    	WHERE
-    		owner_id = #{ownerId}
-    	AND
-    		owner_pw = #{ownerPw}
-    </select>
-    
-    <insert id="OwnerInsert">
-    	INSERT INRO
-    		towner(
-    			owner_id,
-    			owner_num,
-    			owner_pw,
-    			owner_name,
-    			owner_tel,
-    			owner_enable,
-    			join_date,
-    			user_role
-    		)
-    	VALUES(
-    		#{ownerId},
-    		#{ownerNum},
-    		#{ownerPw},
-    		#{ownerName},
-    		#{ownerTel},
-    		0,
-    		SYSDATE,
-    		'OWNER'
-    	)
-    </insert>
-      
+	<insert id="EnrollRestaurant">
+		INSERT INTO
+		    restaurant(
+		        restaurant_idx,
+		        brand_name,
+		        address,
+		        brand_tel,
+		        introduce,
+		        enroll_date,
+		        owner_idx
+		    )
+		VALUES(
+		    (SELECT
+		        MAX(restaurant_idx) + 1
+		    FROM
+		        restaurant),
+		    #{brandName},
+		    #{address},
+		    #{brandTel},
+		    #{introduce},
+		    SYSDATE,
+		    #{ownerIdx}
+		)
+	</insert>
+
 </mapper>
