@@ -14,7 +14,9 @@
 		        brand_tel,
 		        introduce,
 		        enroll_date,
-		        owner_idx
+		        owner_idx,
+		        category_name,
+		        table_type
 		    )
 		VALUES(
 		    (SELECT
@@ -26,7 +28,9 @@
 		    #{brandTel},
 		    #{introduce},
 		    SYSDATE,
-		    #{ownerIdx}
+		    #{ownerIdx},
+		    #{categoryName},
+		    #{table_type}
 		)
 	</insert>
 

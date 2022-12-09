@@ -19,16 +19,18 @@ public class PdsFile {
 			HashMap<String, Object> map,
 			HttpServletRequest request
 			) {
+		System.out.println("PdsFile.save>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>in save");
 		String filePath = "c:\\upload\\";
 		File dir = new File(filePath);
 		if(!dir.exists()) {
 			dir.mkdir();	//파일지정될 경로 없으면 생성
 		}
+		System.out.println("PdsFile.save>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after if");
 		CheckFileName checkFile = new CheckFileName();	//중복파일저장을위해 추가
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;	//파일저장 라이브러리. 서비스로부터 넘어온 파일정보를 MultipartHttpServletRequest자료형으로 바꾼후 multipartHttpServletRequest변수로 저장
 		
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();	//중복되는 파일이름을 다르게 처리해주기위해 Iterator이용
-		
+		System.out.println("PdsFile.save>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after iterator");
 		MultipartFile multipartFile = null;
 		
 		List<FilesVo> filesList = new ArrayList<>();
@@ -39,6 +41,7 @@ public class PdsFile {
 		String sFileName = null;
 		
 		while(iterator.hasNext()) {
+			System.out.println("PdsFile.save>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>in while");
 			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 			
 			if(!multipartFile.isEmpty()) {
@@ -48,7 +51,7 @@ public class PdsFile {
 				
 				sFileName = checkFile.getFileName(filePath, orgFileName, fileExt);	//checkFileName의 getFileName이용해서 중복체크한다음 실제 db에 저장될 파일이름 구함
 				
-				FilesVo vo = new FilesVo(0, 0, fileName, fileExt, sFileName);
+				FilesVo vo = new FilesVo(0, 0, fileName, fileExt, sFileName, 0);
 				filesList.add(vo);
 				
 				File file = new File(filePath + sFileName);
@@ -63,5 +66,6 @@ public class PdsFile {
 			}//end of if
 		}//end of while		
 		map.put("filesList", filesList);
+		System.out.println("PdsFile.save>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
 	}
 }

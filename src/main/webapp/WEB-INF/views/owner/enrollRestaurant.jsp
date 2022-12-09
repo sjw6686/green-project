@@ -25,7 +25,7 @@
 		<a href="/">홈으로</a>
 	</div>
 	<div>
-		<form id="resForm" action="/restaurant/owner/enrollProcess" method="post">
+		<form id="resForm" action="/restaurant/owner/enrollProcess" method="post" enctype="multipart/form-data">
 			<label>식당이름</label><br>
 			<input type="text" name="brandName" id="brandName" /><br>
 			<label>식당주소</label><br>

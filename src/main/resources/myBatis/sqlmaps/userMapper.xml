@@ -12,7 +12,6 @@
     		user_pw as userPw,
     		user_tel as userTel,
     		join_date as joinDate,
-    		like_idx as likeIdx,
     		user_role as userRole
     	FROM
     		tuser
@@ -29,11 +28,9 @@
     		u.user_pw as userPw,
     		u.user_tel as userTel,
     		u.join_date as joinDate,
-    		u.like_idx as likeIdx,
     		u.user_role as userRole,
     		o.owner_idx as ownerIdx,
     		o.owner_num as ownerNum,
-    		o.restaurant_idx as restaurantIdx,
     		o.user_enable as userEnable
     	FROM
     		tuser u

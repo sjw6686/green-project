@@ -7,18 +7,23 @@
 	<insert id="FileInsert">
 		INSERT INTO
 			img_file(
-				user_id,
-				user_pw,
-				user_tel,
-				join_date,
-				user_role
+				file_idx,
+				table_type,
+				file_name,
+				file_ext,
+				sfile_name,
+				table_idx
 			)
 		VALUES(
-			#{userId},
-			#{userPw},
-			#{userTel},
-			SYSDATE,
-			'USER'
+			(SELECT
+				MAX(file_idx) + 1
+			FROM
+				img_file),
+			2,
+			#{file_name},
+			#{file_ext},
+			#{sfile_name},
+			#{stable_idx}
 		)
 	</insert>
 </mapper>
