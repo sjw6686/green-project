@@ -18,11 +18,16 @@ public class CheckFileName {
 		while(isCheck) {
 			fullFilePath = filePath + fileName + fileExt;
 			file = new File(fullFilePath);
+			System.out.println("getFileName.while>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>file: " + file.exists());
+			System.out.println("getFileName.while>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>orgFileName: " + orgFileName);
 			if(file.exists()) {
+				System.out.println("getFileName.while.if>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>fileName: " + orgFileName);
 				i += 1;
-				fileName = String.format("&s_%d", orgFileName, i);
+				fileName = String.format("%s_%d", orgFileName, i);	//error 발생
+				System.out.println("getFileName.if>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>fileName: " + fileName);
 			}
 			else {
+				System.out.println("getFileName.else>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>file: " + file.exists());
 				isCheck = false;
 			}
 		}

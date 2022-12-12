@@ -42,22 +42,28 @@ public class PdsFile {
 		
 		while(iterator.hasNext()) {
 			System.out.println("PdsFile.save>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>in while");
+			System.out.println("PdsFile.save>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
 			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 			
 			if(!multipartFile.isEmpty()) {
+				System.out.println("PdsFile.save.if>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>in if: " + multipartFile.toString());
 				fileName = multipartFile.getOriginalFilename();	//전체파일이름 받음
 				orgFileName = fileName.substring(0, fileName.lastIndexOf('.'));	//파일이름 첫글자부터 . 이 나올때까지 저장
 				fileExt = fileName.substring(fileName.lastIndexOf('.'));		//파일이름중 .이 있는위치부터 저장
 				
 				sFileName = checkFile.getFileName(filePath, orgFileName, fileExt);	//checkFileName의 getFileName이용해서 중복체크한다음 실제 db에 저장될 파일이름 구함
-				
+				System.out.println("PdsFile.save.if>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sFileName: " + sFileName);
 				FilesVo vo = new FilesVo(0, 0, fileName, fileExt, sFileName, 0);
 				filesList.add(vo);
 				
 				File file = new File(filePath + sFileName);
 				
+				System.out.println("PdsFile.save.if>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>file: " + file.toString());
+				
 				try {
+					System.out.println("PdsFile.save.try>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>file: " + file);
 					multipartFile.transferTo(file);//파일저장
+					
 				} catch(IllegalStateException e) {
 					e.printStackTrace();
 				} catch(IOException e) {
