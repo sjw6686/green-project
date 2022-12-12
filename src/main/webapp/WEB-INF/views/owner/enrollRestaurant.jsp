@@ -10,8 +10,9 @@
 	   var num = 1;
 	   $(function() {
 		   $('#btnAddFile').on('click', function() {
-			   let tag  = '<input type="text" name=\"menu' + num + '\"/>';
-			   tag += '<input type="file" name=\"upfile' + num + '\"/><br>';
+			   let tag  = '<input type="text" name=\"menu' + num + '\" />';
+			   tag += '<input type="text" name=\"price' + num + '\" />';
+			   tag += '<input type="file" name=\"upfile' + num + '\ "/><br>';
 			   $('#addMenu').append( tag  );
 			  // alert(tag);
 			   num++;
@@ -33,7 +34,7 @@
 			<label>식당 전화번호</label><br>
 			<input type="text" name="brandTel" id="brandTel" /><br>
 			<label>카테고리</label><br>
-			<select name = "category" id = catagory>
+			<select name = "category_name" id = catagory>
 				<option value="한식">한식</option>
 				<option value="중식">중식</option>
 				<option value="일식">일식</option>
@@ -43,11 +44,11 @@
 
 			<label>메뉴등록</label><br>
 			<div id="addMenu">
-				<input type="text" name="menu_name" placeholder="메뉴이름" />
-				<input type="text" name="menu_price" placeholder="메뉴가격" /><br>
+				<input type="text" name="menu" placeholder="메뉴이름" />
+				<input type="text" name="price" placeholder="메뉴가격" />
 	           	<input type="file" name="upfile" class="upfile" /><br>
-				<input type="button" id="btnAddFile" value="메뉴추가"/><br>
 			</div>
+				<input type="button" id="btnAddFile" value="메뉴추가"/><br>
 			
 			<br><input type="submit" value="가게등록" />
 		</form>

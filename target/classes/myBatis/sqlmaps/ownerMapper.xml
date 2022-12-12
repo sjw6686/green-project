@@ -28,8 +28,8 @@
 		    #{brandTel},
 		    #{introduce},
 		    SYSDATE,
-		    #{ownerIdx},
-		    #{category},
+		    #{owner_idx},
+		    #{category_name},
 		    3
 		)
 	</insert>
@@ -89,9 +89,12 @@
 				MAX(menu_idx)+1
 			FROM
 				menu),
-			#{menu_name},
-			#{menu_price},
-			#{restaurant_idx}
+			#{menu},
+			#{price},
+			(SELECT
+				MAX(restaurant_idx)
+			FROM
+				restaurant),
 			2
 		)
 	</insert>

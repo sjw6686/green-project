@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="Pds">
-	<insert id="FileInsert">
+	<insert id="MenuFileInsert" parameterType="java.util.List">
 		INSERT INTO
 			img_file(
 				file_idx,
@@ -14,16 +14,22 @@
 				sfile_name,
 				table_idx
 			)
-		VALUES(
+		VALUES
+		<foreach collection="filesList" item="filesList" separator=",">
+		(
 			(SELECT
 				MAX(file_idx) + 1
 			FROM
 				img_file),
 			2,
-			#{file_name},
-			#{file_ext},
-			#{sfile_name},
-			#{mTable_idx}
+			#{filesList.file_name},
+			#{filesList.file_ext},
+			#{filesList.sfile_name},
+			(SELECT
+				MAX(menu_idx)
+			FROM
+				menu)
 		)
+		</foreach>
 	</insert>
 </mapper>

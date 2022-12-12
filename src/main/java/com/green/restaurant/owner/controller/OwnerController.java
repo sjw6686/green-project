@@ -38,14 +38,13 @@ public class OwnerController {
 	@RequestMapping("/enrollProcess")
 	public String enrollProcess(
 			@SessionAttribute("login") UserVo userVo,
-			@RequestParam HashMap<String, Object> map,
+			@RequestParam  HashMap<String, Object> map,
 			HttpServletRequest request		//파일정보 받기위해 추가
 			) {
-		System.out.println("ownerCtrl.enrollProcess>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>session.ownerIdx: " + userVo.getOwnerIdx());
+		map.put("owner_idx", userVo.getOwnerIdx());
+		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
-		
-		map.put("ownerIdx", userVo.getOwnerIdx());	//사장 idx번호를 map에 담음
 		
 		this.ownerService.enrollRestorant(map, request);
 		
