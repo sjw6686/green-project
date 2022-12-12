@@ -29,9 +29,50 @@
 		    #{introduce},
 		    SYSDATE,
 		    #{ownerIdx},
-		    #{categoryName},
-		    #{table_type}
+		    #{category},
+		    3
 		)
 	</insert>
+	
+	<select id="MyRestaurantList"
+		resultType="com.green.restaurant.owner.vo.RestaurantVo">
+		SELECT
+			restaurant_idx as restaurantIdx,
+			brand_name as brandName,
+			address as address,
+			brand_tel as brandTel,
+			introduce as introduce,
+			enroll_date as enrollDate,
+			owner_idx as ownerIdx,
+			category_name as categoryName,
+			table_type as tableType
+		FROM
+			restaurant
+		WHERE
+			owner_idx = #{ownerIdx}
+	</select>
+	
+	<select id="GetMyRestaurant"
+		resultType="com.green.restaurant.owner.vo.RestaurantJoinMenu">
+		SELECT
+			r.restaurant_idx,
+		    r.brand_name,
+		    r.address,
+		    r.brand_tel,
+		    r.introduce,
+		    r.enroll_date,
+		    r.owner_idx,
+		    m.menu_idx,
+		    m.menu_name,
+		    m.menu_price
+		FROM
+		    restaurant r
+		JOIN
+		    menu m
+		ON
+		    r.restaurant_idx = m.restaurant_idx
+		WHERE  
+		    r.restaurant_idx = #{restaurant_idx}
+	</select>
 
 </mapper>

@@ -33,21 +33,22 @@
 			<label>식당 전화번호</label><br>
 			<input type="text" name="brandTel" id="brandTel" /><br>
 			<label>카테고리</label><br>
-			<select name = "catagory" id = catagory>
+			<select name = "category" id = catagory>
 				<option value="한식">한식</option>
 				<option value="중식">중식</option>
 				<option value="일식">일식</option>
 			</select>
 			<label>간단한 소개글</label><br>
 			<textarea name="introduce" id="introduce"></textarea><br>
+			<!-- 
 			<label>메뉴등록</label><br>
-			<!-- 메뉴등록 -->
 			<div id="addMenu">
-				<input type="text" name="menu" value="메뉴이름" />
+				<input type="text" name="menu_name" value="메뉴이름" /><br>
+				<input type="text" name="menu_price" value="메뉴이름" /><br>
 	           	<input type="file" name="upfile" class="upfile" /><br>
 				<input type="button" id="btnAddFile" value="메뉴추가"/><br>
 			</div>
-			
+			-->
 			<br><input type="submit" value="가게등록" />
 		</form>
 	</div>

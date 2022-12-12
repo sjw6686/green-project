@@ -15,6 +15,7 @@
 	    	<a href="/signUp">회원가입</a><br>
 	    </c:when>
 	    <c:otherwise>
+	    	<a href="/restaurant/owner/myRestaurantList">내가게 보기</a><br>	  
 	    	<a href="/logOut">로그아웃</a><br>	  
 	    </c:otherwise>
     </c:choose>
