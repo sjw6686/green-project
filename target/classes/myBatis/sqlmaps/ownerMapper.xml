@@ -74,5 +74,26 @@
 		WHERE  
 		    r.restaurant_idx = #{restaurant_idx}
 	</select>
+	
+	<insert id="EnrollMenu">	
+		INSERT INTO
+			menu(
+				menu_idx,
+				menu_name,
+				menu_price,
+				restaurant_idx,
+				table_type
+			)
+		VALUES(
+			(SELECT
+				MAX(menu_idx)+1
+			FROM
+				menu),
+			#{menu_name},
+			#{menu_price},
+			#{restaurant_idx}
+			2
+		)
+	</insert>
 
 </mapper>

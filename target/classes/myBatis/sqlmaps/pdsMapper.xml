@@ -23,7 +23,7 @@
 			#{file_name},
 			#{file_ext},
 			#{sfile_name},
-			#{stable_idx}
+			#{mTable_idx}
 		)
 	</insert>
 </mapper>
