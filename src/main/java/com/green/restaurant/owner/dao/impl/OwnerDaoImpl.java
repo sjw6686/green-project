@@ -21,26 +21,20 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void insertRestaurant(HashMap<String, Object> map) {
 
-		System.out.println("ownerDao.insertRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		System.out.println("ownerDao.insertRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurantVo: " + map);
 		
 		List<FilesVo> filesList = (List<FilesVo>) map.get("filesList");
 		System.out.println("ownerDao.insertRestaurant>>>>>>>>>>>>>>>>filesList: " + filesList.size());
-		if(filesList.size() > 0) {
-			for(int i = 0; i < filesList.size(); i++) {
-//				int nextRes_idx = this.sqlSession.selectOne("Restaurant.SelectNextResaurantIdx");
-//				
-//				map.put("nextRes_idx", nextRes_idx);
-				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
-				
-				this.sqlSession.insert("Owner.EnrollRestaurant", map);	//식당정보 먼저 저장
-				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after restaurant insert");
-				this.sqlSession.insert("Owner.EnrollMenu", map);	//메뉴정보 저장
-				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after menu insert");
-				this.sqlSession.insert("Pds.MenuFileInsert", map);	//파일정보 저장
-				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after file insert");
-			}
+		if(filesList.size() > 0) {	
+			int nextRes_idx = this.sqlSession.selectOne("Restaurant.SelectNextResaurantIdx");
+			
+			map.put("nextRes_idx", nextRes_idx);
+			System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after map.put(nextRes_idx): " + map.toString());
+			this.sqlSession.insert("Pds.MenuFileInsert", map);	//파일정보 저장
+			System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after file insert");
+		
 		}
-		this.sqlSession.insert("Owner.EnrollRestaurant", map);	//파일정보 없으면 그냥 저장
+			this.sqlSession.insert("Owner.EnrollRestaurant", map);	//파일정보 없으면 그냥 저장
 	}
 
 	@Override
