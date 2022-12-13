@@ -28,8 +28,8 @@
 		    #{brandTel},
 		    #{introduce},
 		    SYSDATE,
-		    #{ownerIdx},
-		    #{category},
+		    #{owner_idx},
+		    #{category_name},
 		    3
 		)
 	</insert>
@@ -62,6 +62,7 @@
 		    r.introduce,
 		    r.enroll_date,
 		    r.owner_idx,
+		    r.category_name,
 		    m.menu_idx,
 		    m.menu_name,
 		    m.menu_price
@@ -74,5 +75,34 @@
 		WHERE  
 		    r.restaurant_idx = #{restaurant_idx}
 	</select>
-
+	
+	<insert id="EnrollMenu">	
+		INSERT INTO
+			menu(
+				menu_idx,
+				menu_name,
+				menu_price,
+				restaurant_idx,
+				table_type
+			)
+		VALUES(
+			(SELECT
+				MAX(menu_idx)+1
+			FROM
+				menu),
+			#{menu},
+			#{price},
+			(SELECT
+				MAX(restaurant_idx)
+			FROM
+				restaurant),
+			2
+		)
+	</insert>
+	
+	<update id="UpdateRestaurant">
+		UPDATE
+			restaurant
+		
+	</update>
 </mapper>

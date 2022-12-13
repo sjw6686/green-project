@@ -16,4 +16,6 @@ public interface OwnerService {
 
 	List<RestaurantJoinMenu> getMyRestaurant(int restaurant_idx);
 
+	void updateRestaurant(HashMap<String, Object> map);
+
 }

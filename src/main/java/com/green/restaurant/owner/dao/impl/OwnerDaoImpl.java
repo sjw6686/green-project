@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.green.restaurant.owner.dao.OwnerDao;
 import com.green.restaurant.owner.vo.RestaurantJoinMenu;
 import com.green.restaurant.owner.vo.RestaurantVo;
+import com.green.restaurant.pds.vo.FilesVo;
 import com.green.restaurant.user.vo.UserVo;
 
 @Repository("ownerDao")
@@ -22,14 +23,23 @@ public class OwnerDaoImpl implements OwnerDao {
 
 		System.out.println("ownerDao.insertRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
 		
-		//List<FilesVo> filesList = (List<FilesVo>) map.get("filesList");
-		//System.out.println("ownerDao.insertRestaurant>>>>>>>>>>>>>>>>filesList: " + filesList.size());
-//		if(filesList.size() > 0) {
-//			int stable_idx = this.sqlSession.selectOne("Restaurant.SelectNextResaurantIdx");
-//			map.put("stable_idx", stable_idx);
-//			System.out.println("ownerDao.insertRestaurantIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
-//			this.sqlSession.insert("Pds.FileInsert", map);	//파일정보 저장
-//		}
+		List<FilesVo> filesList = (List<FilesVo>) map.get("filesList");
+		System.out.println("ownerDao.insertRestaurant>>>>>>>>>>>>>>>>filesList: " + filesList.size());
+		if(filesList.size() > 0) {
+			for(int i = 0; i < filesList.size(); i++) {
+//				int nextRes_idx = this.sqlSession.selectOne("Restaurant.SelectNextResaurantIdx");
+//				
+//				map.put("nextRes_idx", nextRes_idx);
+				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
+				
+				this.sqlSession.insert("Owner.EnrollRestaurant", map);	//식당정보 먼저 저장
+				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after restaurant insert");
+				this.sqlSession.insert("Owner.EnrollMenu", map);	//메뉴정보 저장
+				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after menu insert");
+				this.sqlSession.insert("Pds.MenuFileInsert", map);	//파일정보 저장
+				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after file insert");
+			}
+		}
 		this.sqlSession.insert("Owner.EnrollRestaurant", map);	//파일정보 없으면 그냥 저장
 	}
 
@@ -46,5 +56,10 @@ public class OwnerDaoImpl implements OwnerDao {
 		return restaurantJoinMenu;
 	}
 
-	
+	@Override
+	public void updateRestaurant(HashMap<String, Object> map) {
+		System.out.println("ownerDao>>>>>>>>>>>>>>>>>>>updateRestaurant: " + map);
+		this.sqlSession.update("Owner.UpdateRestaurant", map);
+	}
+
 }
