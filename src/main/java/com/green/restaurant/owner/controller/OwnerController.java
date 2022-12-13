@@ -42,7 +42,8 @@ public class OwnerController {
 			HttpServletRequest request		//파일정보 받기위해 추가
 			) {
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>session.ownerIdx: " + userVo.getOwnerIdx());
-		map.put("owner_idx", userVo.getOwnerIdx());
+		map.put("owner_idx", userVo.getOwnerIdx());		//map에 owner_idx 저장
+		
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
 		

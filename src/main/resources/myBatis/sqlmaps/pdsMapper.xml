@@ -14,22 +14,19 @@
 				sfile_name,
 				table_idx
 			)
-		VALUES
-		<foreach collection="filesList" item="filesList" separator=",">
-		(
+		VALUES(
 			(SELECT
 				MAX(file_idx) + 1
 			FROM
 				img_file),
-			2,
+			3,
 			#{filesList.file_name},
 			#{filesList.file_ext},
 			#{filesList.sfile_name},
 			(SELECT
-				MAX(menu_idx)
+				MAX(restaurant_idx)
 			FROM
-				menu)
+				restaurant)
 		)
-		</foreach>
 	</insert>
 </mapper>

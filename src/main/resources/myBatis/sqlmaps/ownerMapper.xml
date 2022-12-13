@@ -28,8 +28,8 @@
 		    #{brandTel},
 		    #{introduce},
 		    SYSDATE,
-		    #{owner_idx},
-		    #{category_name},
+		    #{ownerIdx},
+		    #{categoryName},
 		    3
 		)
 	</insert>
