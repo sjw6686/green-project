@@ -100,9 +100,4 @@
 		)
 	</insert>
 	
-	<update id="UpdateRestaurant">
-		UPDATE
-			restaurant
-		
-	</update>
 </mapper>

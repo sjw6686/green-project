@@ -59,7 +59,7 @@ public class OwnerDaoImpl implements OwnerDao {
 	@Override
 	public void updateRestaurant(HashMap<String, Object> map) {
 		System.out.println("ownerDao>>>>>>>>>>>>>>>>>>>updateRestaurant: " + map);
-		this.sqlSession.update("Owner.UpdateRestaurant", map);
+		//this.sqlSession.update("Owner.UpdateRestaurant", map);
 	}
 
 }
