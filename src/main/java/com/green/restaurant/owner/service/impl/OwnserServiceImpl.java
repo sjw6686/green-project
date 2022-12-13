@@ -45,6 +45,10 @@ public class OwnserServiceImpl implements OwnerService {
 		return restaurantJoinMenu;
 	}
 
-	
+	@Override
+	public void updateRestaurant(HashMap<String, Object> map) {
+		System.out.println("ownerService.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.ownerDao.updateRestaurant(map);
+	}
 
 }

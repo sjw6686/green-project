@@ -38,7 +38,6 @@ public class OwnerDaoImpl implements OwnerDao {
 				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after menu insert");
 				this.sqlSession.insert("Pds.MenuFileInsert", map);	//파일정보 저장
 				System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after file insert");
-			
 			}
 		}
 		this.sqlSession.insert("Owner.EnrollRestaurant", map);	//파일정보 없으면 그냥 저장
@@ -57,5 +56,10 @@ public class OwnerDaoImpl implements OwnerDao {
 		return restaurantJoinMenu;
 	}
 
-	
+	@Override
+	public void updateRestaurant(HashMap<String, Object> map) {
+		System.out.println("ownerDao>>>>>>>>>>>>>>>>>>>updateRestaurant: " + map);
+		this.sqlSession.update("Owner.UpdateRestaurant", map);
+	}
+
 }

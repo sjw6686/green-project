@@ -80,8 +80,47 @@ public class OwnerController {
 		System.out.println("ownerController>>>>>>>>>>>>>>>>>>>restaurantJoinMenu: " + restaurantJoinMenu);
 		
 		model.addAttribute("restaurantJoinMenu", restaurantJoinMenu);
+		model.addAttribute("userRoll", userVo.getUserRole());
 		System.out.println("ownerController>>>>>>>>>>>>>>>>>>>model: " + model.toString());
 		
 		return "/owner/myRestaurant";
 	}
+	
+	@RequestMapping("/updateRestaurant")
+	public String updateRestaurant(
+			Model model,
+			@RequestParam  HashMap<String, Object> map,
+			@SessionAttribute("login") UserVo userVo) {
+		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
+		if(userVo.getUserRole().equals("USER")) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+			return "redirect:/";
+		}
+		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.get("restaurant_idx"));
+		int i = Integer.parseInt((String) map.get("restaurant_idx"));
+		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>i: " + i);
+		
+		List<RestaurantJoinMenu> restaurantJoinMenu = this.ownerService.getMyRestaurant(i);
+		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurantJoinMenu: " + restaurantJoinMenu.toString());
+		
+		model.addAttribute("restaurantJoinMenu", restaurantJoinMenu);
+
+		return "/owner/updateRestaurant";
+	}
+	
+	@RequestMapping("/updateProcess")
+	public String updateProcess(
+				Model model,
+				@RequestParam  HashMap<String, Object> map,
+				@SessionAttribute("login") UserVo userVo
+			) {
+		if(userVo.getUserRole().equals("USER")) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+			return "redirect:/";
+		}
+		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
+		this.ownerService.updateRestaurant(map);
+		return "redirect/";
+	}
+	
 }

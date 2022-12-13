@@ -13,4 +13,6 @@ public interface OwnerDao {
 	List<RestaurantVo> selectMyRestaurantList(UserVo userVo);
 
 	List<RestaurantJoinMenu> selectMyRestaurant(int restaurant_idx);
+
+	void updateRestaurant(HashMap<String, Object> map);
 }

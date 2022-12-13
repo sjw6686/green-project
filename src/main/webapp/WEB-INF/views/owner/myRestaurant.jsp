@@ -10,40 +10,39 @@
 <body>
 	<h2>내가게</h2>
 	<a href="/">홈으로</a>
-	<table border="1">
-		<tr>
-			<th>restaurant_idx</th>
-			<th>brand_name</th>
-			<th>address</th>
-			<th>brand_tel</th>
-			<th>introduce</th>
-			<th>enroll_date</th>
-			<th>owner_idx</th>
-		</tr>
-		<tr>
-			<td>${restaurantJoinMenu[0].restaurant_idx}</td>
-			<td>${restaurantJoinMenu[0].brand_name}</td>
-			<td>${restaurantJoinMenu[0].address}</td>
-			<td>${restaurantJoinMenu[0].brand_tel}</td>
-			<td>${restaurantJoinMenu[0].introduce}</td>
-			<td>${restaurantJoinMenu[0].enroll_date}</td>
-			<td>${restaurantJoinMenu[0].owner_idx}</td>
-		</tr>
-	</table>
-	<br>
-	<table border="1">
-		<tr>
-			<th>menu_idx</th>
-			<th>menu_name</th>
-			<th>menu_price</th>
-		</tr>
-		<c:forEach var="menu" items="${restaurantJoinMenu}">
-			<tr>
-				<td>${menu.menu_idx}</td>
-				<td>${menu.menu_name}</td>
-				<td>${menu.menu_price}</td>
-			</tr>
-		</c:forEach>
-	</table>
+	<form action="/restaurant/owner/updateRestaurant" method="post" enctype="multipart/form-data">
+		<c:set var="role" value="${userRoll}" />
+		<c:if test="${role eq 'OWNER' or 'ADMIN'}">
+			<input type=submit name="update" value="가게수정" />
+		</c:if>
+		<input type="hidden" name="restaurant_idx" value="${restaurantJoinMenu[0].restaurant_idx}" />
+		<ul>
+			<li>restaurant_idx</li>
+			<li>${restaurantJoinMenu[0].restaurant_idx}</li>
+			<li>brand_name</li>
+			<li>${restaurantJoinMenu[0].brand_name}</li>
+			<li>address</li>
+			<li>${restaurantJoinMenu[0].address}</li>
+			<li>brand_tel</li>
+			<li>${restaurantJoinMenu[0].brand_tel}</li>
+			<li>introduce</li>
+			<li>${restaurantJoinMenu[0].introduce}</li>
+			<li>enroll_date</li>
+			<li>${restaurantJoinMenu[0].enroll_date}</li>
+			<li>owner_idx</li>
+			<li>${restaurantJoinMenu[0].owner_idx}</li>
+		</ul>
+		<br>
+		<ul>
+			<c:forEach var="menu" items="${restaurantJoinMenu}">
+				<li>menu_idx</li>
+				<li>${menu.menu_idx}</li>
+				<li>menu_name</li>
+				<li>${menu.menu_name}</li>
+				<li>menu_price</li>
+				<li>${menu.menu_price}</li>
+			</c:forEach>	
+		</ul>
+	</form>
 </body>
 </html>
