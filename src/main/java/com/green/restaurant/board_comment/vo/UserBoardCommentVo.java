@@ -1,6 +1,6 @@
 package com.green.restaurant.board_comment.vo;
 
-public class BoardCommentVo {
+public class UserBoardCommentVo {
 	
 	private  int comment_idx;
 	private String user_id;
@@ -14,10 +14,10 @@ public class BoardCommentVo {
 	
 	
 	//Constructor
-	public BoardCommentVo() {
+	public UserBoardCommentVo() {
 		
 	}
-	public BoardCommentVo(int comment_idx, String user_id, String comment_content, int board_idx, String reg_date,
+	public UserBoardCommentVo(int comment_idx, String user_id, String comment_content, int board_idx, String reg_date,
 			int lvl, int step, int cnum, int nref, int file_idx) {
 		super();
 		this.comment_idx = comment_idx;

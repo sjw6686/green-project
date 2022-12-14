@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.green.restaurant.board.service.BoardService;
-import com.green.restaurant.board.vo.BoardVo;
-import com.green.restaurant.board_comment.vo.BoardCommentVo;
+import com.green.restaurant.board.service.UserBoardService;
+import com.green.restaurant.board.vo.UserBoardVo;
+import com.green.restaurant.board_comment.vo.UserBoardCommentVo;
 
 @Controller
 @RequestMapping("/Board")
-public class BoardController {
+public class UserBoardController {
 
 	@Autowired
-	private BoardService boardService;
+	private UserBoardService boardService;
 
 	@RequestMapping("/List")
 	public String list(Model model) {
 
 		// 출력할 자료목록를 조회한다
-		List<BoardVo> boardList = boardService.getBoardList();
+		List<UserBoardVo> boardList = boardService.getBoardList();
 		/* System.out.println("boardCont:" + boardList); */
 		model.addAttribute("boardList", boardList);
 		return "board/list";
@@ -43,8 +43,8 @@ public class BoardController {
 	public String view(@RequestParam HashMap<Integer, Object> map, Model model) {
 		// int board_idx = Integer.parseInt(String.valueOf(map.get("board_idx") ));
 		System.out.println("bCtrl.view>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
-		BoardVo boardVo = this.boardService.getBoard(map);
-		List<BoardCommentVo> boardCommentList = boardService.getBoardCommentList(map);
+		UserBoardVo boardVo = this.boardService.getBoard(map);
+		List<UserBoardCommentVo> boardCommentList = boardService.getBoardCommentList(map);
 		System.out.println(
 				"boadDao.getBoardCommentList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentList: " + boardCommentList.toString());
 
@@ -55,7 +55,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/WriteSave")
-	public String writesave(BoardVo boardVo) {
+	public String writesave(UserBoardVo boardVo) {
 		// System.out.println("bCtrl.writesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo:
 		// " + boardVo);
 		this.boardService.getwritesave(boardVo);
@@ -78,7 +78,7 @@ public class BoardController {
 	@RequestMapping("/UpdateForm")
 	public ModelAndView updateForm(int board_idx) {
 		System.out.println("boardCtrl.update>>>>>>>>>>>>>>>>>>>>map:" + board_idx);
-		BoardVo boardVo = boardService.getBoard(board_idx);
+		UserBoardVo boardVo = boardService.getBoard(board_idx);
 		System.out.println("boardCtrl.update>>>>>>>>>>>>>>>>>>>>boardVo:" + boardVo.toString());
 		
 		ModelAndView mv = new ModelAndView();	

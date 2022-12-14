@@ -5,7 +5,7 @@
 
 <mapper namespace="Board">
     
-    <select id="GetBoardList"  resultType="com.green.restaurant.board.vo.BoardVo" >
+    <select id="GetBoardList"  resultType="com.green.restaurant.board.vo.UserBoardVo" >
        SELECT
 		    board_idx,
 		    board_type,
@@ -24,7 +24,7 @@
     
     <!-- 내용 보기 -->
    	<select  id="GetBoardVo"
-   		 resultType="com.green.restaurant.board.vo.BoardVo">
+   		 resultType="com.green.restaurant.board.vo.UserBoardVo">
    		SELECT
 		    board_idx,
 		    board_title,
@@ -146,7 +146,7 @@
     
    
    <select id="GetCommentList"
-   		resultType="com.green.restaurant.board_comment.vo.BoardCommentVo">
+   		resultType="com.green.restaurant.board_comment.vo.UserBoardCommentVo">
    		SELECT
    			COMMENT_IDX,
 			USER_ID,
@@ -177,7 +177,7 @@
    </update>
    <!-- 댓글 조회하기 -->
    <select id="GetCommentUpdate"
-   		resultType="com.green.restaurant.board_comment.vo.BoardCommentVo">
+   		resultType="com.green.restaurant.board_comment.vo.UserBoardCommentVo">
    		SELECT
    			COMMENT_IDX,
 			USER_ID,
@@ -194,14 +194,14 @@
 			COMMENT_IDX = #{comment_idx}
    </select>
    <!-- 댓글 수정하기 -->
-   <!--  <update id="BoardCommentUpdate">
+   <update id="BoardCommentUpdate">
       	UPDATE   
       		board_comment
        	SET     
             comment_content  = #{ comment_content  }
        	WHERE   
        		comment_idx   = #{ comment_idx   }         
-   </update>-->
+   </update>
    
 	      
 </mapper>

@@ -29,7 +29,7 @@
 	  
 	  $('#btnList').on('click', function() {
 		  alert('목록으로 돌아갑니다.');		  
-		  let    url     =  '/Board/View?board_idx=${boardCommentVo.comment_idx}';
+		  let    url     =  '/Board/View?board_idx=${boardVo.board_idx}';
 		  location.href  =  url;
 	  } )
 	 

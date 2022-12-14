@@ -6,17 +6,17 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.green.restaurant.board_comment.dao.BoardCommentDao;
-import com.green.restaurant.board_comment.vo.BoardCommentVo;
+import com.green.restaurant.board_comment.dao.UserBoardCommentDao;
+import com.green.restaurant.board_comment.vo.UserBoardCommentVo;
 
 @Repository("boardCommentDao")
-public class BoardCommentDaoimpl implements BoardCommentDao{
+public class UserBoardCommentDaoimpl implements UserBoardCommentDao{
 	
 	@Autowired
 	private  SqlSession sqlSession;
 	
 	@Override
-	public void boardInsert(BoardCommentVo boardCommentVo) {
+	public void boardInsert(UserBoardCommentVo boardCommentVo) {
 		System.out.println(boardCommentVo);
 		int cnum = boardCommentVo.getCnum();  
 		if(cnum == 0) { // 새글쓰기
@@ -29,9 +29,9 @@ public class BoardCommentDaoimpl implements BoardCommentDao{
 	}
 
 	@Override
-	public BoardCommentVo getCommentUpdate(int comment_idx) {
+	public UserBoardCommentVo getCommentUpdate(int comment_idx) {
 		System.out.println("boardCommentDao.getCommentUpdate>>>>>>>>>>>>>>>>>>>>board_idx:" + comment_idx);
-		BoardCommentVo boardCommentVo = sqlSession.selectOne("Board.GetCommentUpdate" , comment_idx);
+		UserBoardCommentVo boardCommentVo = sqlSession.selectOne("Board.GetCommentUpdate" , comment_idx);
 		System.out.println("boardCommentDao.getCommentUpdate>>>>>>>>>>>>>>>>>>>>boardCommentVo:" + boardCommentVo.toString());
 		return boardCommentVo;
 	}

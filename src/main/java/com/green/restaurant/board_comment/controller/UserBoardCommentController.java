@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.green.restaurant.board_comment.service.BoardCommentService;
-import com.green.restaurant.board_comment.vo.BoardCommentVo;
+import com.green.restaurant.board_comment.service.UserBoardCommentService;
+import com.green.restaurant.board_comment.vo.UserBoardCommentVo;
 
 @Controller
 @RequestMapping("/BoardComment")
-public class BoardCommentController {
+public class UserBoardCommentController {
 	
 	
 	@Autowired
-	private BoardCommentService boardCommentService;
+	private UserBoardCommentService boardCommentService;
 	
 	@RequestMapping("/Write")
-	public  ModelAndView  write(  BoardCommentVo boardCommentVo ) {
+	public  ModelAndView  write(  UserBoardCommentVo boardCommentVo ) {
 		// 새글 저장/ 답글 저장
 		boardCommentService.boardInsert ( boardCommentVo );
 		
@@ -32,7 +32,7 @@ public class BoardCommentController {
 	
 	@RequestMapping("/CommentUpdateForm")
 	public ModelAndView UpdateForm(int comment_idx) {
-		BoardCommentVo boardCommentVo = this.boardCommentService.getCommentUpdate(comment_idx);
+		UserBoardCommentVo boardCommentVo = this.boardCommentService.getCommentUpdate(comment_idx);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("boardCommentVo", boardCommentVo);
