@@ -30,8 +30,8 @@
     class="org.apache.commons.dbcp.BasicDataSource"
     destroy-method="close">
        <property name="driverClassName"  value="oracle.jdbc.OracleDriver" />
-       <property name="url"              value="jdbc:oracle:thin:@localhost:1521:xe" />
-       <property name="username"         value="restaurant03" />
+       <property name="url"              value="jdbc:oracle:thin:@192.168.0.198:1521:xe" />
+       <property name="username"         value="restaurant" />
        <property name="password"         value="1234" />    
     </bean>
     
