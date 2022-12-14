@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.green.restaurant.owner.dao.OwnerDao;
-import com.green.restaurant.owner.vo.RestaurantJoinMenu;
+import com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.RestaurantVo;
 import com.green.restaurant.pds.vo.FilesVo;
 import com.green.restaurant.user.vo.UserVo;
@@ -30,7 +30,7 @@ public class OwnerDaoImpl implements OwnerDao {
 			
 			map.put("nextRes_idx", nextRes_idx);
 			System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after map.put(nextRes_idx): " + map.toString());
-			this.sqlSession.insert("Pds.MenuFileInsert", map);	//파일정보 저장
+			this.sqlSession.insert("Pds.RestaurantFileInsert", map);	//파일정보 저장
 			System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after file insert");
 		
 		}
@@ -44,10 +44,11 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public List<RestaurantJoinMenu> selectMyRestaurant(int restaurant_idx) {
-		List<RestaurantJoinMenu> restaurantJoinMenu = this.sqlSession.selectList("Owner.GetMyRestaurant", restaurant_idx);
-		System.out.println("ownerDao>>>>>>>>>>>>>>>>>>>restaurantJoinMenu: " + restaurantJoinMenu);
-		return restaurantJoinMenu;
+	public List<RestaurantMenuFileJoinVo> selectMyRestaurantInfo(int restaurant_idx) {
+		System.out.println("ownerDao.selectMyRestaurantAllInfo>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
+		List<RestaurantMenuFileJoinVo> restaurantInfo = this.sqlSession.selectList("Owner.GetMyRestaurantInfo", restaurant_idx);
+		System.out.println("ownerDao.selectMyRestaurantAllInfo>>>>>>>>>>>>>>>>>>>restaurantInfo: " + restaurantInfo.toString());
+		return restaurantInfo;
 	}
 
 	@Override

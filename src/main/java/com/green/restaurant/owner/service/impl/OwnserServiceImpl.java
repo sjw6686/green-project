@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.green.restaurant.owner.dao.OwnerDao;
 import com.green.restaurant.owner.service.OwnerService;
-import com.green.restaurant.owner.vo.RestaurantJoinMenu;
+import com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.RestaurantVo;
 import com.green.restaurant.pds.service.impl.PdsFile;
 import com.green.restaurant.user.vo.UserVo;
@@ -34,10 +34,11 @@ public class OwnserServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public List<RestaurantJoinMenu> getMyRestaurant(int restaurant_idx) {
-		List<RestaurantJoinMenu> restaurantJoinMenu = this.ownerDao.selectMyRestaurant(restaurant_idx);
-		System.out.println("ownerService>>>>>>>>>>>>>>>>>>>restaurantJoinMenu: " + restaurantJoinMenu);
-		return restaurantJoinMenu;
+	public List<RestaurantMenuFileJoinVo> getMyRestaurantInfo(int restaurant_idx) {
+		System.out.println("ownerService.getMyRestaurantInfo>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
+		List<RestaurantMenuFileJoinVo> restaurantInfo = this.ownerDao.selectMyRestaurantInfo(restaurant_idx);
+		System.out.println("ownerService.getMyRestaurantInfo>>>>>>>>>>>>>>>>>>>restaurantInfo: " + restaurantInfo.toString());
+		return restaurantInfo;
 	}
 
 	@Override

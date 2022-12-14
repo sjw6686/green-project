@@ -15,34 +15,36 @@
 		<c:if test="${role eq 'OWNER' or 'ADMIN'}">
 			<input type=submit name="update" value="가게수정" />
 		</c:if>
-		<input type="hidden" name="restaurant_idx" value="${restaurantJoinMenu[0].restaurant_idx}" />
-		<ul>
-			<li>restaurant_idx</li>
-			<li>${restaurantJoinMenu[0].restaurant_idx}</li>
-			<li>brand_name</li>
-			<li>${restaurantJoinMenu[0].brand_name}</li>
-			<li>address</li>
-			<li>${restaurantJoinMenu[0].address}</li>
-			<li>brand_tel</li>
-			<li>${restaurantJoinMenu[0].brand_tel}</li>
-			<li>introduce</li>
-			<li>${restaurantJoinMenu[0].introduce}</li>
-			<li>enroll_date</li>
-			<li>${restaurantJoinMenu[0].enroll_date}</li>
-			<li>owner_idx</li>
-			<li>${restaurantJoinMenu[0].owner_idx}</li>
-		</ul>
-		<br>
-		<ul>
-			<c:forEach var="menu" items="${restaurantJoinMenu}">
-				<li>menu_idx</li>
-				<li>${menu.menu_idx}</li>
-				<li>menu_name</li>
-				<li>${menu.menu_name}</li>
-				<li>menu_price</li>
-				<li>${menu.menu_price}</li>
-			</c:forEach>	
-		</ul>
+		<input type="hidden" name="restaurant_idx" value="${restaurantInfo[0].restaurant_idx}" />
 	</form>
+	<h3>식당정보</h3>
+	<ul>
+		<li>restaurant_idx</li>
+		<li>${restaurantInfo[0].restaurant_idx}</li>
+		<li>brand_name</li>
+		<li>${restaurantInfo[0].brand_name}</li>
+		<li>address</li>
+		<li>${restaurantInfo[0].address}</li>
+		<li>brand_tel</li>
+		<li>${restaurantInfo[0].brand_tel}</li>
+		<li>introduce</li>
+		<li>${restaurantInfo[0].introduce}</li>
+		<li>enroll_date</li>
+		<li>${restaurantInfo[0].enroll_date}</li>
+		<li>owner_idx</li>
+		<li>${restaurantInfo[0].owner_idx}</li>
+	</ul>
+	<br>
+	<h3>메뉴정보</h3>
+	<ul>
+		<c:forEach var="menu" items="${restaurantInfo}">
+			<li>menu_idx</li>
+			<li>${menu.menu_idx}</li>
+			<li>menu_name</li>
+			<li>${menu.menu_name}</li>
+			<li>menu_price</li>
+			<li>${menu.menu_price}</li>
+		</c:forEach>	
+	</ul>
 </body>
 </html>

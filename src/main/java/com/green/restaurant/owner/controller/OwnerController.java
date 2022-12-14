@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.green.restaurant.owner.service.OwnerService;
-import com.green.restaurant.owner.vo.RestaurantJoinMenu;
+import com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.RestaurantVo;
 import com.green.restaurant.user.vo.UserVo;
 
@@ -42,7 +42,7 @@ public class OwnerController {
 			HttpServletRequest request		//파일정보 받기위해 추가
 			) {
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>session.ownerIdx: " + userVo.getOwnerIdx());
-		map.put("owner_idx", userVo.getOwnerIdx());		//map에 owner_idx 저장
+		map.put("ownerIdx", userVo.getOwnerIdx());		//map에 owner_idx 저장
 		
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
@@ -72,17 +72,16 @@ public class OwnerController {
 	@RequestMapping("/myRestaurant")
 	public String myRestaurant(Model model, @SessionAttribute("login") UserVo userVo, int restaurant_idx) {
 		System.out.println("ownerController>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
-		if(userVo.getUserRole().equals("USER")) {			//가게목록은 일반유저가 볼수없게 하기위해 USER권한을 가진 유저는 홈으로 반환
+		if(userVo.getUserRole().equals("USER") ) {			//가게목록은 일반유저가 볼수없게 하기위해 USER권한을 가진 유저는 홈으로 반환
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
 			return "redirect:/";
 		}
+		System.out.println("ownerController.myRestaurant>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
+		List<RestaurantMenuFileJoinVo> restaurantInfo = this.ownerService.getMyRestaurantInfo(restaurant_idx);
+		System.out.println("ownerController.myRestaurant>>>>>>>>>>>>>>>>>>>restaurantInfo: " + restaurantInfo.toString());
 		
-		List<RestaurantJoinMenu> restaurantJoinMenu = this.ownerService.getMyRestaurant(restaurant_idx);
-		System.out.println("ownerController>>>>>>>>>>>>>>>>>>>restaurantJoinMenu: " + restaurantJoinMenu);
-		
-		model.addAttribute("restaurantJoinMenu", restaurantJoinMenu);
-		model.addAttribute("userRoll", userVo.getUserRole());
-		System.out.println("ownerController>>>>>>>>>>>>>>>>>>>model: " + model.toString());
+		model.addAttribute("restaurantInfo", restaurantInfo);
+		System.out.println("ownerController.myRestaurant>>>>>>>>>>>>>>>>>>>model: " + model.toString());
 		
 		return "/owner/myRestaurant";
 	}
@@ -93,18 +92,18 @@ public class OwnerController {
 			@RequestParam  HashMap<String, Object> map,
 			@SessionAttribute("login") UserVo userVo) {
 		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
-		if(userVo.getUserRole().equals("USER")) {
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
-			return "redirect:/";
-		}
-		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.get("restaurant_idx"));
-		int i = Integer.parseInt((String) map.get("restaurant_idx"));
-		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>i: " + i);
-		
-		List<RestaurantJoinMenu> restaurantJoinMenu = this.ownerService.getMyRestaurant(i);
-		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurantJoinMenu: " + restaurantJoinMenu.toString());
-		
-		model.addAttribute("restaurantJoinMenu", restaurantJoinMenu);
+//		if(userVo.getUserRole().equals("USER")) {
+//			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+//			return "redirect:/";
+//		}
+//		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.get("restaurant_idx"));
+//		int i = Integer.parseInt((String) map.get("restaurant_idx"));
+//		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>i: " + i);
+//		
+//		List<RestaurantJoinMenu> restaurantJoinMenu = this.ownerService.getMyRestaurant(i);
+//		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurantJoinMenu: " + restaurantJoinMenu.toString());
+//		
+//		model.addAttribute("restaurantJoinMenu", restaurantJoinMenu);
 
 		return "/owner/updateRestaurant";
 	}

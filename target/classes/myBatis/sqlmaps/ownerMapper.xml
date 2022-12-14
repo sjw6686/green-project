@@ -52,10 +52,10 @@
 			owner_idx = #{ownerIdx}
 	</select>
 	
-	<select id="GetMyRestaurant"
-		resultType="com.green.restaurant.owner.vo.RestaurantJoinMenu">
+	<select id="GetMyRestaurantInfo"
+		resultType="com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo">
 		SELECT
-			r.restaurant_idx,
+		    r.restaurant_idx,
 		    r.brand_name,
 		    r.address,
 		    r.brand_tel,
@@ -65,14 +65,24 @@
 		    r.category_name,
 		    m.menu_idx,
 		    m.menu_name,
-		    m.menu_price
+		    m.menu_price,
+		    f.file_idx,
+		    f.file_name,
+		    f.file_ext,
+		    f.sfile_name
 		FROM
 		    restaurant r
 		JOIN
 		    menu m
 		ON
 		    r.restaurant_idx = m.restaurant_idx
-		WHERE  
+		JOIN
+		    img_file f
+		ON
+		    m.table_type = f.table_type
+		WHERE
+		    m.menu_idx = f.table_idx
+		AND
 		    r.restaurant_idx = #{restaurant_idx}
 	</select>
 	

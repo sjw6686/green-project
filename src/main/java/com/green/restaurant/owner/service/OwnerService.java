@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.green.restaurant.owner.vo.RestaurantJoinMenu;
+import com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.RestaurantVo;
 import com.green.restaurant.user.vo.UserVo;
 
@@ -14,7 +14,7 @@ public interface OwnerService {
 
 	List<RestaurantVo> myRestaurantList(UserVo userVo);
 
-	List<RestaurantJoinMenu> getMyRestaurant(int restaurant_idx);
+	List<RestaurantMenuFileJoinVo> getMyRestaurantInfo(int restaurant_idx);
 
 	void updateRestaurant(HashMap<String, Object> map);
 

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="Pds">
-	<insert id="MenuFileInsert" parameterType="java.util.List">
+	<insert id="RestaurantFileInsert" parameterType="java.util.List">
 		INSERT INTO
 			img_file(
 				file_idx,
@@ -20,9 +20,9 @@
 			FROM
 				img_file),
 			3,
-			#{filesList.file_name},
-			#{filesList.file_ext},
-			#{filesList.sfile_name},
+			#{filesList[0].file_name},
+			#{filesList[0].file_ext},
+			#{filesList[0].sfile_name},
 			(SELECT
 				MAX(restaurant_idx)
 			FROM
