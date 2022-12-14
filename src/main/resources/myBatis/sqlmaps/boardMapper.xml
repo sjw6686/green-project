@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+    
+    <select id="GetBoardList"  resultType="com.green.restaurant.board.vo.BoardVo" >
+       SELECT
+		    board_idx,
+		    board_type,
+		    board_title,
+		    board_content,
+		    review_avg,
+		    reg_date,
+		    restaurant_idx,
+		    view_cnt,
+		    user_id,
+		    cnt_like,
+		    cnt_hate
+		FROM
+		    board
+    </select>
+    
+    <!-- 내용 보기 -->
+   	<select  id="GetBoardVo"
+   		 resultType="com.green.restaurant.board.vo.BoardVo">
+   		SELECT
+		    board_idx,
+		    board_title,
+		    board_content,
+		    review_avg,
+		    reg_date,
+		    restaurant_idx,
+		    view_cnt,
+		    user_id,
+		    cnt_like,
+		    cnt_hate
+		FROM
+		    board
+		WHERE
+		    board_idx = #{board_idx}
+   	</select>
+   	
+   	<insert id = "getwriesave">
+		INSERT INTO
+		    board(
+		        BOARD_IDX,
+		        BOARD_TYPE,
+		        BOARD_TITLE,
+		        BOARD_CONTENT,
+		        REVIEW_AVG,
+		        REG_DATE,
+		        VIEW_CNT,
+		        USER_ID,
+		        CNT_LIKE,
+		        CNT_HATE,
+		        address
+		    )
+		VALUES(
+		    (SELECT
+		        MAX(BOARD_IDX) + 1
+		    FROM
+		        board),
+		    1,
+		    #{board_title},
+		    #{board_content},
+		    5,
+		    SYSDATE,
+		    0,
+		    'admin1234',
+		    0,
+		    0,
+		    #{address}
+		)
+   	</insert>
+   	
+   	<!-- 조회수 증가 -->
+   	<update id="ReadCountUpdate">
+       	UPDATE
+       		board
+       	SET
+       		view_cnt = view_cnt + 1  
+        WHERE
+        	board_idx  = #{board_idx}        
+    </update>
+    
+    <insert id="BoardInsert">       
+    	INSERT INTO board_comment (
+	    	COMMENT_IDX,
+	    	user_id,
+	    	comment_content,
+	    	board_idx,
+	    	reg_date,
+	    	lvl,
+	    	step,
+	    	cnum,
+	    	nref
+	) 
+		VALUES (
+	    	( select nvl(max(COMMENT_IDX),0)+1 from board_comment ) ,
+	    	#{user_id},
+	    	#{comment_content},
+	    	#{board_idx},
+	    	sysdate,
+	    	0,
+	    	0,
+	    	( SELECT NVL(MAX(COMMENT_IDX),0)+1 FROM board_comment  ) ,
+	    	 ( SELECT NVL(MAX(COMMENT_IDX),0)+1 FROM board_comment ) 
+	)
+    </insert>
+    
+    <!-- 해당글(menu_id) 그룹(nref)의 기존 답글의 순서(step)를 +1 증가 -->
+    <update id="UpdateRef">
+     UPDATE  board_comment
+	     SET    step = step + 1
+	     WHERE  user_id = #{ user_id } 
+	     AND    nref    = #{ nref }
+	     AND    step    > #{ step }
+    </update>
+    
+    <insert id="BoardReply">       
+    	INSERT INTO board_comment (
+	    	COMMENT_IDX,
+	    	user_id,
+	    	comment_content,
+	    	board_idx,
+	    	reg_date,
+	    	lvl,
+	    	step,
+	    	cnum,
+	    	nref
+	) 
+		VALUES (
+	    	( select nvl(max(COMMENT_IDX),0)+1 from board_comment ) ,
+	    	#{user_id},
+	    	#{comment_content},
+	    	#{board_idx},
+	    	sysdate,
+	    	#{ lvl   } + 1 ,
+	    	#{ step  } + 1,
+	    	#{ cnum  },
+	    	#{ nref  } 
+	)
+    </insert>
+    
+   
+   <select id="GetCommentList"
+   		resultType="com.green.restaurant.board_comment.vo.BoardCommentVo">
+   		SELECT
+   			COMMENT_IDX,
+			USER_ID,
+			COMMENT_CONTENT,
+			BOARD_IDX,
+			REG_DATE,
+			LVL,
+			STEP,
+			CNUM,
+			NREF
+		FROM
+			board_comment
+		WHERE
+			BOARD_IDX = #{board_idx}
+   </select>
+    <!-- 게시글 삭제하기 -->
+   <delete id="BoardDelete">
+      DELETE  FROM  BOARD
+       WHERE  BOARD_IDX  =  #{ BOARD_IDX } 
+   </delete>
+   
+   <!-- 게시글 수정하기 -->
+   <update id="BoardUpdate">
+      UPDATE   BOARD
+       SET     board_title = #{ board_title },
+               board_content  = #{ board_content  }
+       WHERE   board_idx   = #{ board_idx   }         
+   </update>
+   <!-- 댓글 조회하기 -->
+   <select id="GetCommentUpdate"
+   		resultType="com.green.restaurant.board_comment.vo.BoardCommentVo">
+   		SELECT
+   			COMMENT_IDX,
+			USER_ID,
+			COMMENT_CONTENT,
+			BOARD_IDX,
+			REG_DATE,
+			LVL,
+			STEP,
+			CNUM,
+			NREF
+		FROM
+			board_comment
+		WHERE
+			COMMENT_IDX = #{comment_idx}
+   </select>
+   <!-- 댓글 수정하기 -->
+   <!--  <update id="BoardCommentUpdate">
+      	UPDATE   
+      		board_comment
+       	SET     
+            comment_content  = #{ comment_content  }
+       	WHERE   
+       		comment_idx   = #{ comment_idx   }         
+   </update>-->
+   
+	      
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
