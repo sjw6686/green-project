@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.restaurant.user.service.UserService;
-import com.green.restaurant.user.vo.UserVo;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 @Controller
 @RequestMapping("/restaurant/user")
@@ -34,7 +34,7 @@ public class UserController {
 			session.removeAttribute("login");
 		}
 		
-		UserVo userVo = this.userService.login(map);
+		OwnerUserVo userVo = this.userService.login(map);
 		
 		if(userVo != null) {
 			session.setAttribute("login", userVo);

@@ -1,6 +1,6 @@
 package com.green.restaurant.user.vo;
 
-public class UserVo {
+public class OwnerUserVo {
 	//유저정보
 	private String userId;
 	private String userPw;
@@ -13,9 +13,9 @@ public class UserVo {
 	private char userEnable;
 	
 	//constructor
-	public UserVo() {};
+	public OwnerUserVo() {};
 	
-	public UserVo(String userId, String userPw, String userTel, String joinDate, String userRole, Integer ownerIdx,
+	public OwnerUserVo(String userId, String userPw, String userTel, String joinDate, String userRole, Integer ownerIdx,
 			String ownerNum, char userEnable) {
 		super();
 		this.userId = userId;

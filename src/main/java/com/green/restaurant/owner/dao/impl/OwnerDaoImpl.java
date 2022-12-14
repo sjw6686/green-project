@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.green.restaurant.owner.dao.OwnerDao;
-import com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo;
-import com.green.restaurant.owner.vo.RestaurantVo;
+import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.pds.vo.FilesVo;
-import com.green.restaurant.user.vo.UserVo;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 @Repository("ownerDao")
 public class OwnerDaoImpl implements OwnerDao {
@@ -38,15 +40,15 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public List<RestaurantVo> selectMyRestaurantList(UserVo userVo) {
-		List<RestaurantVo> myRestaurantList = this.sqlSession.selectList("Owner.MyRestaurantList", userVo.getOwnerIdx());
+	public List<OwnerRestaurantVo> selectMyRestaurantList(OwnerUserVo userVo) {
+		List<OwnerRestaurantVo> myRestaurantList = this.sqlSession.selectList("Owner.MyRestaurantList", userVo.getOwnerIdx());
 		return myRestaurantList;
 	}
 
 	@Override
-	public List<RestaurantMenuFileJoinVo> selectMyRestaurantInfo(int restaurant_idx) {
+	public List<OwnerRestaurantMenuFileJoinVo> selectMyRestaurantInfo(int restaurant_idx) {
 		System.out.println("ownerDao.selectMyRestaurantAllInfo>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
-		List<RestaurantMenuFileJoinVo> restaurantInfo = this.sqlSession.selectList("Owner.GetMyRestaurantInfo", restaurant_idx);
+		List<OwnerRestaurantMenuFileJoinVo> restaurantInfo = this.sqlSession.selectList("Owner.GetMyRestaurantInfo", restaurant_idx);
 		System.out.println("ownerDao.selectMyRestaurantAllInfo>>>>>>>>>>>>>>>>>>>restaurantInfo: " + restaurantInfo.toString());
 		return restaurantInfo;
 	}
@@ -55,6 +57,30 @@ public class OwnerDaoImpl implements OwnerDao {
 	public void updateRestaurant(HashMap<String, Object> map) {
 		System.out.println("ownerDao>>>>>>>>>>>>>>>>>>>updateRestaurant: " + map);
 		//this.sqlSession.update("Owner.UpdateRestaurant", map);
+	}
+
+	@Override
+	public List<OwnerBoardVo> selectReviewList(int restaurant_idx) {
+		System.out.println("ownerDao.getBoardInfo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
+		List<OwnerBoardVo> boardInfo = this.sqlSession.selectList("Owner.GetReviewList", restaurant_idx);
+		System.out.println("ownerDao.getBoardInfo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardInfo: " + boardInfo);
+		return boardInfo;
+	}
+
+	@Override
+	public List<OwnerCommentVo> selectReviewCommentList(int board_idx) {
+		System.out.println("OwnerService.reviewComment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>board_idx: " + board_idx);
+		List<OwnerCommentVo> reviewCommentList = this.sqlSession.selectList("Owner.getReviewCommentList", board_idx);
+		System.out.println("OwnerService.selectReviewCommentList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>reviewCommentList: " + reviewCommentList.toString());
+		return reviewCommentList;
+	}
+
+	@Override
+	public OwnerBoardVo selectReview(int board_idx) {
+		System.out.println("OwnerDao.selectReview>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>board_idx: " + board_idx);
+		OwnerBoardVo ownerBoardVo = this.sqlSession.selectOne("Owner.getReview", board_idx);
+		System.out.println("OwnerDao.selectReview>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + ownerBoardVo.toString());
+		return ownerBoardVo;
 	}
 
 }

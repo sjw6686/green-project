@@ -1,6 +1,7 @@
 package com.green.restaurant.owner.vo;
 
-public class RestaurantMenuFileJoinVo {
+public class OwnerRestaurantMenuFileJoinVo {
+	//fields
 	//restaurant
 	private int restaurant_idx;
 	private String brand_name;
@@ -20,9 +21,9 @@ public class RestaurantMenuFileJoinVo {
 	private String file_ext;
 	private String sfile_name;
 	//constructor
-	public RestaurantMenuFileJoinVo() {}
+	public OwnerRestaurantMenuFileJoinVo() {}
 	
-	public RestaurantMenuFileJoinVo(int restaurant_idx, String brand_name, String address, String brand_tel,
+	public OwnerRestaurantMenuFileJoinVo(int restaurant_idx, String brand_name, String address, String brand_tel,
 			String introduce, String enroll_date, int owner_idx, String category_name, int menu_idx, String menu_name,
 			String menu_price, int file_idx, String file_name, String file_ext, String sfile_name) {
 		super();

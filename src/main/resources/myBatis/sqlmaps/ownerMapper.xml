@@ -35,7 +35,7 @@
 	</insert>
 	
 	<select id="MyRestaurantList"
-		resultType="com.green.restaurant.owner.vo.RestaurantVo">
+		resultType="com.green.restaurant.owner.vo.OwnerRestaurantVo">
 		SELECT
 			restaurant_idx as restaurantIdx,
 			brand_name as brandName,
@@ -53,7 +53,7 @@
 	</select>
 	
 	<select id="GetMyRestaurantInfo"
-		resultType="com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo">
+		resultType="com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo">
 		SELECT
 		    r.restaurant_idx,
 		    r.brand_name,
@@ -109,5 +109,65 @@
 			2
 		)
 	</insert>
+	
+	<select id="GetReviewList"
+		resultType="com.green.restaurant.owner.vo.OwnerBoardVo">
+		SELECT
+		    board_idx,
+		    board_type,
+		    board_title,
+		    board_content,
+		    review_avg,
+		    reg_date as boardRegDate,
+		    restaurant_idx,
+		    view_cnt,
+		    user_id as boardWriter,
+		    cnt_like,
+		    cnt_hate,
+		    address
+		FROM
+		    board
+		WHERE
+		    restaurant_idx = #{restaurant_idx}
+	</select>
+	
+	<select id="getReviewCommentList"
+		resultType="com.green.restaurant.owner.vo.OwnerCommentVo">
+		SELECT
+		    comment_idx,
+		    user_id as commentWriter,
+		    comment_content,
+		    board_idx as boardIdx,
+		    reg_date as commentRegDate,
+		    lvl,
+		    step,
+		    cnum,
+		    nref
+		FROM
+		    board_comment
+		WHERE
+		    board_idx = #{board_idx}
+	</select>
+	
+	<select id="getReview"
+		resultType="com.green.restaurant.owner.vo.OwnerBoardVo">
+		SELECT
+		    board_idx,
+		    board_type,
+		    board_title,
+		    board_content,
+		    review_avg,
+		    reg_date as boardRegDate,
+		    restaurant_idx,
+		    view_cnt,
+		    user_id as boardWriter,
+		    cnt_like,
+		    cnt_hate,
+		    address
+		FROM
+		    board
+		WHERE
+		    board_idx = #{board_idx}
+	</select>
 	
 </mapper>

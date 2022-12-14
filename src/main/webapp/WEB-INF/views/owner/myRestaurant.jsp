@@ -36,15 +36,55 @@
 	</ul>
 	<br>
 	<h3>메뉴정보</h3>
-	<ul>
+	<table>
+		<tr>
+			<th>menu_idx</th>
+			<th>menu_name</th>
+			<th>menu_price</th>
+			<th>sfile_name</th>
+		</tr>
 		<c:forEach var="menu" items="${restaurantInfo}">
-			<li>menu_idx</li>
-			<li>${menu.menu_idx}</li>
-			<li>menu_name</li>
-			<li>${menu.menu_name}</li>
-			<li>menu_price</li>
-			<li>${menu.menu_price}</li>
+			<tr>
+				<th>${menu.menu_idx}</th>
+				<th>${menu.menu_name}</th>
+				<th>${menu.menu_price}</th>
+				<th>${menu.sfile_name}</th>
+			</tr>
 		</c:forEach>	
-	</ul>
+	</table>
+	<br>
+	<h2>리뷰목록</h2> <!-- 리뷰에있는 링크누르면 리뷰에 대한 자세한 정보를 확인할수있음 -->
+	<table>
+		<tr>
+			<th>board_idx</th>
+			<th>board_title</th>
+			<th>board_content</th>
+			<th>review_avg</th>
+			<th>boardRegDate</th>
+			<th>restaurant_idx</th>
+			<th>view_cnt</th>
+			<th>boardWriter</th>
+			<th>cnt_like</th>
+			<th>cnt_hate</th>
+			<th>address</th>
+		</tr>
+		<c:forEach var="review" items="${reviewList}">
+			<tr>
+				<th>
+					<a href="reviewComment?board_idx=${review.board_idx}">${review.board_idx}</a>
+				</th>
+				<th>${review.board_title}</th>
+				<th>${review.board_content}</th>
+				<th>${review.review_avg}</th>
+				<th>${review.boardRegDate}</th>
+				<th>${review.restaurant_idx}</th>
+				<th>${review.view_cnt}</th>
+				<th>${review.boardWriter}</th>
+				<th>${review.cnt_like}</th>
+				<th>${review.cnt_hate}</th>				
+				<th>${review.address}</th>				
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.green.restaurant.owner.vo;
 
-public class RestaurantVo {
+public class OwnerRestaurantVo {
 	private int restaurantIdx;
 	private String brandName;
 	private String address;
@@ -12,9 +12,9 @@ public class RestaurantVo {
 	private int tableType;
 	
 	//constructor
-	public RestaurantVo() {}
+	public OwnerRestaurantVo() {}
 	
-	public RestaurantVo(int restaurantIdx, String brandName, String address, String brandTel, String introduce,
+	public OwnerRestaurantVo(int restaurantIdx, String brandName, String address, String brandTel, String introduce,
 			String enrollDate, int ownerIdx, String categoryName, int tableType) {
 		super();
 		this.restaurantIdx = restaurantIdx;

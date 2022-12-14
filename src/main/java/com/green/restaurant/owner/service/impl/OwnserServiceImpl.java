@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.green.restaurant.owner.dao.OwnerDao;
 import com.green.restaurant.owner.service.OwnerService;
-import com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo;
-import com.green.restaurant.owner.vo.RestaurantVo;
+import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.pds.service.impl.PdsFile;
-import com.green.restaurant.user.vo.UserVo;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 @Service("ownerService")
 public class OwnserServiceImpl implements OwnerService {
@@ -28,15 +30,15 @@ public class OwnserServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public List<RestaurantVo> myRestaurantList(UserVo userVo) {
-		List<RestaurantVo> myRestaurantList = this.ownerDao.selectMyRestaurantList(userVo);
+	public List<OwnerRestaurantVo> myRestaurantList(OwnerUserVo userVo) {
+		List<OwnerRestaurantVo> myRestaurantList = this.ownerDao.selectMyRestaurantList(userVo);
 		return myRestaurantList;
 	}
 
 	@Override
-	public List<RestaurantMenuFileJoinVo> getMyRestaurantInfo(int restaurant_idx) {
+	public List<OwnerRestaurantMenuFileJoinVo> getMyRestaurantInfo(int restaurant_idx) {
 		System.out.println("ownerService.getMyRestaurantInfo>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
-		List<RestaurantMenuFileJoinVo> restaurantInfo = this.ownerDao.selectMyRestaurantInfo(restaurant_idx);
+		List<OwnerRestaurantMenuFileJoinVo> restaurantInfo = this.ownerDao.selectMyRestaurantInfo(restaurant_idx);
 		System.out.println("ownerService.getMyRestaurantInfo>>>>>>>>>>>>>>>>>>>restaurantInfo: " + restaurantInfo.toString());
 		return restaurantInfo;
 	}
@@ -45,6 +47,30 @@ public class OwnserServiceImpl implements OwnerService {
 	public void updateRestaurant(HashMap<String, Object> map) {
 		System.out.println("ownerService.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
 		this.ownerDao.updateRestaurant(map);
+	}
+
+	@Override
+	public List<OwnerBoardVo> getReviewList(int restaurant_idx) {
+		System.out.println("ownerService.getBoardInfo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
+		List<OwnerBoardVo> boardInfo =  this.ownerDao.selectReviewList(restaurant_idx);
+		System.out.println("ownerService.getBoardInfo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardInfo: " + boardInfo);
+		return boardInfo;
+	}
+
+	@Override
+	public List<OwnerCommentVo> getReviewCommentList(int board_idx) {
+		System.out.println("OwnerService.reviewComment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>board_idx: " + board_idx);
+		List<OwnerCommentVo> reviewCommentList = this.ownerDao.selectReviewCommentList(board_idx);
+		System.out.println("OwnerService.getReviewCommentList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>reviewCommentList: " + reviewCommentList.toString());
+		return reviewCommentList;
+	}
+
+	@Override
+	public OwnerBoardVo getReview(int board_idx) {
+		System.out.println("OwnerService.getReview>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>board_idx: " + board_idx);
+		OwnerBoardVo ownerBoardVo = this.ownerDao.selectReview(board_idx);
+		System.out.println("OwnerService.getReview>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerBoardVo: " + ownerBoardVo.toString());
+		return ownerBoardVo;
 	}
 
 }

@@ -6,7 +6,7 @@
 <mapper namespace="User">
     
     <select id = "login"
-    	resultType="com.green.restaurant.user.vo.UserVo">
+    	resultType="com.green.restaurant.user.vo.OwnerUserVo">
     	SELECT
     		user_id as userId,
     		user_pw as userPw,
@@ -22,7 +22,7 @@
     </select>
     
     <select id="loginAuth"
-    	resultType="com.green.restaurant.user.vo.UserVo">
+    	resultType="com.green.restaurant.user.vo.OwnerUserVo">
     	SELECT
     		u.user_id as userId,
     		u.user_pw as userPw,

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.green.restaurant.user.dao.UserDao;
-import com.green.restaurant.user.vo.UserVo;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {
@@ -15,9 +15,9 @@ public class UserDaoImpl implements UserDao {
 	private SqlSession  sqlSession;
 
 	@Override
-	public UserVo login(HashMap<String, Object> map) {
+	public OwnerUserVo login(HashMap<String, Object> map) {
 		System.out.println("userDao.login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
-		UserVo userVo = this.sqlSession.selectOne("User.login", map);
+		OwnerUserVo userVo = this.sqlSession.selectOne("User.login", map);
 		System.out.println("userDao.login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>user_role: " + userVo.getUserRole());
 		if(userVo.getUserRole().equals("OWNER")) {
 			map.put("userRole", userVo.getUserRole());

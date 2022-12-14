@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.green.restaurant.user.dao.UserDao;
 import com.green.restaurant.user.service.UserService;
-import com.green.restaurant.user.vo.UserVo;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -15,9 +15,9 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public UserVo login(HashMap<String, Object> map) {
+	public OwnerUserVo login(HashMap<String, Object> map) {
 		System.out.println("ownerService>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>login() called");
-		UserVo userVo = this.userDao.login(map);
+		OwnerUserVo userVo = this.userDao.login(map);
 		return userVo;
 	}
 

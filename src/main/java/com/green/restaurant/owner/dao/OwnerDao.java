@@ -3,18 +3,26 @@ package com.green.restaurant.owner.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import com.green.restaurant.owner.vo.RestaurantMenuFileJoinVo;
-import com.green.restaurant.owner.vo.RestaurantVo;
-import com.green.restaurant.user.vo.UserVo;
+import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantVo;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 public interface OwnerDao {
 	void insertRestaurant(HashMap<String, Object> map);
 
-	List<RestaurantVo> selectMyRestaurantList(UserVo userVo);
+	List<OwnerRestaurantVo> selectMyRestaurantList(OwnerUserVo userVo);
 
-	List<RestaurantMenuFileJoinVo> selectMyRestaurantInfo(int restaurant_idx);
+	List<OwnerRestaurantMenuFileJoinVo> selectMyRestaurantInfo(int restaurant_idx);
 
 	void updateRestaurant(HashMap<String, Object> map);
+
+	List<OwnerBoardVo> selectReviewList(int restaurant_idx);
+
+	List<OwnerCommentVo> selectReviewCommentList(int board_idx);
+
+	OwnerBoardVo selectReview(int board_idx);
 
 	
 }

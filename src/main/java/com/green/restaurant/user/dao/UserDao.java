@@ -2,11 +2,11 @@ package com.green.restaurant.user.dao;
 
 import java.util.HashMap;
 
-import com.green.restaurant.user.vo.UserVo;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 public interface UserDao {
 
-	UserVo login(HashMap<String, Object> map);
+	OwnerUserVo login(HashMap<String, Object> map);
 
 	void insertUser(HashMap<String, Object> map);
 
