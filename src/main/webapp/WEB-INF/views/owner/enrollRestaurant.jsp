@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<title>식당등록</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<%-- <script>
+	<script>
 	   var num = 1;
 	   $(function() {
 		   $('#btnAddFile').on('click', function() {
@@ -18,7 +18,7 @@
 			   num++;
 		   } );
 	   });
-	</script> --%>
+	</script>
 </head>
 <body>
 	<div>
