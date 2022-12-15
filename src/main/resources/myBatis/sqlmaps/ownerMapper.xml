@@ -170,4 +170,25 @@
 		    board_idx = #{board_idx}
 	</select>
 	
+	<select id="getCategoryList"
+		resultType="com.green.restaurant.owner.vo.OwnerCategoryVo">
+		SELECT
+			category_idx,
+			category_name
+		FROM
+			rcategory
+		ORDER BY
+			category_idx
+	</select>
+	
+	<select id="getRestaurantIdx"
+		resultType="int">
+		SELECT
+			MAX(restaurant_idx)
+		FROM
+			restaurant
+		WHERE
+			owner_idx=#{owner_idx}
+	</select>
+	
 </mapper>

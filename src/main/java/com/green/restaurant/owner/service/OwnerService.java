@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
@@ -25,5 +26,10 @@ public interface OwnerService {
 	List<OwnerCommentVo> getReviewCommentList(int board_idx);
 
 	OwnerBoardVo getReview(int board_idx);
+
+	List<OwnerCategoryVo> getCategoryList();
+
+	int getRestaurantIdx(Integer ownerIdx);
+
 
 }

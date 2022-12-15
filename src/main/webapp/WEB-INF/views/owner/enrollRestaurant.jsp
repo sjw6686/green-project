@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>  
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,9 +38,9 @@
 			<input type="text" name="brandTel" id="brandTel" /><br>
 			<label>카테고리</label><br>
 			<select name = "categoryName" id = catagory>
-				<option value="한식">한식</option>
-				<option value="중식">중식</option>
-				<option value="일식">일식</option>
+				<c:forEach var="categoryList" items="${categoryList}">
+					<option value="${categoryList.category_name}">${categoryList.category_name}</option>
+				</c:forEach>
 			</select>
 			<label>간단한 소개글</label><br>
 			<textarea name="introduce" id="introduce"></textarea><br>

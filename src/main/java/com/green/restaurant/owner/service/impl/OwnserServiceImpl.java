@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.green.restaurant.owner.dao.OwnerDao;
 import com.green.restaurant.owner.service.OwnerService;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
@@ -72,5 +73,20 @@ public class OwnserServiceImpl implements OwnerService {
 		System.out.println("OwnerService.getReview>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerBoardVo: " + ownerBoardVo.toString());
 		return ownerBoardVo;
 	}
+
+	@Override
+	public List<OwnerCategoryVo> getCategoryList() {
+		List<OwnerCategoryVo> categoryList = this.ownerDao.selectCategoryList();
+		System.out.println("OwnerService.getCategoryList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>categoryList: " + categoryList);
+		return categoryList;
+	}
+
+	@Override
+	public int getRestaurantIdx(Integer ownerIdx) {
+		System.out.println("OwnerService.getRestaurantIdx>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerIdx: " + ownerIdx);
+		int restaurnat_idx = this.ownerDao.selectRestaurantIdx(ownerIdx);
+		return restaurnat_idx;
+	}
+
 
 }

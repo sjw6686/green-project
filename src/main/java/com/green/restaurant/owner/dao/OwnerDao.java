@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
@@ -23,6 +24,10 @@ public interface OwnerDao {
 	List<OwnerCommentVo> selectReviewCommentList(int board_idx);
 
 	OwnerBoardVo selectReview(int board_idx);
+
+	List<OwnerCategoryVo> selectCategoryList();
+
+	int selectRestaurantIdx(Integer ownerIdx);
 
 	
 }

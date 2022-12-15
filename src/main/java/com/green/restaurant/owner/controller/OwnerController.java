@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.green.restaurant.owner.service.OwnerService;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
@@ -29,19 +30,31 @@ public class OwnerController {
 //	private PdsService pdsService;
 	
 	@RequestMapping("/enrollRestaurant")
-	public String enrollRestaurant(@SessionAttribute("login") OwnerUserVo userVo) {						//로그인한 유저의 세션정보를 UserVo에 담음
+	public String enrollRestaurant(
+				Model model,
+				@SessionAttribute("login") OwnerUserVo userVo
+			) {						//로그인한 유저의 세션정보를 UserVo에 담음
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>session: " + userVo.getUserRole());
-		if(userVo.getUserRole().equals("OWNER") || userVo.getUserRole().equals("ADMIN")) {			//유저권한정보를 확인한 후 사장이나 관리자권한을 가진 계정이면 접근 허용
-			return "/owner/enrollRestaurant";
+		
+		if(userVo.getUserRole().equals("USER")) {			//가게목록은 일반유저가 볼수없게 하기위해 USER권한을 가진 유저는 홈으로 반환
+			model.addAttribute("user_id", userVo.getUserId());
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+			return "redirect:/";
 		}
-		return "redirect:/";
+		
+		List<OwnerCategoryVo> categoryList = this.ownerService.getCategoryList(); 
+		System.out.println("OwnerCtrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>categoryList: " + categoryList);
+		model.addAttribute("categoryList", categoryList);
+		
+		return "/owner/enrollRestaurant";
 	}
 	
 	@RequestMapping("/enrollProcess")
 	public String enrollProcess(
-			@SessionAttribute("login") OwnerUserVo userVo,
-			@RequestParam  HashMap<String, Object> map,
-			HttpServletRequest request		//파일정보 받기위해 추가
+				@SessionAttribute("login") OwnerUserVo userVo,
+				@RequestParam  HashMap<String, Object> map,
+				HttpServletRequest request,		//파일정보 받기위해 추가
+				Model model
 			) {
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>session.ownerIdx: " + userVo.getOwnerIdx());
 		map.put("ownerIdx", userVo.getOwnerIdx());		//map에 owner_idx 저장
@@ -50,14 +63,30 @@ public class OwnerController {
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
 		
 		this.ownerService.enrollRestorant(map, request);
+		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enrollSuccess!!");
 		
-		return "redirect:/";
+		int restaurant_idx = this.ownerService.getRestaurantIdx(userVo.getOwnerIdx());		//가게를 먼저 등록한 후 바로 메뉴등록하는 페이지로 이동한다. 이때 메뉴등록할때 어느가게의 메뉴인지 입력하기위해, 등록된 가게번호를 model에 담아 jsp에 보낸다.
+		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx:" + restaurant_idx);
+		
+		model.addAttribute("restaurant_idx", restaurant_idx);			//가게번호 받아서 모델에 담음
+		
+		return "/owner/enrollMenu";
+	}
+	
+	@RequestMapping("/enrollMenuProcess")
+	public String enrollMenuProcess(
+				@RequestParam  HashMap<String, Object> map,
+				HttpServletRequest request
+			) {
+		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
+		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
+		return "redirect:/showJsp";
 	}
 	
 	@RequestMapping("/myRestaurantList")
 	public String myRestaurantList(
-			Model model,
-			@SessionAttribute("login") OwnerUserVo userVo
+				Model model,
+				@SessionAttribute("login")OwnerUserVo userVo
 			) {
 		if(userVo.getUserRole().equals("USER")) {			//가게목록은 일반유저가 볼수없게 하기위해 USER권한을 가진 유저는 홈으로 반환
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
@@ -72,7 +101,11 @@ public class OwnerController {
 	}
 	
 	@RequestMapping("/myRestaurant")
-	public String myRestaurant(Model model, @SessionAttribute("login") OwnerUserVo userVo, int restaurant_idx) {
+	public String myRestaurant(
+				Model model,
+				@SessionAttribute("login") OwnerUserVo userVo,
+				int restaurant_idx
+			) {
 		System.out.println("ownerController>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
 		if(userVo.getUserRole().equals("USER") ) {			//가게목록은 일반유저가 볼수없게 하기위해 USER권한을 가진 유저는 홈으로 반환
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
@@ -110,33 +143,33 @@ public class OwnerController {
 		return "/owner/ownerReviewComment";
 	}
 	
-	@RequestMapping("/updateRestaurant")
-	public String updateRestaurant(
-			Model model,
-			int restaurant_idx,
-			@SessionAttribute("login") OwnerUserVo userVo) {
-		if(userVo.getUserRole().equals("USER")) {
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
-			return "redirect:/";
-		}
-		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
-
-		return "/owner/updateRestaurant";
-	}
-	
-	@RequestMapping("/updateProcess")
-	public String updateProcess(
-				Model model,
-				@RequestParam  HashMap<String, Object> map,
-				@SessionAttribute("login") OwnerUserVo userVo
-			) {
-		if(userVo.getUserRole().equals("USER")) {
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
-			return "redirect:/";
-		}
-		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
-		this.ownerService.updateRestaurant(map);
-		return "redirect/";
-	}
+//	@RequestMapping("/updateRestaurant")
+//	public String updateRestaurant(
+//			Model model,
+//			int restaurant_idx,
+//			@SessionAttribute("login") OwnerUserVo userVo) {
+//		if(userVo.getUserRole().equals("USER")) {
+//			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+//			return "redirect:/";
+//		}
+//		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx: " + restaurant_idx);
+//
+//		return "/owner/updateRestaurant";
+//	}
+//	
+//	@RequestMapping("/updateProcess")
+//	public String updateProcess(
+//				Model model,
+//				@RequestParam  HashMap<String, Object> map,
+//				@SessionAttribute("login") OwnerUserVo userVo
+//			) {
+//		if(userVo.getUserRole().equals("USER")) {
+//			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+//			return "redirect:/";
+//		}
+//		System.out.println("OwnerCtrl.updateRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
+//		this.ownerService.updateRestaurant(map);
+//		return "redirect/";
+//	}
 	
 }

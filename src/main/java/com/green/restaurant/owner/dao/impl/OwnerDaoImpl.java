@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.green.restaurant.owner.dao.OwnerDao;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
+import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
@@ -82,5 +83,21 @@ public class OwnerDaoImpl implements OwnerDao {
 		System.out.println("OwnerDao.selectReview>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + ownerBoardVo.toString());
 		return ownerBoardVo;
 	}
+
+	@Override
+	public List<OwnerCategoryVo> selectCategoryList() {
+		List<OwnerCategoryVo> categoryList = this.sqlSession.selectList("Owner.getCategoryList");
+		System.out.println("OwnerDao.selectCategoryList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>categoryList: " + categoryList.toString());
+		return categoryList;
+	}
+
+	@Override
+	public int selectRestaurantIdx(Integer ownerIdx) {
+		System.out.println("OwnerDao.selectRestaurantIdx>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerIdx: " + ownerIdx);
+		int restaurant_idx = this.sqlSession.selectOne("Owner.getRestaurantIdx", ownerIdx);
+		System.out.println("OwnerDao.selectRestaurantIdx>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerIdx: " + restaurant_idx);
+		return restaurant_idx;
+	}
+
 
 }

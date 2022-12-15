@@ -24,7 +24,7 @@
 			#{filesList[0].file_ext},
 			#{filesList[0].sfile_name},
 			(SELECT
-				MAX(restaurant_idx)
+				MAX(restaurant_idx) + 1
 			FROM
 				restaurant)
 		)

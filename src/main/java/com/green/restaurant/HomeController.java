@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -33,5 +34,14 @@ public class HomeController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/showJsp")
+	public ModelAndView showJsp() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("restaurant_idx", 1);
+		mv.setViewName("/owner/enrollMenu");
+		return mv;
+	}
+
 
 }
