@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.green.restaurant.owner.service.OwnerService;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.user.vo.OwnerUserVo;
@@ -32,11 +34,11 @@ public class OwnerController {
 	@RequestMapping("/enrollRestaurant")
 	public String enrollRestaurant(
 				Model model,
-				@SessionAttribute("login") OwnerUserVo userVo
-			) {						//로그인한 유저의 세션정보를 UserVo에 담음
+				@SessionAttribute("login") OwnerUserVo userVo		//로그인한 유저의 세션정보를 UserVo에 담음
+			) {
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>session: " + userVo.getUserRole());
 		
-		if(userVo.getUserRole().equals("USER")) {			//가게목록은 일반유저가 볼수없게 하기위해 USER권한을 가진 유저는 홈으로 반환
+		if(userVo.getUserRole().equals("USER")) {					//가게등록은 일반유저가 할수없게 하기위해 USER권한을 가진 유저는 홈으로 반환
 			model.addAttribute("user_id", userVo.getUserId());
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
 			return "redirect:/";
@@ -63,12 +65,42 @@ public class OwnerController {
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
 		
 		this.ownerService.enrollRestorant(map, request);
-		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enrollSuccess!!");
+		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant enroll success!!");
 		
-		int restaurant_idx = this.ownerService.getRestaurantIdx(userVo.getOwnerIdx());		//가게를 먼저 등록한 후 바로 메뉴등록하는 페이지로 이동한다. 이때 메뉴등록할때 어느가게의 메뉴인지 입력하기위해, 등록된 가게번호를 model에 담아 jsp에 보낸다.
-		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx:" + restaurant_idx);
+//		int restaurant_idx = this.ownerService.getRestaurantIdx(userVo.getOwnerIdx());		//가게를 먼저 등록한 후 바로 메뉴등록하는 페이지로 이동한다. 이때 메뉴등록할때 어느가게의 메뉴인지 입력하기위해, 등록된 가게번호를 model에 담아 jsp에 보낸다.
+//		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx:" + restaurant_idx);
+//		map.put("restaurant_idx", restaurant_idx);			//가게번호 map에 담음
+//		
+//		List<OwnerMenuFileJoinVo> menuList = this.ownerService.getMenuList(map);
+//		
+//		model.addAttribute("restaurant_idx", restaurant_idx);		//가게번호 받아서 모델에 담음
+//		model.addAttribute("menuList", menuList);					//menu정보 등록시 메뉴를 리스트형식으로 한번에 등록하는것이 아니라 하나씩 등록후 다시 등록하는 페이지로 돌아옴. 메뉴등록후 등록된 정보를 볼수있게 메뉴정보가 있다면 찾아서 model에 담음
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/enrollMenu")
+	public String enrollMenu(
+				@SessionAttribute("login") OwnerUserVo userVo,
+				@RequestParam  HashMap<String, Object> map,
+				Model model
+			) {
 		
-		model.addAttribute("restaurant_idx", restaurant_idx);			//가게번호 받아서 모델에 담음
+		if(userVo.getUserRole().equals("USER")) {
+			model.addAttribute("user_id", userVo.getUserId());
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+			return "redirect:/";
+		}
+		
+		System.out.println("ownerctrl.enrollMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>session.ownerIdx: " + userVo.getOwnerIdx());
+		map.put("ownerIdx", userVo.getOwnerIdx());
+		System.out.println("ownerctrl.enrollMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		
+		List<OwnerMenuFileJoinVo> menuList = this.ownerService.getMenuList(map);
+		System.out.println("ownerctrl.enrollMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>menuList: " + menuList.toString());
+		
+		model.addAttribute("menuList", menuList);					//menu정보 등록시 메뉴를 리스트형식으로 한번에 등록하는것이 아니라 하나씩 등록후 다시 등록하는 페이지로 돌아옴. 메뉴등록후 등록된 정보를 볼수있게 메뉴정보가 있다면 찾아서 model에 담음
+		model.addAttribute("restaurant_idx", map.get("restaurant_idx"));
+		System.out.println("ownerctrl.enrollMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>model: " + model.toString());
 		
 		return "/owner/enrollMenu";
 	}
@@ -76,11 +108,16 @@ public class OwnerController {
 	@RequestMapping("/enrollMenuProcess")
 	public String enrollMenuProcess(
 				@RequestParam  HashMap<String, Object> map,
-				HttpServletRequest request
+				HttpServletRequest request,
+				RedirectAttributes re
 			) {
-		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
-		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
-		return "redirect:/showJsp";
+		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.ownerService.enrollMenu(map, request);
+		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enroll menu success!!");
+		
+		re.addAttribute("restaurant_idx", map.get("restaurant_idx"));
+		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>re: " + re.toString());
+		return "redirect:/restaurant/owner/enrollMenu";
 	}
 	
 	@RequestMapping("/myRestaurantList")

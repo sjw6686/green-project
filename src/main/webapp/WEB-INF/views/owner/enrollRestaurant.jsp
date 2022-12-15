@@ -6,20 +6,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>식당등록</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<%-- <script>
-	   var num = 1;
-	   $(function() {
-		   $('#btnAddFile').on('click', function() {
-			   let tag  = '<input type="text" name=\"menu' + num + '\" />';
-			   tag += '<input type="text" name=\"price' + num + '\" />';
-			   tag += '<input type="file" name=\"upfile' + num + '\ "/><br>';
-			   $('#addMenu').append( tag  );
-			  // alert(tag);
-			   num++;
-		   } );
-	   });
-	</script> --%>
 </head>
 <body>
 	<div>

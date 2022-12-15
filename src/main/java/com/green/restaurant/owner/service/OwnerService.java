@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.user.vo.OwnerUserVo;
@@ -30,6 +31,10 @@ public interface OwnerService {
 	List<OwnerCategoryVo> getCategoryList();
 
 	int getRestaurantIdx(Integer ownerIdx);
+
+	List<OwnerMenuFileJoinVo> getMenuList(HashMap<String, Object> map);
+
+	void enrollMenu(HashMap<String, Object> map, HttpServletRequest request);
 
 
 }
