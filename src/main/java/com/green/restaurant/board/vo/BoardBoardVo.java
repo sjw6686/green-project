@@ -1,6 +1,6 @@
 package com.green.restaurant.board.vo;
 
-public class UserBoardVo {
+public class BoardBoardVo {
 	
 	private   int         board_idx;
 	private   int         board_type;
@@ -17,9 +17,9 @@ public class UserBoardVo {
 	private   int         table_type;
 	
 	//constructor
-	public UserBoardVo() {}
+	public BoardBoardVo() {}
 	
-	public UserBoardVo(int board_idx, int board_type, String board_title, String board_content, int review_avg,
+	public BoardBoardVo(int board_idx, int board_type, String board_title, String board_content, int review_avg,
 			String reg_date, int restaurant_idx, int view_cnt, String user_id, int cnt_like, int cnt_hate,
 			String address , int table_type) {
 		super();

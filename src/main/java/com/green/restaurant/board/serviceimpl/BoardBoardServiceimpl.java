@@ -7,41 +7,41 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.green.restaurant.board.dao.UserBoardDao;
-import com.green.restaurant.board.service.UserBoardService;
-import com.green.restaurant.board.vo.UserBoardVo;
-import com.green.restaurant.board_comment.vo.UserBoardCommentVo;
+import com.green.restaurant.board.dao.BoardBoardDao;
+import com.green.restaurant.board.service.BoardBoardService;
+import com.green.restaurant.board.vo.BoardBoardVo;
+import com.green.restaurant.board_comment.vo.BoardBoardCommentVo;
 
 @Service("boardService")
-public class UserBoardServiceimpl implements UserBoardService {
+public class BoardBoardServiceimpl implements BoardBoardService {
 
 	@Autowired
-	private UserBoardDao  boardDao;
+	private BoardBoardDao  boardDao;
 	
 	@Override
-	public List<UserBoardVo> getBoardList() {
-		List<UserBoardVo>  boardList  =  boardDao.getBoardList();
+	public List<BoardBoardVo> getBoardList() {
+		List<BoardBoardVo>  boardList  =  boardDao.getBoardList();
 		return boardList;
 	}
 
 
 
 	@Override
-	public UserBoardVo getBoard(HashMap<Integer, Object> map) {
-		UserBoardVo boardVo = boardDao.getBoardVo(map); 
+	public BoardBoardVo getBoard(HashMap<Integer, Object> map) {
+		BoardBoardVo boardVo = boardDao.getBoardVo(map); 
 		return boardVo;
 	}
 
 
 	@Override
-	public void getwritesave(UserBoardVo boardVo) {
+	public void getwritesave(BoardBoardVo boardVo) {
 		//System.out.println("bService.getwritesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + boardVo);
 		this.boardDao.getwritesave(boardVo);
 	}
 
 	@Override
-	public List<UserBoardCommentVo> getBoardCommentList(HashMap<Integer, Object> map) {
-		List<UserBoardCommentVo> BoardCommentList = boardDao.getBoardCommentList(map);
+	public List<BoardBoardCommentVo> getBoardCommentList(HashMap<Integer, Object> map) {
+		List<BoardBoardCommentVo> BoardCommentList = boardDao.getBoardCommentList(map);
 		return BoardCommentList;
 	}
 
@@ -51,8 +51,8 @@ public class UserBoardServiceimpl implements UserBoardService {
 	}
 
 	@Override
-	public UserBoardVo getBoard(Map<String, Object> map) {
-		UserBoardVo boardVo = boardDao.getBoard(map);
+	public BoardBoardVo getBoard(Map<String, Object> map) {
+		BoardBoardVo boardVo = boardDao.getBoard(map);
 		return boardVo;
 	}
 
@@ -67,9 +67,9 @@ public class UserBoardServiceimpl implements UserBoardService {
 
 
 	@Override
-	public UserBoardVo getBoard(int board_idx) {
+	public BoardBoardVo getBoard(int board_idx) {
 		System.out.println("boardService.getBoard>>>>>>>>>>>>>>>>>>>>board_idx:" + board_idx);
-		UserBoardVo boardVo  = boardDao.getBoard(board_idx);
+		BoardBoardVo boardVo  = boardDao.getBoard(board_idx);
 		System.out.println("boardService.getBoard>>>>>>>>>>>>>>>>>>>>boardVo:" + boardVo.toString());
 		return boardVo;
 	}

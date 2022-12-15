@@ -8,42 +8,42 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.green.restaurant.board.dao.UserBoardDao;
-import com.green.restaurant.board.vo.UserBoardVo;
-import com.green.restaurant.board_comment.vo.UserBoardCommentVo;
+import com.green.restaurant.board.dao.BoardBoardDao;
+import com.green.restaurant.board.vo.BoardBoardVo;
+import com.green.restaurant.board_comment.vo.BoardBoardCommentVo;
 
 @Repository("boardDao")
-public class UserBoardDaoImpl implements UserBoardDao {
+public class BoardBoardDaoImpl implements BoardBoardDao {
 
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<UserBoardVo> getBoardList() {
-		List<UserBoardVo> boardList = sqlSession.selectList("Board.GetBoardList");	
+	public List<BoardBoardVo> getBoardList() {
+		List<BoardBoardVo> boardList = sqlSession.selectList("Board.GetBoardList");	
 		return boardList;
 	}
 
 
 	@Override
-	public UserBoardVo getBoardVo(HashMap<Integer, Object> map) {
+	public BoardBoardVo getBoardVo(HashMap<Integer, Object> map) {
 		System.out.println("boardDao.getBoardVo>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
 		sqlSession.update("Board.ReadCountUpdate", map );
-		UserBoardVo BoardVo = sqlSession.selectOne("Board.GetBoardVo", map);
+		BoardBoardVo BoardVo = sqlSession.selectOne("Board.GetBoardVo", map);
 		return BoardVo;
 	}
 
 
 	@Override
-	public void getwritesave(UserBoardVo boardVo) {
+	public void getwritesave(BoardBoardVo boardVo) {
 		//System.out.println("bDao.getwritesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + boardVo);
 		this.sqlSession.insert("Board.getwriesave", boardVo);
 	}
 
 	@Override
-	public List<UserBoardCommentVo> getBoardCommentList(HashMap<Integer, Object> map) {
+	public List<BoardBoardCommentVo> getBoardCommentList(HashMap<Integer, Object> map) {
 		System.out.println("boadDao.getBoardCommentList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
-		List<UserBoardCommentVo> commentList = this.sqlSession.selectList("Board.GetCommentList", map);
+		List<BoardBoardCommentVo> commentList = this.sqlSession.selectList("Board.GetCommentList", map);
 		System.out.println("boadDao.getBoardCommentList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentList: " + commentList.toString());
 		return commentList;
 	}
@@ -56,9 +56,9 @@ public class UserBoardDaoImpl implements UserBoardDao {
 
 
 	@Override
-	public UserBoardVo getBoard(Map<String, Object> map) {
+	public BoardBoardVo getBoard(Map<String, Object> map) {
 		
-		UserBoardVo boardVo = sqlSession.selectOne("Board.BoardUpdate",map);
+		BoardBoardVo boardVo = sqlSession.selectOne("Board.BoardUpdate",map);
 		return boardVo;
 	}
 
@@ -72,9 +72,9 @@ public class UserBoardDaoImpl implements UserBoardDao {
 
 
 	@Override
-	public UserBoardVo getBoard(int board_idx) {
+	public BoardBoardVo getBoard(int board_idx) {
 		System.out.println("boardDao.getBoard>>>>>>>>>>>>>>>>>>>>board_idx:" + board_idx);
-		UserBoardVo boardVo = sqlSession.selectOne("Board.GetBoardVo" , board_idx);
+		BoardBoardVo boardVo = sqlSession.selectOne("Board.GetBoardVo" , board_idx);
 		System.out.println("boardDao.getBoard>>>>>>>>>>>>>>>>>>>>boardVo:" + boardVo.toString());
 		return boardVo;
 	}

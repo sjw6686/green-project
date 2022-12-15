@@ -65,7 +65,7 @@
 				<tr>
 					<td>
 					<a href="/BoardComment/CommentUpdateForm?comment_idx=
-								${ commentList.comment_idx}">글 수정</a>
+								${ commentList.comment_idx}&board_idx=${boardVo.board_idx}">글 수정</a>
 					<a href="#">글 삭제</a>
 					</td>
 				</tr>
@@ -73,12 +73,8 @@
 			
 		</table>
 		 <form method="post" action="/BoardComment/Write">
-			<%--<input type="hidden" name="user_id" value="${ boardVo.user_id }" />
-			<input type="hidden" name="Comment_idx" value="${ commentList.comment_idx }" /> --%>
-			<input type="hidden" name="lvl" value="0" /> 
-			<input type="hidden"name="step" value="0" /> 
-			<input type="hidden" name="cnum" value="0" />
-			<input type="hidden" name="nref" value="0" />
+			<input type="hidden" name="user_id" value="${ boardVo.user_id }" />
+			<input type="hidden" name="board_idx" value="${ boardVo.board_idx }" />
 			<textarea name="comment_content" id="content" rows="4"></textarea>
 			<input type="submit" value="댓글달기">
 		</form> 

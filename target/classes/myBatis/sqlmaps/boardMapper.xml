@@ -5,7 +5,7 @@
 
 <mapper namespace="Board">
     
-    <select id="GetBoardList"  resultType="com.green.restaurant.board.vo.UserBoardVo" >
+    <select id="GetBoardList"  resultType="com.green.restaurant.board.vo.BoardBoardVo" >
        SELECT
 		    board_idx,
 		    board_type,
@@ -24,7 +24,7 @@
     
     <!-- 내용 보기 -->
    	<select  id="GetBoardVo"
-   		 resultType="com.green.restaurant.board.vo.UserBoardVo">
+   		 resultType="com.green.restaurant.board.vo.BoardBoardVo">
    		SELECT
 		    board_idx,
 		    board_title,
@@ -137,16 +137,16 @@
 	    	#{comment_content},
 	    	#{board_idx},
 	    	sysdate,
-	    	#{ lvl   } + 1 ,
-	    	#{ step  } + 1,
-	    	#{ cnum  },
-	    	#{ nref  } 
+	    	0,
+	    	0,
+	    	0,
+	    	0 
 	)
     </insert>
     
    
    <select id="GetCommentList"
-   		resultType="com.green.restaurant.board_comment.vo.UserBoardCommentVo">
+   		resultType="com.green.restaurant.board_comment.vo.BoardBoardCommentVo">
    		SELECT
    			COMMENT_IDX,
 			USER_ID,
@@ -177,7 +177,7 @@
    </update>
    <!-- 댓글 조회하기 -->
    <select id="GetCommentUpdate"
-   		resultType="com.green.restaurant.board_comment.vo.UserBoardCommentVo">
+   		resultType="com.green.restaurant.board_comment.vo.BoardBoardCommentVo">
    		SELECT
    			COMMENT_IDX,
 			USER_ID,

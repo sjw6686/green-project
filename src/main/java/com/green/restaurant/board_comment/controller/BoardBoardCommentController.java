@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.green.restaurant.board_comment.service.UserBoardCommentService;
-import com.green.restaurant.board_comment.vo.UserBoardCommentVo;
+import com.green.restaurant.board_comment.service.BoardBoardCommentService;
+import com.green.restaurant.board_comment.vo.BoardBoardCommentVo;
 
 @Controller
 @RequestMapping("/BoardComment")
-public class UserBoardCommentController {
+public class BoardBoardCommentController {
 	
 	
 	@Autowired
-	private UserBoardCommentService boardCommentService;
+	private BoardBoardCommentService boardCommentService;
 	
 	@RequestMapping("/Write")
-	public  ModelAndView  write(  UserBoardCommentVo boardCommentVo ) {
+	public  ModelAndView  write(  BoardBoardCommentVo boardCommentVo ) {
 		// 새글 저장/ 답글 저장
 		boardCommentService.boardInsert ( boardCommentVo );
 		
@@ -31,11 +31,12 @@ public class UserBoardCommentController {
 	}
 	
 	@RequestMapping("/CommentUpdateForm")
-	public ModelAndView UpdateForm(int comment_idx) {
-		UserBoardCommentVo boardCommentVo = this.boardCommentService.getCommentUpdate(comment_idx);
-		
+	public ModelAndView UpdateForm(@RequestParam HashMap<String, Object> map) {
+		BoardBoardCommentVo boardCommentVo = this.boardCommentService.getCommentUpdate(map);
+		System.out.println("commentupdate>>>>>>>>>>>>>>>>>>>>>>>>map.board_idx: " + map.get("board_idx"));
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("boardCommentVo", boardCommentVo);
+		mv.addObject("board_idx", map.get("board_idx"));
 		mv.setViewName("board/commentupdate");
 		return mv;
 	}
@@ -43,11 +44,11 @@ public class UserBoardCommentController {
 	@RequestMapping("/CommentUpdate")
 	public ModelAndView commentupdate(@RequestParam HashMap<String, Object> map) {
 		
+		System.out.println("commentupdate>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
 		boardCommentService.boardCommentUpdate(map);
 		
-		String comment_idx = (String) map.get("comment_idx");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:/Board/View?board_idx=" + comment_idx);
+		mv.setViewName("redirect:/Board/View?board_idx=" + map.get("board_idx"));
 		return mv;
 		
 		

@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $( function() {
-	  $('form').on('submit', function(e) {
+	  /* $('form').on('submit', function(e) {
 		  if( $('[name=title]').val().trim() == ''   ) {
 			  alert('제목을 입력하세요');
 		  	  return false;
@@ -25,15 +25,14 @@
 		  // jqeury 에서는 return false는 아래 두 문장과 동일
 		  //e.preventDefault();
 		  //e.stopPropagation();
-	  });
+	  }); */
 	  
 	  $('#btnList').on('click', function() {
 		  alert('목록으로 돌아갑니다.');		  
-		  let    url     =  '/Board/View?board_idx=${boardVo.board_idx}';
+		  let    url     =  '/Board/View?board_idx=${board_idx}';
 		  location.href  =  url;
 	  } )
 	 
-	 	 	  
   })
 </script>
 </head>
@@ -41,9 +40,10 @@
   <div id="main">
     <!-- 게시물 수정 -->
     <form action="/BoardComment/CommentUpdate" method="POST">
-    <input type="hidden" name="comment_idx"     value="${boardCommentVo.comment_idx}" /> 
+    <input type="hidden" name="comment_idx" value="${boardCommentVo.comment_idx}" />
+    <input type="hidden" name="board_idx" value="${board_idx}" />
     <%-- <input type="hidden" name="menu_id" value="${ menu_id } " /> --%> 
-    <table  id="boardCommentUpdate">
+    <table  id="BoardCommentUpdate">
      <caption><h2>게시물 수정</h2></caption>
      <tr>
        <td class="td1">글쓴이</td>
@@ -65,7 +65,6 @@
      </tr>
     </table>
     </form>
-   
   </div>
 </body>
 </html>

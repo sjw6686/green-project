@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.green.restaurant.board.service.UserBoardService;
-import com.green.restaurant.board.vo.UserBoardVo;
-import com.green.restaurant.board_comment.vo.UserBoardCommentVo;
+import com.green.restaurant.board.service.BoardBoardService;
+import com.green.restaurant.board.vo.BoardBoardVo;
+import com.green.restaurant.board_comment.vo.BoardBoardCommentVo;
 
 @Controller
 @RequestMapping("/Board")
-public class UserBoardController {
+public class BoardBoardController {
 
 	@Autowired
-	private UserBoardService boardService;
+	private BoardBoardService boardService;
 
 	@RequestMapping("/List")
 	public String list(Model model) {
 
 		// 출력할 자료목록를 조회한다
-		List<UserBoardVo> boardList = boardService.getBoardList();
+		List<BoardBoardVo> boardList = boardService.getBoardList();
 		/* System.out.println("boardCont:" + boardList); */
 		model.addAttribute("boardList", boardList);
 		return "board/list";
@@ -33,7 +33,7 @@ public class UserBoardController {
 
 	@RequestMapping("/Write")
 	public String write() {
-
+		
 		return "board/write";
 	}
 
@@ -43,8 +43,8 @@ public class UserBoardController {
 	public String view(@RequestParam HashMap<Integer, Object> map, Model model) {
 		// int board_idx = Integer.parseInt(String.valueOf(map.get("board_idx") ));
 		System.out.println("bCtrl.view>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
-		UserBoardVo boardVo = this.boardService.getBoard(map);
-		List<UserBoardCommentVo> boardCommentList = boardService.getBoardCommentList(map);
+		BoardBoardVo boardVo = this.boardService.getBoard(map);
+		List<BoardBoardCommentVo> boardCommentList = boardService.getBoardCommentList(map);
 		System.out.println(
 				"boadDao.getBoardCommentList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentList: " + boardCommentList.toString());
 
@@ -55,7 +55,7 @@ public class UserBoardController {
 	}
 
 	@RequestMapping("/WriteSave")
-	public String writesave(UserBoardVo boardVo) {
+	public String writesave(BoardBoardVo boardVo) {
 		// System.out.println("bCtrl.writesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo:
 		// " + boardVo);
 		this.boardService.getwritesave(boardVo);
@@ -78,7 +78,7 @@ public class UserBoardController {
 	@RequestMapping("/UpdateForm")
 	public ModelAndView updateForm(int board_idx) {
 		System.out.println("boardCtrl.update>>>>>>>>>>>>>>>>>>>>map:" + board_idx);
-		UserBoardVo boardVo = boardService.getBoard(board_idx);
+		BoardBoardVo boardVo = boardService.getBoard(board_idx);
 		System.out.println("boardCtrl.update>>>>>>>>>>>>>>>>>>>>boardVo:" + boardVo.toString());
 		
 		ModelAndView mv = new ModelAndView();	
