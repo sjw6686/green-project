@@ -79,7 +79,6 @@ public class OwnerController {
 				HttpServletRequest request
 			) {
 		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
-		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>request: " + request.toString());
 		return "redirect:/showJsp";
 	}
 	
