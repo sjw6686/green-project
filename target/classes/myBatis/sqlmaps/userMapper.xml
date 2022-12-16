@@ -62,6 +62,25 @@
 		)
 	</insert>
 	
+	<select id="SelectRequestList"
+		resultType="com.green.restaurant.user.vo.OwnerUserVo">
+		SELECT
+			u.user_id as userId,
+		    o.owner_idx as ownerIdx,
+		    o.owner_num as ownerNum,
+		    o.user_enable as userEnable
+		FROM
+		    tuser u
+		JOIN
+		    towner o
+		ON
+		    u.user_id = o.user_id
+		WHERE
+		    o.user_enable = '0'
+		ORDER BY
+		    o.owner_idx
+	</select>
+	
 </mapper>
 
 

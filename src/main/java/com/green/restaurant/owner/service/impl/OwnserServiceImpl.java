@@ -110,5 +110,12 @@ public class OwnserServiceImpl implements OwnerService {
 		this.ownerDao.insertOwnerInfo(map);
 	}
 
+	@Override
+	public List<OwnerUserVo> getRequestUpgradeUserList() {
+		List<OwnerUserVo> requestList = this.ownerDao.selectRequestUserUpgradeList();
+		System.out.println("OwnerService.getRequestUpgradeUserList>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
+		return requestList;
+	}
+
 
 }

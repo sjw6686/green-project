@@ -36,5 +36,6 @@ public interface OwnerDao {
 
 	void insertOwnerInfo(HashMap<String, Object> map);
 
-	
+	List<OwnerUserVo> selectRequestUserUpgradeList();
+
 }

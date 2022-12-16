@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -186,7 +187,7 @@ public class OwnerController {
 		model.addAttribute("userVo", userVo);										//변경된 유저정보 model에 담아서 jsp에 전달
 		System.out.println("OwnerController.requestUpgrade>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>model: " + model.toString());
 		
-		return "/requestUserUpgrade";
+		return "/owner/requestUserUpgrade";
 	}
 	
 	@RequestMapping("/requestUserUpgradeProcess")										//등업신청시 
@@ -198,6 +199,38 @@ public class OwnerController {
 		
 		this.ownerService.requestUpdate(map);
 		userVo.setUserRole("USER");			//requestUserUpgrade에서 변경했던 유저권한을 다시 USER로 세팅
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/requestUserUpgradeList")
+	public String requestUserUpgradeList(Model model) {
+		List<OwnerUserVo> requestList = this.ownerService.getRequestUpgradeUserList();
+		System.out.println("OwnerCtrl.requestUserUpgradeList>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
+		
+		model.addAttribute("requestList", requestList);
+		return "/owner/requestUserUpgradeList";
+	}
+	
+	@RequestMapping("/userUpgradeProcess")
+	public String userUpgradeProcess(@RequestParam List<Integer> owner_idx, @RequestParam List<String> user_id) {
+		System.out.println("OwnerCtrl.userUpgradeProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>owner_idx: " + owner_idx);
+		System.out.println("OwnerCtrl.userUpgradeProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>user_id: " + user_id);
+		
+		for(int ownerIdx : owner_idx) {
+			System.out.println(ownerIdx);
+			//this.ownerService.updateUser
+		}
+		
+		for(String userId : user_id) {
+			System.out.println(userId);
+		}
+		
+//		System.out.println("OwnerCtrl.userUpgradeProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>owner_idx: " + request);
+//		
+//		for(int ownerIdx : request) {
+//			System.out.println("ownerIdx: " + ownerIdx);
+//		}
 		
 		return "redirect:/";
 	}

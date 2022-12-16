@@ -130,5 +130,11 @@ public class OwnerDaoImpl implements OwnerDao {
 		this.sqlSession.insert("Owner.insertOwnerInfo", map);
 	}
 
+	@Override
+	public List<OwnerUserVo> selectRequestUserUpgradeList() {
+		List<OwnerUserVo> requestList = this.sqlSession.selectList("User.SelectRequestList");
+		System.out.println("OwnerDao.selectRequestUserUpgradeList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
+		return requestList;
+	}
 
 }

@@ -38,5 +38,6 @@ public interface OwnerService {
 
 	void requestUpdate(HashMap<String, Object> map);
 
+	List<OwnerUserVo> getRequestUpgradeUserList();
 
 }
