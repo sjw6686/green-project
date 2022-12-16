@@ -36,5 +36,7 @@ public interface OwnerService {
 
 	void enrollMenu(HashMap<String, Object> map, HttpServletRequest request);
 
+	void requestUpdate(HashMap<String, Object> map);
+
 
 }

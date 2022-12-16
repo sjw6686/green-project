@@ -124,5 +124,11 @@ public class OwnerDaoImpl implements OwnerDao {
 				
 	}
 
+	@Override
+	public void insertOwnerInfo(HashMap<String, Object> map) {
+		System.out.println("OwnerDao.insertOwnerInfo>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.sqlSession.insert("Owner.insertOwnerInfo", map);
+	}
+
 
 }

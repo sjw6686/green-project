@@ -34,5 +34,7 @@ public interface OwnerDao {
 
 	void insertMenu(HashMap<String, Object> map);
 
+	void insertOwnerInfo(HashMap<String, Object> map);
+
 	
 }

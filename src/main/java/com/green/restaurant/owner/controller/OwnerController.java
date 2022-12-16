@@ -28,9 +28,6 @@ public class OwnerController {
 	@Autowired
 	private OwnerService ownerService;
 	
-//	@Autowired
-//	private PdsService pdsService;
-	
 	@RequestMapping("/enrollRestaurant")
 	public String enrollRestaurant(
 				Model model,
@@ -67,14 +64,6 @@ public class OwnerController {
 		this.ownerService.enrollRestorant(map, request);
 		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant enroll success!!");
 		
-//		int restaurant_idx = this.ownerService.getRestaurantIdx(userVo.getOwnerIdx());		//가게를 먼저 등록한 후 바로 메뉴등록하는 페이지로 이동한다. 이때 메뉴등록할때 어느가게의 메뉴인지 입력하기위해, 등록된 가게번호를 model에 담아 jsp에 보낸다.
-//		System.out.println("ownerctrl.enrollRestaurant>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurant_idx:" + restaurant_idx);
-//		map.put("restaurant_idx", restaurant_idx);			//가게번호 map에 담음
-//		
-//		List<OwnerMenuFileJoinVo> menuList = this.ownerService.getMenuList(map);
-//		
-//		model.addAttribute("restaurant_idx", restaurant_idx);		//가게번호 받아서 모델에 담음
-//		model.addAttribute("menuList", menuList);					//menu정보 등록시 메뉴를 리스트형식으로 한번에 등록하는것이 아니라 하나씩 등록후 다시 등록하는 페이지로 돌아옴. 메뉴등록후 등록된 정보를 볼수있게 메뉴정보가 있다면 찾아서 model에 담음
 		return "redirect:/";
 	}
 	
@@ -178,6 +167,39 @@ public class OwnerController {
 		model.addAttribute("reviewCommentList", reviewCommentList);
 		
 		return "/owner/ownerReviewComment";
+	}
+	
+	@RequestMapping("/requestUserUpgrade")
+	public String requestUserUpgrade(
+				Model model,
+				@SessionAttribute("login") OwnerUserVo userVo
+			) {
+		if(userVo.getUserRole().equals("OWNER")) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>invalid authority");
+			return "redirect:/";
+		}
+		
+		if(userVo.getUserRole().equals("USER")) {
+			userVo.setUserRole("일반유저");		//만약 유저권한이 "USER" 라면 화면에 표시되는 정보는 일반유저라고 표시하기위해 값 변경
+		}
+		
+		model.addAttribute("userVo", userVo);										//변경된 유저정보 model에 담아서 jsp에 전달
+		System.out.println("OwnerController.requestUpgrade>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>model: " + model.toString());
+		
+		return "/requestUserUpgrade";
+	}
+	
+	@RequestMapping("/requestUserUpgradeProcess")										//등업신청시 
+	public String requestUpgradeProcess(
+				@SessionAttribute("login") OwnerUserVo userVo,
+				@RequestParam  HashMap<String, Object> map
+			) {
+		System.out.println("OwnerController.requestUpgradeProcess>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		
+		this.ownerService.requestUpdate(map);
+		userVo.setUserRole("USER");			//requestUserUpgrade에서 변경했던 유저권한을 다시 USER로 세팅
+		
+		return "redirect:/";
 	}
 	
 //	@RequestMapping("/updateRestaurant")

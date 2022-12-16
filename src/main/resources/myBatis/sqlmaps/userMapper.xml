@@ -11,7 +11,7 @@
     		user_id as userId,
     		user_pw as userPw,
     		user_tel as userTel,
-    		join_date as joinDate,
+    		TO_CHAR(join_date, 'YYYY-MM-DD') as joinDate,
     		user_role as userRole
     	FROM
     		tuser
@@ -27,7 +27,7 @@
     		u.user_id as userId,
     		u.user_pw as userPw,
     		u.user_tel as userTel,
-    		u.join_date as joinDate,
+    		TO_CHAR(u.join_date, 'YYYY-MM-DD') as joinDate,
     		u.user_role as userRole,
     		o.owner_idx as ownerIdx,
     		o.owner_num as ownerNum,

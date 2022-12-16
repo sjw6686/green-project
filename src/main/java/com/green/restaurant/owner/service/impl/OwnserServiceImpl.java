@@ -104,5 +104,11 @@ public class OwnserServiceImpl implements OwnerService {
 		this.ownerDao.insertMenu(map);
 	}
 
+	@Override
+	public void requestUpdate(HashMap<String, Object> map) {
+		System.out.println("OwnerService.updateUser>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.ownerDao.insertOwnerInfo(map);
+	}
+
 
 }
