@@ -11,6 +11,7 @@ import com.green.restaurant.owner.dao.OwnerDao;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.pds.vo.FilesVo;
@@ -99,5 +100,41 @@ public class OwnerDaoImpl implements OwnerDao {
 		return restaurant_idx;
 	}
 
+	@Override
+	public List<OwnerMenuFileJoinVo> selectMenuList(HashMap<String, Object> map) {
+		System.out.println("OwnerDao.selectMenuList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		List<OwnerMenuFileJoinVo> menuList = this.sqlSession.selectList("Owner.getMenuList", map);
+		System.out.println("OwnerDao.selectMenuList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>menuList: " + menuList.toString());
+		return menuList;
+	}
+
+	@Override
+	public void insertMenu(HashMap<String, Object> map) {
+		System.out.println("OwnerDao.insertMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.sqlSession.insert("Owner.EnrollMenu", map);
+		
+		List<FilesVo> filesList = (List<FilesVo>) map.get("filesList");
+		System.out.println("ownerDao.insertMenu>>>>>>>>>>>>>>>>filesList: " + filesList.size());
+		if(filesList.size() > 0) {				
+			System.out.println("ownerDao.insertMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>in if");
+			this.sqlSession.insert("Pds.MenuFileInsert", map);	//파일정보 저장
+			System.out.println("ownerDao.insertRestaurantInIf>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after file insert");
+		
+		}
+				
+	}
+
+	@Override
+	public void insertOwnerInfo(HashMap<String, Object> map) {
+		System.out.println("OwnerDao.insertOwnerInfo>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.sqlSession.insert("Owner.insertOwnerInfo", map);
+	}
+
+	@Override
+	public List<OwnerUserVo> selectRequestUserUpgradeList() {
+		List<OwnerUserVo> requestList = this.sqlSession.selectList("User.SelectRequestList");
+		System.out.println("OwnerDao.selectRequestUserUpgradeList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
+		return requestList;
+	}
 
 }

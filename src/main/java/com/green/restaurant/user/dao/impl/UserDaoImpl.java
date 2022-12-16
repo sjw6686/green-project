@@ -17,11 +17,15 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public OwnerUserVo login(HashMap<String, Object> map) {
 		System.out.println("userDao.login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		
 		OwnerUserVo userVo = this.sqlSession.selectOne("User.login", map);
 		System.out.println("userDao.login>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>user_role: " + userVo.getUserRole());
+		
 		if(userVo.getUserRole().equals("OWNER")) {
-			map.put("userRole", userVo.getUserRole());
 			userVo = this.sqlSession.selectOne("User.loginAuth", map);
+			System.out.println("UserDao.login>>>>>>>>>>>>>>>>>>userVo: " + userVo.toString());
+
+			return userVo;				
 		}
 		return userVo;
 	}

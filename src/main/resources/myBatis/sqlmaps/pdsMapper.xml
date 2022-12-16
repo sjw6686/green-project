@@ -29,4 +29,31 @@
 				restaurant)
 		)
 	</insert>
+	
+	<insert id="MenuFileInsert" parameterType="java.util.List">
+		INSERT INTO
+			img_file(
+				file_idx,
+				table_type,
+				file_name,
+				file_ext,
+				sfile_name,
+				table_idx
+			)
+		VALUES(
+			(SELECT
+				MAX(file_idx) + 1
+			FROM
+				img_file),
+			2,
+			#{filesList[0].file_name},
+			#{filesList[0].file_ext},
+			#{filesList[0].sfile_name},
+			(SELECT
+				MAX(menu_idx)
+			FROM
+				menu)
+		)
+	</insert>
+	
 </mapper>

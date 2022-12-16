@@ -36,7 +36,7 @@
 				<td>${restaurant.categoryName}</td>
 				<td>${restaurant.tableType}</td>
 				<th>
-					<a href="updateRestaurant?restaurant_idx=${restaurant.restaurantIdx}">가게수정하기</a>
+					<a href="enrollMenu?restaurant_idx=${restaurant.restaurantIdx}">메뉴등록</a>
 				</th>
 			</tr>
 		</c:forEach>	

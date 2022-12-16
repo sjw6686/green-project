@@ -100,12 +100,9 @@
 				MAX(menu_idx)+1
 			FROM
 				menu),
-			#{menu},
-			#{price},
-			(SELECT
-				MAX(restaurant_idx)
-			FROM
-				restaurant),
+			#{menu_name},
+			#{menu_price},
+			#{restaurant_idx},
 			2
 		)
 	</insert>
@@ -190,5 +187,37 @@
 		WHERE
 			owner_idx=#{owner_idx}
 	</select>
+	
+	<select id="getMenuList"
+		resultType="com.green.restaurant.owner.vo.OwnerMenuFileJoinVo">
+		SELECT
+		    m.menu_name,
+		    m.menu_price,
+		    f.sfile_name
+		FROM
+		    menu m
+		JOIN
+		    img_file f
+		ON
+		    m.menu_idx = f.table_idx
+		WHERE
+		    f.table_type = 2
+		AND
+		    m.restaurant_idx = #{restaurant_idx}
+	</select>
+	
+	<insert id="insertOwnerInfo">
+		INSERT INTO
+			towner
+		VALUES(
+			(SELECT
+				MAX(owner_idx) + 1
+			FROM
+				towner),
+			#{user_id},
+			#{owner_num},
+			0
+		)
+	</insert>
 	
 </mapper>

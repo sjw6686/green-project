@@ -13,6 +13,7 @@ import com.green.restaurant.owner.service.OwnerService;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.pds.service.impl.PdsFile;
@@ -86,6 +87,34 @@ public class OwnserServiceImpl implements OwnerService {
 		System.out.println("OwnerService.getRestaurantIdx>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerIdx: " + ownerIdx);
 		int restaurnat_idx = this.ownerDao.selectRestaurantIdx(ownerIdx);
 		return restaurnat_idx;
+	}
+
+	@Override
+	public List<OwnerMenuFileJoinVo> getMenuList(HashMap<String, Object> map) {
+		System.out.println("OwnerService.getMenuList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		List<OwnerMenuFileJoinVo> menuList = this.ownerDao.selectMenuList(map);
+		System.out.println("OwnerService.getMenuList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>menuList: " + menuList.toString());
+		return menuList;
+	}
+
+	@Override
+	public void enrollMenu(HashMap<String, Object> map, HttpServletRequest request) {
+		System.out.println("ownerService.enrollMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		PdsFile.save(map, request);
+		this.ownerDao.insertMenu(map);
+	}
+
+	@Override
+	public void requestUpdate(HashMap<String, Object> map) {
+		System.out.println("OwnerService.updateUser>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.ownerDao.insertOwnerInfo(map);
+	}
+
+	@Override
+	public List<OwnerUserVo> getRequestUpgradeUserList() {
+		List<OwnerUserVo> requestList = this.ownerDao.selectRequestUserUpgradeList();
+		System.out.println("OwnerService.getRequestUpgradeUserList>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
+		return requestList;
 	}
 
 

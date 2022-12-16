@@ -6,6 +6,7 @@ import java.util.List;
 import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
+import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.user.vo.OwnerUserVo;
@@ -29,5 +30,12 @@ public interface OwnerDao {
 
 	int selectRestaurantIdx(Integer ownerIdx);
 
-	
+	List<OwnerMenuFileJoinVo> selectMenuList(HashMap<String, Object> map);
+
+	void insertMenu(HashMap<String, Object> map);
+
+	void insertOwnerInfo(HashMap<String, Object> map);
+
+	List<OwnerUserVo> selectRequestUserUpgradeList();
+
 }
