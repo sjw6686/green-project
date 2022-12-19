@@ -1,0 +1,313 @@
+@charset "UTF-8";
+
+   		h2 { margin : 20px;  }
+  		 .wrapper {
+            position: relative;
+            width: 100%;
+            top: 43px;
+        }
+
+		.allyc{
+		top: 139px;
+    	position: relative;
+    	}
+
+        .top-bars {
+            position: fixed;
+            width: 100%;
+            background-color: var(--body-color);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            display: flex;
+            padding: 20px var(--body-padding) 10px;
+            align-items: center;
+            z-index: 5;
+            left: 0;
+        }
+
+        .title-logo {
+            color: var(--body-color);
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .intro-title {
+            position: relative;
+		    font-size: 36px;
+		    text-align: center;
+		    margin-top: 50px;
+		    font-weight: 800;
+		    top: 45px;
+		    width: 100%;
+		    margin: 0px auto;
+		    padding: 10px 0;
+        }
+
+        .intro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+
+        .tag-filters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px 0;
+            animation: down-long 1.0s 1.2s both;
+        }
+
+        .tag-filter_title {
+        	position: relative;
+  		  	right: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .tag-filter_tag {
+            margin: 0 auto;
+            width: 80px;
+            height: 80px;
+            padding: 7px 18px;
+            background-color: #ecedf0;
+            border-radius: 50%;
+            margin-right: 35px;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .tag-filters .tag-filter a{
+            display: inline-block;
+		    padding: 10px 16px;
+		    transition: 0.3s;
+        }        
+        
+        .tag-filters .tag-filter a:hover{
+      		background-color: #198754;
+		    color: #fff;
+		    border-radius: 50%;
+        }
+
+		.tag-filters .tag-filter a h6{
+			position: relative;
+   			top: 19px;
+   			color: black;
+		}
+
+        .store1 {
+            position: relative;
+        }
+
+		.your-class{
+			background: #f5f5f5;
+		}
+
+        .restaurant-list_textBox_name {
+            display: block;
+            line-height: 19px;
+            font-size: 1.167em;
+            padding-top: 0;
+            padding-bottom: 2px;
+            font-weight: 700;
+        }
+
+        .restaurant-list_textBox_sub {
+            display: block;
+        }
+
+        .restaurant-list_textBox {
+            margin-left: 0;
+            padding-right: 10px;
+            padding-top: 6px;
+            font-size: 15px;
+            position: absolute;
+            top: 190px;
+        }
+
+        .restaurantInfo {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 1;
+            margin-top: 20px;
+            justify-content: space-around;
+        }
+
+        .Info {
+            position: relative;
+        }
+
+        .tag-filter_title2 {
+            position: relative;
+            margin-left: 5%;
+        }
+
+        .restaurantrank-lists {
+            position: relative;
+            top: 110px;
+        }
+
+        .restaurant-list_textBox_ {
+            font-size: 13px;
+        }
+
+        .top-bars__menu {
+            position: relative;
+            left: 1770px;
+        }
+        
+        .me-width1{
+        	width: 550px;
+        }
+        
+       em{
+       		display: block;
+            line-height: 19px;
+            font-size: 1.167em;
+            padding-top: 0;
+            padding-bottom: 2px;
+            font-weight: 700;
+            text-align: center;
+            }
+            
+       span{
+      		display: block;
+      		text-align: center;
+       		}
+       		
+       img{
+       		margin : 0 auto;
+       		}
+       		
+       .your-class{
+       		top: 30px;
+       		}
+       		
+	.slick-arrow {
+	    position: absolute;
+	    top: 50%;
+	    transform: translateY(-50%);
+	    border: none;
+	    font-size: 0;
+	    width: 0px;
+	    height: 100px;
+	    background: #ffffff;
+	}
+	
+	.slick-prev {
+	    z-index: 20;
+	    left: 0;
+	}
+	
+	.slick-prev::before {
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    content: "\f104";
+	    width: 30px;
+	    height: 30px;
+	    font-family: "Font Awesome 5 Free";
+	    font-weight: 900;
+	    font-size: 50px;
+	}
+	
+	.slick-next {
+	    z-index: 20;
+	    right: 0;
+	}
+	
+	.slick-next::before {
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	    content: "\f105";
+	    width: 30px;
+	    height: 30px;
+	    font-family: "Font Awesome 5 Free";
+	    font-weight: 900;
+	    font-size: 50px;
+	}
+	
+	.slick-dots{
+		position: relative;
+		display: flex;
+		justify-content: center;
+	    bottom: 6px;
+	}
+	
+	.slick-dots li button{
+	    display: inline-block;
+	    width: 10px;
+	    height: 10px;
+	    border-radius: 10px;
+	    background: #ccc;
+	    margin: 0 5px;
+	    cursor: pointer;
+	    float: left;
+	    font-size: 0;
+	    width: 20px;
+	    height: 15px;
+	    border: 0;
+	    cursor: pointer;
+	    transition: 0.3s;
+	}
+	
+	.slick-dots li.slick-active button {
+    	background: #54474a;
+	}
+	
+	
+	.typing-txt{display: none;}
+	ul{list-style:none;}
+	.typing ul li{
+	  display:block;
+	  position: relative;
+			    font-size: 36px;
+			    text-align: center;
+			    margin-top: 50px;
+			    font-weight: 800;
+			    top: 17px;
+			    width: 100%;
+			    margin: 0px auto;
+			    padding: 10px 0;
+			    left: 5px;
+	}
+	.typing ul li.on {  
+	  display: inline-block; 
+	  animation-name: cursor; 
+	  animation-duration: 0.3s; 
+	  animation-iteration-count: infinite; 
+	} 
+	@keyframes cursor{ 
+	  0%{border-right: 1px solid #fff} 
+	  50%{border-right: 1px solid #000} 
+	  100%{border-right: 1px solid #fff} 
+	}
+	
+	
+
+	@keyframes down-long {
+	    0% {
+	        transform: translateY(-500px);
+	        opacity: 0;
+	    }
+	
+	    50% {
+	        transform: translateY(30px);
+	        opacity: 1;
+	    }
+	    
+	    100% {
+	        transform: translateY(0px);
+	        opacity: 1;
+	    }
+	}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminCategory">
+
+<!-- 카테고리 호출 -->
+	<select id="CategoryList"
+		resultType="com.green.admin.category.vo.AdminCategoryVo">
+		
+		SELECT
+			CATEGORY_IDX as category_idx,
+			CATEGORY_NAME as category_name
+		FROM
+			RCATEGORY
+		ORDER BY CATEGORY_IDX DESC
+	</select>
+	
+	<insert id="insertCategory" parameterType="com.green.admin.category.vo.AdminCategoryVo">
+		INSERT INTO RCATEGORY(
+			CATEGORY_NAME
+			)
+		VALUES(
+			#{category_name}
+		)
+	</insert>
+	
+	<delete id="DeleteCategory">
+		DELETE FROM RCATEGORY
+		 WHERE CATEGORY_NAME = #{category_name} 
+	</delete>
+	
+	<select id="SelectCategoryName" resultType="com.green.admin.category.vo.AdminCategoryVo">
+		select
+			category_name
+		from
+			rcategory
+		where
+			category_name = #{category_name}
+	</select>
+	
+	<select id="CategoryRestaurant" resultType="com.green.admin.category.vo.AdminCategoryVo">
+ 		SELECT
+ 			rs.brand_name
+			,rs.address
+			,rs.brand_tel
+			,rs.introduce
+			,rs.category_name as category_name1
+		FROM
+			RCATEGORY rc
+			INNER JOIN RESTAURANT rs ON rs.CATEGORY_NAME = rc.CATEGORY_NAME
+		WHERE
+			rc.CATEGORY_NAME = #{category_name}
+ </select>
+
+</mapper>

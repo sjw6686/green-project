@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminUser">
+  
+    <select id="UserList"
+      resultType="com.green.admin.user.vo.AdminUserVo">
+      SELECT USER_ID, USER_PW, USER_ROLE,
+             TO_CHAR(INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE 
+        FROM TUSER
+       ORDER BY INDATE DESC
+    </select>
+    
+    <select id="getView"
+        resultType="com.green.admin.user.vo.AdminUserVo">
+     SELECT USER_ID, 
+            USER_PW,
+            TO_CHAR(INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE 
+      FROM  TUSER
+      WHERE USERID = #{id}
+    </select>
+             	
+    <select id="getViewName"	
+        resultType="com.green.admin.user.vo.AdminUserVo">
+     SELECT USER_ID, 
+            USER_PW,
+            TO_CHAR(INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE 
+      FROM  TUSER
+      WHERE USER_ID LIKE '%' || #{name} || '%'  
+      ORDER BY  USER_ID ASC     	
+    
+    </select>
+ 
+     <select id="login"
+        resultType="com.green.admin.user.vo.AdminUserVo">
+SELECT
+    		user_id as userId,
+    		user_pw as userPw,
+    		user_tel as userTel,
+    		TO_CHAR(join_date, 'YYYY-MM-DD') as joinDate,
+    		user_role as userRole
+    	FROM
+    		tuser
+    	WHERE
+    		user_id = #{userId}
+    	AND
+    		user_pw = #{userPw}   
+    
+    </select>
+    
+    <delete id="DeleteUser">
+	    DELETE FROM TUSER
+			 WHERE USER_ID = #{userid}
+    </delete>
+    
+     <select id="UserListSearch"	
+        resultType="com.green.admin.user.vo.AdminUserVo">
+     SELECT USER_ID,
+            TO_CHAR(INDATE, 'YYYY-MM-DD HH24:MI:SS') INDATE 
+      FROM  TUSER
+      WHERE USER_ID LIKE '%' || #{keyword} || '%'
+	
+    
+    </select>
+    
+      
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

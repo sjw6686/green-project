@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminReview">
+  
+  <select id="SelectComment"
+  	resultType="com.green.admin.review.vo.AdminReviewVo">
+  	SELECT COMMENT_CONTENT
+  	FROM board_comment
+  </select>
+    
+    
+    <delete id="DeleteReview">
+	    DELETE FROM board_comment
+			 WHERE board_comment = #{review_comment}
+    </delete>
+    
+     <select id="reviewSearch" resultType="com.green.admin.review.vo.AdminReviewVo">
+   		SELECT 
+			user_id,
+			comment_content,
+			reg_date
+   		FROM
+   			board_comment
+   		<include refid="search"></include>
+   		ORDER BY comment_idx desc
+   </select>
+   
+   <sql id="search">
+   	<choose>
+   		<when test="searchOption == 'all'">
+   			WHERE user_id like '%'||#{keyword}||'%'
+   			OR comment_content like '%'||#{keyword}||'%'
+   			OR reg_date like '%'||#{keyword}||'%'
+   		</when>
+   		<otherwise>
+   			WHERE ${searchOption} like '%'||#{keyword}||'%'
+   		</otherwise>
+   	</choose>
+   </sql>
+      
+    
+    <!-- 
+ <resultMap type="com.green.review.vo.ReviewVo" id="reviewInfo">
+ 	<result column="review_idx" property="review_idx"/>
+ 	<result column="restaurant_idx" property="restaurant_idx"/>
+	<result column="review_comment" property="review_comment"/>
+	<result column="regdate" property="regdate"/>
+	<collection property="restaurantVo" resultMap="restaurantVo"/>
+ </resultMap>
+ 
+ <resultMap type="com.green.restaurant.vo.RestaurantVo" id="restaurantVo">
+ 	<result column="restaurant_idx" property="restaurant_idx"/>
+	<result column="brand_name" property="brand_name"/>
+	<result column="address" property="address"/>
+	<result column="brand_tel" property="brand_tel"/>
+	<result column="introduce" property="introduce"/>
+	<result column="enroll_date" property="enroll_date"/>
+	<result column="owner_idx" property="owner_idx"/>
+	<result column="file_idx" property="file_idx"/>
+ </resultMap>
+ 
+ <select id="reviewMap" resultMap="reviewInfo">
+	SELECT	
+			rs.brand_name, rs.address, rs.brand_tel, rs.introduce,
+			rv.review_comment, rv.regdate
+	FROM
+		restaurant rs,
+		review rv
+	WHERE 
+		rv.restaurant_idx = rs.restaurant_idx
+</select>
+    
+      
+   <resultMap type="com.green.review.vo.ReviewVo" id="reviewInfo">
+ 	<result column="review_idx" property="review_idx"/>
+ 	<result column="restaurant_idx" property="restaurant_idx"/>
+	<result column="review_comment" property="review_comment"/>
+	<result column="regdate" property="regdate"/>
+	<collection property="restaurantVo" resultMap="restaurantVo"/>
+ 	</resultMap>
+ 
+ 	<resultMap type="com.green.restaurant.vo.RestaurantVo" id="restaurantVo">
+ 	<result column="restaurant_idx" property="restaurant_idx"/>
+	<result column="brand_name" property="brand_name"/>
+	<result column="address" property="address"/>
+	<result column="brand_tel" property="brand_tel"/>
+	<result column="introduce" property="introduce"/>
+	<result column="enroll_date" property="enroll_date"/>
+	<result column="owner_idx" property="owner_idx"/>
+	<result column="file_idx" property="file_idx"/>
+ </resultMap>  
+  --> 
+</mapper>

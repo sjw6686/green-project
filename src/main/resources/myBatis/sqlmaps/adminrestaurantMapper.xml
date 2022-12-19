@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Restaurant">
+
+ <select id="RestaurantList" resultType="com.green.admin.restaurant.vo.AdminRestaurantVo">
+ 	SELECT 
+		BRAND_NAME
+		,ADDRESS
+		,BRAND_TEL
+		,INTRODUCE
+		,ENROLL_DATE
+	FROM
+		RESTAURANT
+ </select>
+ 
+ <update id="RestaurantUpdate">
+ 	UPDATE RESTAURANT
+ 		SET BRAND_NAME = #{brand_name},
+ 			ADDRESS	= #{address},
+ 			BRAND_TEL	= #{brand_tel},
+ 			INTRODUCE	= #{introduce},
+ 		WHERE
+ 			RESTAURANT_IDX = #{restaurant_idx}
+ </update>
+ 
+ <select id="RestaurantView"
+ resultType="com.green.admin.restaurant.vo.AdminRestaurantVo">
+ 	SELECT RESTAURANT_IDX, BRAND_NAME, ADDRESS, BRAND_TEL, INTRODUCE
+ 	FROM RESTAURANT
+ 	WHERE RESTAURANT_IDX = #{restaurant_idx}
+ </select>
+ 
+ <delete id="DeleteRestaurant">
+ 	DELETE FROM RESTAURANT
+			 WHERE BRAND_NAME = #{brand_name}
+ </delete>
+ 
+ 
+
+<!-- 
+<resultMap type="com.green.restaurant.vo.RestaurantVo" id="RestaurantVo">
+	<id column="restaurant_idx" property="restaurant_idx"/>
+	<id column="brand_name" property="brand_name"/>
+	<id column="address" property="address"/>
+	<id column="brand_tel" property="brand_tel"/>
+	<id column="introduce" property="introduce"/>
+	<id column="enroll_date" property="enroll_date"/>
+	<id column="owner_idx" property="owner_idx"/>
+	<id column="file_idx" property="file_idx"/>
+	
+	<collection property="ReviewVo" resultMap="ReviewVo"></collection>
+</resultMap>
+
+ <resultMap type="com.green.review.vo.ReviewVo" id="ReviewVo">
+	<id column="review_idx" property="review_idx"/>
+	<id column="review_comment" property="review_comment"/>
+	<id column="regdate" property="regdate"/>
+</resultMap>
+ -->
+<!-- 
+<select id="restaurantMap" resultType="map">
+	SELECT rs.brand_name, rs.address, rs.brand_tel, rs.introduce,
+			rv.review_comment, rv.regdate
+	FROM
+		restaurant rs
+	JOIN
+		review rv
+		ON rs.review_idx = rv.review_idx
+	WHERE 
+		rv.review_idx = #{review_idx}
+</select>
+
+
+<delete id="deleteUnfinishedData" parameterType="map">
+    {call
+        declare
+        begin
+            delete from TABLE1 where id = #{valueFromMap1};
+            delete from TABLE2 where id = #{valueFromMap2};
+        end
+    }
+</delete>
+ -->
+</mapper>
