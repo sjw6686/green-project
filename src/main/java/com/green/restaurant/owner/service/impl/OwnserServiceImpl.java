@@ -14,6 +14,7 @@ import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.pds.service.impl.PdsFile;
@@ -115,6 +116,25 @@ public class OwnserServiceImpl implements OwnerService {
 		List<OwnerUserVo> requestList = this.ownerDao.selectRequestUserUpgradeList();
 		System.out.println("OwnerService.getRequestUpgradeUserList>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
 		return requestList;
+	}
+
+	@Override
+	public void updateOwnerIdx(int ownerIdx) {
+		System.out.println("OwnerService.updateOwnerIdx>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerIdx: " + ownerIdx);
+		this.ownerDao.updateOwnerIdx(ownerIdx);
+	}
+
+	@Override
+	public void updateUserRole(String userId) {
+		System.out.println("OwnerService.updateUserRole>>>>>>>>>>>>>>>>>>>>>>>>>>>>userId: " + userId);
+		this.ownerDao.updateUserRole(userId);
+	}
+
+	@Override
+	public List<OwnerRestaurantJoinImgFileVo> getRestaurantList() {
+		List<OwnerRestaurantJoinImgFileVo> restaurantList = this.ownerDao.selectRestaurantList();
+		System.out.println("OwnerService.getRestaurantList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurantList: " + restaurantList.toString());
+		return restaurantList;
 	}
 
 

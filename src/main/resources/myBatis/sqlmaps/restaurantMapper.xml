@@ -12,5 +12,33 @@
     	FROM
     		restaurant
 	</select>
+	
+	<select id = "selectRestaurantList"
+		resultType="com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo">
+		SELECT
+			r.restaurant_idx,
+			r.brand_name,
+			r.address,
+			r.brand_tel,
+			r.introduce,
+			TO_DATE(r.enroll_date, 'YYYY-MM-DD') as enroll_date,
+		    r.owner_idx,
+			r.category_name,
+			r.table_type as restaurantTable,
+		    f.file_idx,
+		    f.table_type as fileTable,
+		    f.file_name,
+		    f.file_ext,
+		    f.sfile_name,
+		    f.table_idx
+		FROM
+			restaurant r
+		JOIN
+		    img_file f
+		ON
+		    r.restaurant_idx = f.table_idx
+		WHERE
+		    f.table_type= 3
+	</select>
 
 </mapper>

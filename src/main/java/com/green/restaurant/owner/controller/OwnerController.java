@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -101,18 +100,18 @@ public class OwnerController {
 				HttpServletRequest request,
 				RedirectAttributes re
 			) {
-<<<<<<< HEAD
-		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
-		return "redirect:/showJsp";
-=======
+
+//		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map.toString());
+//		return "redirect:/showJsp";
+
 		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
 		this.ownerService.enrollMenu(map, request);
 		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enroll menu success!!");
 		
 		re.addAttribute("restaurant_idx", map.get("restaurant_idx"));
 		System.out.println("OwnerCtrl.enrollMenuProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>re: " + re.toString());
+		
 		return "redirect:/restaurant/owner/enrollMenu";
->>>>>>> branch 'jinung-jinho221216' of https://github.com/sjw6686/green-project.git
 	}
 	
 	@RequestMapping("/myRestaurantList")
@@ -224,20 +223,25 @@ public class OwnerController {
 		
 		for(int ownerIdx : owner_idx) {
 			System.out.println(ownerIdx);
-			//this.ownerService.updateUser
+			this.ownerService.updateOwnerIdx(ownerIdx);
 		}
 		
 		for(String userId : user_id) {
 			System.out.println(userId);
+			this.ownerService.updateUserRole(userId);
 		}
 		
-//		System.out.println("OwnerCtrl.userUpgradeProcess>>>>>>>>>>>>>>>>>>>>>>>>>>>>owner_idx: " + request);
-//		
-//		for(int ownerIdx : request) {
-//			System.out.println("ownerIdx: " + ownerIdx);
-//		}
-		
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/writeCommentProcess")
+	public String writeCommentProcess(
+				@SessionAttribute("login") OwnerUserVo userVo,
+				@RequestParam  HashMap<String, Object> map
+			) {
+		System.out.println("OwnerCtrl.writeCommentProcess>>>>>>>>>>>>>>>>>>>>>>>map" + map);
+		//this.ownerService.writeComment();
+		return "redirect:/owner/reviewComment";
 	}
 	
 //	@RequestMapping("/updateRestaurant")

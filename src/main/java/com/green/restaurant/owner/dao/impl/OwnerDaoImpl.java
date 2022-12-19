@@ -12,6 +12,7 @@ import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.pds.vo.FilesVo;
@@ -135,6 +136,25 @@ public class OwnerDaoImpl implements OwnerDao {
 		List<OwnerUserVo> requestList = this.sqlSession.selectList("User.SelectRequestList");
 		System.out.println("OwnerDao.selectRequestUserUpgradeList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
 		return requestList;
+	}
+
+	@Override
+	public void updateOwnerIdx(int ownerIdx) {
+		System.out.println("OwnerDao.updateOwnerIdx>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ownerIdx: " + ownerIdx);
+		this.sqlSession.update("User.UpdateOwnerIdx", ownerIdx);
+	}
+
+	@Override
+	public void updateUserRole(String userId) {
+		System.out.println("OwnerDao.updateUserRole>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>userId: " + userId);
+		this.sqlSession.update("User.UpdateUserRole", userId);
+	}
+
+	@Override
+	public List<OwnerRestaurantJoinImgFileVo> selectRestaurantList() {
+		List<OwnerRestaurantJoinImgFileVo> restaurantList = this.sqlSession.selectList("Restaurant.selectRestaurantList");
+		System.out.println("OwnerDao.selectRestaurantList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurantList: " + restaurantList.toString());
+		return restaurantList;
 	}
 
 }

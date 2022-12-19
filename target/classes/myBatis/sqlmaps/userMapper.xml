@@ -42,6 +42,8 @@
     		u.user_id = #{userId}
     	AND
     		u.user_pw = #{userPw}
+    	AND
+    		o.owner_idx = 1
     </select>
       
 	<insert id="SignUp">
@@ -80,6 +82,24 @@
 		ORDER BY
 		    o.owner_idx
 	</select>
+	
+	<update id="UpdateOwnerIdx">
+		UPDATE
+			towner
+		SET
+			user_enable = 1
+		WHERE
+			owner_idx = #{ownerIdx}
+	</update>
+
+	<update id="UpdateUserRole">
+		UPDATE
+			tuser
+		SET
+			user_role = 'OWNER'
+		WHERE
+			user_id = #{userId}
+	</update>
 	
 </mapper>
 

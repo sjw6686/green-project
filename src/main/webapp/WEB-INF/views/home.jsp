@@ -11,6 +11,7 @@
     <h2>hello</h2>
     <h3>${sessionScope.login.userRole}</h3>				<!-- 현재 로그인된 유저의 권한을 출력. test기간에만 출력한다 -->
     <a href="/Board/List">게시물 목록</a><br>
+    <a href="/restaurantList">식당목록</a><br>
     <c:choose>
 	    <c:when test = "${sessionScope.login == null}">	<!-- interceptor에 로그인 정보가 세션에 담기는데, 이때 저장되는 세션의 이름이 "login"이라는 이름으로 저장됨. sessionScope.login은 "login"이라는 이름의 세션정보를 가져오는것. 로그인을 하지않았다면 세션정보가 null임.  -->
 	    	<a href="/login">로그인</a><br>				<!-- 따라서 when태그 안의 것은 로그인 하지 않은 유저에게 보여주는 정보 -->

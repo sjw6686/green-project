@@ -36,32 +36,41 @@
 			<td>${ownerBoardVo.cnt_hate}</td>
 		</tr>
 	</table>
-	<c:if test="${reviewCommentList[0].comment_idx != 0}">
-		<table>
-			<tr>
-				<th>comment_idx</th>
-				<th>commentWriter</th>
-				<th>comment_content</th>
-				<th>commentBoardIdx</th>
-				<th>commentRegDate</th>
-				<th>lvl</th>
-				<th>step</th>
-				<th>cnum</th>
-				<th>nref</th>
-			</tr>
-			<c:forEach var="comment" items="${reviewCommentList}">
+	<form action="/owner/writeCommentProcess" method="post">
+		<c:if test="${reviewCommentList[0].comment_idx != 0}">
+			<table>
 				<tr>
-					<td>${comment.comment_idx}</td>
-					<td>${comment.commentWriter}</td>
-					<td>${comment.comment_content}</td>
-					<td>${comment.commentBoardIdx}</td>
-					<td>${comment.commentRegDate}</td>
-					<td>${comment.lvl}</td>
-					<td>${comment.step}</td>
-					<td>${comment.cnum}</td>
+					<th>comment_idx</th>
+					<th>commentWriter</th>
+					<th>comment_content</th>
+					<th>commentBoardIdx</th>
+					<th>commentRegDate</th>
+					<th>lvl</th>
+					<th>step</th>
+					<th>cnum</th>
+					<th>nref</th>
 				</tr>
-			</c:forEach>
-		</table>
-	</c:if>
+				<c:forEach var="comment" items="${reviewCommentList}">
+					<tr>
+						<td>
+							<a href="/witeComment?comment_idx=${comment.comment_idx}">
+								${comment.comment_idx}
+							</a>
+						</td>
+						<td>${comment.commentWriter}</td>
+						<td>${comment.comment_content}</td>
+						<td>${comment.commentBoardIdx}</td>
+						<td>${comment.commentRegDate}</td>
+						<td>${comment.lvl}</td>
+						<td>${comment.step}</td>
+						<td>${comment.cnum}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:if>
+		<textarea name="comment" id="comment"></textarea><br>
+		<input type="submit" value="제출" />
+		<input type="hidden" name="board_idx" value="ownerBoardVo.board_idx" />
+	</form>
 </body>
 </html>
