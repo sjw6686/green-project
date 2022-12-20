@@ -100,48 +100,37 @@
 	    	<a href="/signUp">회원가입</a><br>
 	    </c:when>
 	    <c:otherwise>
-	    	<c:if test="${sessionScope.login.userRole eq 'OWNER' }">
-	    		<a href="/restaurant/owner/myRestaurantList">내가게 보기</a><br>	  
-   	 			<a href="/restaurant/owner/enrollRestaurant">가게등록</a><br>
-	    	</c:if>
-	    	<c:if test="${sessionScope.login.userRole eq 'USER' }">
-	    		<a href="/restaurant/owner/requestUserUpgrade">등업신청</a><br>
-	    	</c:if>
-	    	<a href="/logOut">로그아웃</a><br>	  
+	    	<a href="/logOut">로그아웃</a>
 	    </c:otherwise>
     	</c:choose>
             <a class="nav-link active" aria-current="page" href="/">홈으로 돌아가기</a>
           </li>
           <li class="nav-item dropdown">
           <c:if test="${sessionScope.login.userRole eq 'USER' }">
-	            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	             관리자 메뉴
-	            </a>
-	            <ul class="dropdown-menu">
-	              
-	              <li>
-	                <hr class="dropdown-divider">
-	              </li>
-	              <li><a class="dropdown-item" href="#">닫기</a></li>
-	            </ul>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             사용자 메뉴
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Board/List">게시판</a></li>
+              <li><a class="dropdown-item" href="/restaurant/owner/requestUserUpgrade">등업신청</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">닫기</a></li>
+            </ul>
             </c:if>
             <c:if test="${sessionScope.login.userRole eq 'OWNER' }">
-	            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	             관리자 메뉴
-	            </a>
-	            <ul class="dropdown-menu">
-	              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
-	               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
-	              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
-	               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
-	              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
-	              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
-	              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
-	              <li>
-	                <hr class="dropdown-divider">
-	              </li>
-	              <li><a class="dropdown-item" href="#">닫기</a></li>
-	            </ul>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             사장 메뉴
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/restaurant/owner/myRestaurantList">내가게 보기</a></li>
+               <li><a class="dropdown-item" href="/restaurant/owner/enrollRestaurant">가게등록</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">닫기</a></li>
+            </ul>
             </c:if>
           <c:if test="${sessionScope.login.userRole eq 'ADMIN' }">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -161,8 +150,6 @@
               <li><a class="dropdown-item" href="#">닫기</a></li>
             </ul>
             </c:if>
-            
-            
           </li>
         </ul>
         <form class="d-flex mt-3" role="search">
@@ -202,7 +189,7 @@
                     <h4 class="tag-filter_title">카테고리</h4>
                     <a class="tag-filter_tag" href="/"><h6>전체</h6></a>
                     <c:forEach var="category" items="${categoryList}">
-                    <a class="tag-filter_tag" href="categorySearch?category_name=${category.category_name }"><h6>${category.category_name }</h6></a>
+                    <a class="tag-filter_tag" href="categorySearch?category_name=${category.category_name}"><h6>${category.category_name}</h6></a>
                     </c:forEach>
                 </div>
             </div>
@@ -212,7 +199,7 @@
 			  <c:forEach var="restaurant" items="${restaurantList}">
 			    <div>
 			      <figure>
-			       <img src="/img/해목.png" alt="이미지1">
+			       <img src="/img2/${restaurant.sfile_name}" alt="식당이미지">
 			       <figcaption>
 			       <em><a href="/restaurantInfo?restaurant_idx=${restaurant.restaurant_idx}">${restaurant.brand_name}</a></em>
 			       <span>${restaurant.introduce}</span>
@@ -226,7 +213,7 @@
 			   <c:forEach var="restaurant" items="${restaurantList}">
 			    <div>
 			      <figure>
-			       <img src="/img2/${restaurant.sfile_name}" />
+			       <img src="/img2/${restaurant.sfile_name}" alt="식당이미지" />
 			       <figcaption>
 			       <em><a href="/restaurantInfo?restaurant_idx=${restaurant.restaurant_idx}">${restaurant.brand_name}</a></em>
 			       <span>${restaurant.introduce}</span>
