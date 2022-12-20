@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Comment">  
+  	<select id="CommentList"
+  		resultType="com.green.restaurant.mypage.comment.Vo.MypageCommentVo">
+  		SELECT
+			COMMENT_CONTENT,
+			REG_DATE,
+			COMMENT_IDX,
+			USER_ID
+		FROM
+			BOARD_COMMENT
+		WHERE
+			USER_ID=#{userId}
+		ORDER BY
+			REG_DATE DESC
+  	</select>
+  </mapper>

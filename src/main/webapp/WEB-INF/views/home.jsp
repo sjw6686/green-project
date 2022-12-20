@@ -113,6 +113,9 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/Board/List">게시판</a></li>
               <li><a class="dropdown-item" href="/restaurant/owner/requestUserUpgrade">등업신청</a></li>
+              <li><a class="dropdown-item" href="/restaurant/mypage/comment">내가 쓴 댓글</a></li>
+              <li><a class="dropdown-item" href="/restaurant/mypage/board">내가 쓴 게시글</a></li>
+              <li><a class="dropdown-item" href="/restaurant/mypage/reviewList">내가 쓴 리뷰</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
