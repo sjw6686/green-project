@@ -213,13 +213,29 @@
 </style>
 </head>
 <body>
-	<nav class="navbar bg-light fixed-top">
-  <div class="container-fluid">
+<nav class="navbar bg-light fixed-top">
+  <div class="container-fluid" style="background-color: #439A97;">
     <a class="navbar-brand" href="/">부산 맛집</a>
+    <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/Board/List">게시판</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled">Disabled</a>
+  </li>
+</ul>
     <nav class="navbar bg-light">
 	  <div class="container-fluid">
 	    <form class="d-flex mt-2" role="search">
-	      <input class="form-control me-2 me-width1" type="search" placeholder="Search" aria-label="Search">
+	    <input type="text" id='insert_target' readonly style='background: #cacaca'>
+	      <input class="form-control me-2 me-width1 form-control" type="text" placeholder="Search" aria-label="Search" id="search_area" name="recv_id" >
+		    <div id='autoMaker'></div>
 	      <button class="btn btn-outline-success" type="submit">Search</button>
 	    </form>
 	  </div>
@@ -228,31 +244,90 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">안녕하세요!</h5>
-        <h5 class="text-white h4"></h5>${ sessionScope.login.username } 님 환영합니다.<a href="/logout">로그아웃</a>
+        <h5 class="text-white h4"></h5><c:if test = "${sessionScope.login != null}">${ sessionScope.login.userId } 님 환영합니다.</c:if>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
+
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
+          <c:choose>
+	    <c:when test = "${sessionScope.login == null}">	<!-- interceptor에 로그인 정보가 세션에 담기는데, 이때 저장되는 세션의 이름이 "login"이라는 이름으로 저장됨. sessionScope.login은 "login"이라는 이름의 세션정보를 가져오는것. 로그인을 하지않았다면 세션정보가 null임.  -->
+	    	<a href="/login">로그인</a><br>				<!-- 따라서 when태그 안의 것은 로그인 하지 않은 유저에게 보여주는 정보 -->
+	    	<a href="/signUp">회원가입</a><br>
+	    </c:when>
+	    <c:otherwise>
+	    	<c:if test="${sessionScope.login.userRole eq 'OWNER' }">
+	    		<a href="/restaurant/owner/myRestaurantList">내가게 보기</a><br>	  
+   	 			<a href="/restaurant/owner/enrollRestaurant">가게등록</a><br>
+	    	</c:if>
+	    	<c:if test="${sessionScope.login.userRole eq 'USER' }">
+	    		<a href="/restaurant/owner/requestUserUpgrade">등업신청</a><br>
+	    	</c:if>
+	    	<a href="/logOut">로그아웃</a><br>	  
+	    </c:otherwise>
+    	</c:choose>
             <a class="nav-link active" aria-current="page" href="/">홈으로 돌아가기</a>
           </li>
           <li class="nav-item dropdown">
+          <c:if test="${sessionScope.login.userRole eq 'USER' }">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
              관리자 메뉴
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/User/List">사용자 관리</a></li>
+              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
+               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
               <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
+               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
               <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
               <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
-              <li><a class="dropdown-item" href="/User/List">코딩중...</a></li>
+              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li><a class="dropdown-item" href="#">닫기</a></li>
             </ul>
+            </c:if>
+            <c:if test="${sessionScope.login.userRole eq 'OWNER' }">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             관리자 메뉴
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
+               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
+              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
+               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
+              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
+              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
+              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">닫기</a></li>
+            </ul>
+            </c:if>
+          <c:if test="${sessionScope.login.userRole eq 'ADMIN' }">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             관리자 메뉴
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
+               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
+              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
+               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
+              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
+              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
+              <li><a class="dropdown-item" href=/restaurant/owner/requestUserUpgradeList>등업신청목록보기</a><br></li>
+              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">닫기</a></li>
+            </ul>
+            </c:if>
           </li>
         </ul>
         <form class="d-flex mt-3" role="search">

@@ -27,33 +27,60 @@
 <div id="main">
 	<%@ include file="/WEB-INF/views/includeFile/header.jsp" %>
 	<h2>사용자 조회</h2>
-	<form name="form1" method="post" action="${path}/admin/reviewsearch">
+	<form name="form1" method="post" action="${path}/admin/usersearch">
 		<select name="searchOption">
 			<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/> >전체</option>
 			<option value="user_id" <c:out value="${map.searchOption == 'user_id'?'selected':''}"/> >아이디</option>
-			<option value="comment_content" <c:out value="${map.searchOption == 'comment_content'?'selected':''}"/> >리뷰 내용</option>
+			<option value="user_tel" <c:out value="${map.searchOption == 'user_tel'?'selected':''}"/> >전화번호</option>
+			<option value="user_role" <c:out value="${map.searchOption == 'user_role'?'selected':''}"/> >전화번호</option>
 		</select>
 		<input name="keyword" value="${map.keyword}">
 		<input type="submit" value="조회">
 	</form>
 	<table border="1" width="600px">
 		<tr>
-			<th>번호</th>
-			<th>이름</th>
-			<th>댓글</th>
-			<th>작성일</th>
+			<th>아이디</th>
+			<th>비밀번호</th>
+			<th>전화번호</th>
+			<th>가입일</th>
+			<th>권한</th>
 		</tr>
 		<c:forEach var="list" items="${map.list}">
 			<tr>
-				<td>${list.comment_idx}</td>
-				<td><a href="${path}/board">${list.user_id}</a></td>
-				<td>${list.comment_content}</td>
+				<td>${list.user_id}</td>
+				<td>${list.user_pw}</td>
+				<td>${list.user_tel}</td>
 				<td>
-					${list.reg_date}
+					${list.join_date}
 				</td>
+				<td>${list.user_role}</td>
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<h2>등업신청 목록</h2>
+	<form action="/restaurant/owner/userUpgradeProcess" method="post">
+		<table border="1">
+			<tr>
+				<th>선택</th>
+				<th>유저 아이디</th>
+				<th>사업자번호</th>
+			</tr>
+			<c:forEach var="requestList" items="${requestList}">
+				<tr>
+					<td>
+						<input type="checkbox" name="owner_idx" value="${requestList.ownerIdx}" />
+						<input type="hidden" name="user_id" value="${requestList.userId}" />
+					</td>
+					<td>${requestList.userId}</td>
+					<td>${requestList.ownerNum}</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<div>
+			<input type="submit" value="등업하기" />
+		</div>
+	</form>
 </div>
 </body>
 </html>

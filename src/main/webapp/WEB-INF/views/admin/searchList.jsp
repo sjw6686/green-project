@@ -40,7 +40,7 @@
 	${map.count}개가 조회되었습니다.
 	<table border="1" width="600px">
 		<tr>
-			<th>번호</th>
+			<th>게시판</th>
 			<th>제목</th>
 			<th>이름</th>
 			<th>작성일</th>
@@ -48,11 +48,38 @@
 		</tr>
 		<c:forEach var="list" items="${map.list}">
 			<tr>
+				<c:if test="${list.board_type == 1}">
+				<td>일반게시판</td>	
 				<td><a href="${path}/board">${list.board_title}</a></td>
 				<td>${list.user_id}</td>
 				<td>
-					<fmt:formatDate value="${list.reg_date}" pattern="yyyy-MM-DD HH:mm:ss" />
+					${list.reg_date}
 				</td>
+				<td>${list.view_cnt}</td>
+				</c:if>
+			</tr>
+		</c:forEach>
+	</table>
+	<br>
+		<table border="1" width="600px">
+		<tr>
+			<th>리뷰</th>
+			<th>제목</th>
+			<th>이름</th>
+			<th>작성일</th>
+			<th>조회수</th>
+		</tr>
+		<c:forEach var="list" items="${map.list}">
+			<tr>
+				<c:if test="${list.board_type == 2}">
+				<td>리뷰게시판</td>
+				<td><a href="${path}/board">${list.board_title}</a></td>
+				<td>${list.user_id}</td>
+				<td>
+					${list.reg_date}
+				</td>
+				<td>${list.view_cnt}</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>

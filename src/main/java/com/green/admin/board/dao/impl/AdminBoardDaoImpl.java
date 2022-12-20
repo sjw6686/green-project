@@ -24,6 +24,8 @@ public class AdminBoardDaoImpl implements AdminBoardDao {
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		
+		System.out.println("map"+ map);
+		
 		return sqlSession.selectList("Board.listAll", map);
 	}
 

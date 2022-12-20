@@ -56,6 +56,18 @@ public class AdminUserServiceImpl implements AdminUserService {
 		System.out.println("service.listSearch>>>>>>>>>>>>>>>>>>>>>>searchType: " + searchType);
 		System.out.println("service.listSearch>>>>>>>>>>>>>>>>>>>>>>keyword: " + keyword);
 		return userDao.UserListSearch(searchType, keyword);
+	}
+
+	@Override
+	public List<AdminUserVo> listAll(String searchOption, String keyword) throws Exception {
+		
+		return userDao.listAll(searchOption, keyword);
+	}
+
+	@Override
+	public int countArticle(String searchOption, String keyword) throws Exception {
+		
+		return userDao.countArticle(searchOption, keyword);
 	}	
 
 

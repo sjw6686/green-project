@@ -20,6 +20,7 @@
      <select id="reviewSearch" resultType="com.green.admin.review.vo.AdminReviewVo">
    		SELECT 
 			user_id,
+			comment_idx,
 			comment_content,
 			reg_date
    		FROM

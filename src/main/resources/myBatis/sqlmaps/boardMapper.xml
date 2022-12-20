@@ -203,6 +203,40 @@
        		comment_idx   = #{ comment_idx   }         
    </update>
    
+   <select id="listAll" resultType="com.green.restaurant.board.vo.UserBoardVo">
+   		SELECT 
+			board_title,
+			board_content,
+			user_id,
+			reg_date,
+			view_cnt,
+			board_type
+   		FROM
+   			board
+   		<include refid="search"></include>
+   		ORDER BY board_idx desc
+   </select>
+   
+   <select id="countArticle" resultType="int">
+   		SELECT
+   			COUNT(*)
+   		FROM
+   			board
+   		<include refid="search"></include>
+   </select>
+   
+   <sql id="search">
+   	<choose>
+   		<when test="searchOption == 'all'">
+   			WHERE user_id like '%'||#{keyword}||'%'
+   			OR board_content like '%'||#{keyword}||'%'
+   			OR board_title like '%'||#{keyword}||'%'
+   		</when>
+   		<otherwise>
+   			WHERE ${searchOption} like '%'||#{keyword}||'%'
+   		</otherwise>
+   	</choose>
+   </sql>
 	      
 </mapper>
 

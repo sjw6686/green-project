@@ -16,20 +16,10 @@ import com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
 
 @Controller
-public class HomeController {
+public class UserHomeController {
 	
 	@Autowired
 	private OwnerService ownerService;
-	
-	@RequestMapping("/")
-	public String index() {
-		return "redirect:/home";
-	}
-	
-	@RequestMapping("/home")
-	public String home() {
-		return "home";
-	}
 	
 	@RequestMapping("/login")
 	public String login() {

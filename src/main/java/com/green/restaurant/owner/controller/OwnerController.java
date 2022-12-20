@@ -231,7 +231,7 @@ public class OwnerController {
 			this.ownerService.updateUserRole(userId);
 		}
 		
-		return "redirect:/";
+		return "redirect:/admin/usersearch";
 	}
 	
 	@RequestMapping("/writeCommentProcess")

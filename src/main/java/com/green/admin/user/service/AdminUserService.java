@@ -19,4 +19,7 @@ public interface AdminUserService {
 	
 	List<AdminUserVo> UserListSearch(String searchType, String keyword) throws Exception;
 
+	List<AdminUserVo> listAll(String searchOption, String keyword) throws Exception;
+	
+	int countArticle(String searchOption, String keyword) throws Exception;
 }

@@ -2,6 +2,7 @@
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,28 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		  
 		  return sqlSession.selectList("AdminUser.UserListSearch", data);
 		  
+	}
+
+	@Override
+	public List<AdminUserVo> listAll(String searchOption, String keyword) throws Exception {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		System.out.println("map"+ map);
+		
+		return sqlSession.selectList("AdminUser.listAll", map);
+	}
+
+	@Override
+	public int countArticle(String searchOption, String keyword) throws Exception {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("AdminUser.countArticle", map);
 	}
 
 

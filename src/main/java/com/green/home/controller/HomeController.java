@@ -111,7 +111,7 @@ public class HomeController {
 		List<String> msgList  = new ArrayList<>(); 
 		
 		for (AdminUserVo userVo : userList) {
-			String msg = userVo.getUser_Id() + "\n";
+			String msg = userVo.getUser_id() + "\n";
 			msgList.add( msg );
 		}
 		

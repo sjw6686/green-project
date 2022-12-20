@@ -21,6 +21,9 @@ import com.green.admin.restaurant.vo.AdminRestaurantVo;
 import com.green.admin.review.service.impl.AdminReviewServiceImpl;
 import com.green.admin.review.vo.AdminReviewVo;
 import com.green.admin.user.service.AdminUserService;
+import com.green.admin.user.vo.AdminUserVo;
+import com.green.restaurant.owner.service.OwnerService;
+import com.green.restaurant.user.vo.OwnerUserVo;
 
 @Controller
 @RequestMapping("/admin")
@@ -40,6 +43,9 @@ public class AdminCategoryController {
 	
 	@Autowired
 	private  AdminUserService  userService;
+	
+	@Autowired
+	private OwnerService ownerService;
 	
 	@RequestMapping("/index")
 	public String index() {
@@ -193,6 +199,8 @@ public class AdminCategoryController {
 		mv.addObject("map", map);
 		mv.setViewName("admin/searchList");
 		
+		System.out.println("mv" + mv);
+		
 		return mv;
 	}
 	
@@ -213,6 +221,28 @@ public class AdminCategoryController {
 		
 		mv.addObject("map", map);
 		mv.setViewName("admin/reviewSearch");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/usersearch")
+	public ModelAndView usersearch(@RequestParam(defaultValue="user_id") String searchOption,
+			@RequestParam(defaultValue="") String keyword) throws Exception {
+			
+		List<AdminUserVo> list = userService.listAll(searchOption, keyword);
+				
+				ModelAndView mv = new ModelAndView();
+				Map<String, Object>map = new HashMap<String, Object>();
+				map.put("list", list);
+				map.put("searchOption", searchOption);
+				map.put("keyword", keyword);
+				
+				List<OwnerUserVo> requestList = this.ownerService.getRequestUpgradeUserList();
+				System.out.println("OwnerCtrl.requestUserUpgradeList>>>>>>>>>>>>>>>>>>>>>>>>>>>>requestList: " + requestList.toString());
+				mv.addObject("requestList", requestList);
+				
+				mv.addObject("map", map);
+				mv.setViewName("admin/userSearch");
 		
 		return mv;
 	}
