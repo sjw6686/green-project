@@ -37,7 +37,7 @@
 	</div>
 </div>
 
-<h2> 안녕하세요 ${ sessionScope.login.username }님, 홈페이지를 관리해보세요! </h2>
+<h2> 안녕하세요 관리자님, 홈페이지를 관리해보세요! </h2>
 
 </body>
 
