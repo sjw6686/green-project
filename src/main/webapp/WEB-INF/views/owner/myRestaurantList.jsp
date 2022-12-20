@@ -12,31 +12,27 @@
 	<a href="/">홈으로</a>
 	<table>
 		<tr>
-			<th>restaurantIdx</th>
-			<th>brandName</th>
-			<th>address</th>
-			<th>brandTel</th>
-			<th>introduce</th>
-			<th>enrollDate</th>
-			<th>ownerIdx</th>
-			<th>categoryName</th>
-			<th>tableType</th>
+			<th>No</th>
+			<th>가게이름</th>
+			<th>주소</th>
+			<th>전화번호</th>
+			<th>소개</th>
+			<th>카테고리</th>
+			<th>파일이름</th>
 		</tr>
 		<c:forEach var="restaurant" items="${restaurantList}">		
 			<tr>
 				<td>
-					<a href="myRestaurant?restaurant_idx=${restaurant.restaurantIdx}">${restaurant.restaurantIdx}</a>
+					<a href="myRestaurant?restaurant_idx=${restaurant.restaurant_idx}">${restaurant.restaurant_idx}</a>
 				</td>
-				<td>${restaurant.brandName}</td>
+				<td>${restaurant.brand_name}</td>
 				<td>${restaurant.address}</td>
-				<td>${restaurant.brandTel}</td>
+				<td>${restaurant.brand_tel}</td>
 				<td>${restaurant.introduce}</td>
-				<td>${restaurant.enrollDate}</td>
-				<td>${restaurant.ownerIdx}</td>
-				<td>${restaurant.categoryName}</td>
-				<td>${restaurant.tableType}</td>
+				<td>${restaurant.category_name}</td>
+				<td>${restaurant.sfile_name}</td>
 				<th>
-					<a href="enrollMenu?restaurant_idx=${restaurant.restaurantIdx}">메뉴등록</a>
+					<a href="enrollMenu?restaurant_idx=${restaurant.restaurant_idx}">메뉴등록</a>
 				</th>
 			</tr>
 		</c:forEach>	

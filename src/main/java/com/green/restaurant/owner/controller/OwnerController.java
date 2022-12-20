@@ -18,8 +18,8 @@ import com.green.restaurant.owner.vo.OwnerBoardVo;
 import com.green.restaurant.owner.vo.OwnerCategoryVo;
 import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
+import com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
-import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.user.vo.OwnerUserVo;
 
 @Controller
@@ -124,7 +124,7 @@ public class OwnerController {
 			return "redirect:/";
 		}
 		
-		List<OwnerRestaurantVo> myRestaurantList = this.ownerService.myRestaurantList(userVo);
+		List<OwnerRestaurantJoinImgFileVo> myRestaurantList = this.ownerService.myRestaurantList(userVo);
 		System.out.println("myRestaurantList>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>myRestaurantList: " + myRestaurantList);
 		model.addAttribute("restaurantList", myRestaurantList);
 		

@@ -9,13 +9,12 @@ import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
-import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.user.vo.OwnerUserVo;
 
 public interface OwnerDao {
 	void insertRestaurant(HashMap<String, Object> map);
 
-	List<OwnerRestaurantVo> selectMyRestaurantList(OwnerUserVo userVo);
+	List<OwnerRestaurantJoinImgFileVo> selectMyRestaurantList(OwnerUserVo userVo);
 
 	List<OwnerRestaurantMenuFileJoinVo> selectMyRestaurantInfo(int restaurant_idx);
 

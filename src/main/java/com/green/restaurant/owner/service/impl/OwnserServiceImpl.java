@@ -33,8 +33,8 @@ public class OwnserServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public List<OwnerRestaurantVo> myRestaurantList(OwnerUserVo userVo) {
-		List<OwnerRestaurantVo> myRestaurantList = this.ownerDao.selectMyRestaurantList(userVo);
+	public List<OwnerRestaurantJoinImgFileVo> myRestaurantList(OwnerUserVo userVo) {
+		List<OwnerRestaurantJoinImgFileVo> myRestaurantList = this.ownerDao.selectMyRestaurantList(userVo);
 		return myRestaurantList;
 	}
 

@@ -17,7 +17,7 @@ import com.green.restaurant.user.vo.OwnerUserVo;
 public interface OwnerService {
 	void enrollRestorant(HashMap<String, Object> map, HttpServletRequest request);
 
-	List<OwnerRestaurantVo> myRestaurantList(OwnerUserVo userVo);
+	List<OwnerRestaurantJoinImgFileVo> myRestaurantList(OwnerUserVo userVo);
 
 	List<OwnerRestaurantMenuFileJoinVo> getMyRestaurantInfo(int restaurant_idx);
 

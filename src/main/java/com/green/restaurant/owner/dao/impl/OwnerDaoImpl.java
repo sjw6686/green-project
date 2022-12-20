@@ -14,7 +14,6 @@ import com.green.restaurant.owner.vo.OwnerCommentVo;
 import com.green.restaurant.owner.vo.OwnerMenuFileJoinVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo;
 import com.green.restaurant.owner.vo.OwnerRestaurantMenuFileJoinVo;
-import com.green.restaurant.owner.vo.OwnerRestaurantVo;
 import com.green.restaurant.pds.vo.FilesVo;
 import com.green.restaurant.user.vo.OwnerUserVo;
 
@@ -43,8 +42,8 @@ public class OwnerDaoImpl implements OwnerDao {
 	}
 
 	@Override
-	public List<OwnerRestaurantVo> selectMyRestaurantList(OwnerUserVo userVo) {
-		List<OwnerRestaurantVo> myRestaurantList = this.sqlSession.selectList("Owner.MyRestaurantList", userVo.getOwnerIdx());
+	public List<OwnerRestaurantJoinImgFileVo> selectMyRestaurantList(OwnerUserVo userVo) {
+		List<OwnerRestaurantJoinImgFileVo> myRestaurantList = this.sqlSession.selectList("Owner.MyRestaurantList", userVo.getOwnerIdx());
 		return myRestaurantList;
 	}
 
