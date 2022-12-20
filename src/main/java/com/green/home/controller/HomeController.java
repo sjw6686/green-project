@@ -24,6 +24,8 @@ import com.green.admin.category.vo.AdminCategoryVo;
 import com.green.admin.restaurant.service.AdminRestaurantService;
 import com.green.admin.user.service.AdminUserService;
 import com.green.admin.user.vo.AdminUserVo;
+import com.green.restaurant.owner.service.OwnerService;
+import com.green.restaurant.owner.vo.OwnerRestaurantJoinImgFileVo;
 
 @Controller
 public class HomeController {
@@ -37,11 +39,18 @@ public class HomeController {
 	@Autowired
 	AdminRestaurantService restaurantService;
 	
+	@Autowired
+	private OwnerService ownerService;
+	
 	@RequestMapping("/")
 	public  String  home(Model model) {
 		
+		List<OwnerRestaurantJoinImgFileVo> restaurantList = this.ownerService.getRestaurantList();
+		System.out.println("HomeConriller.restaurantList>>>>>>>>>>>>>>>>>>>>>>>>>>>>restaurantList: " + restaurantList.toString());
+		
 		List<AdminCategoryVo> categoryList = categoryService.getCategoryList();
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("restaurantList", restaurantList);
 		
 		System.out.println("home>>>>"+ model);
 		

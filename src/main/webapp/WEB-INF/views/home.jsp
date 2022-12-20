@@ -318,17 +318,19 @@
 -->
 <div class="allyc">
   <div class="your-class" style="background-color: #EFF5F5;">음식점 목록
-    <div>
-      <figure>
-       <img src="/img/해목.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">해목</a></em>
-       <span>일식당</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-    <div>
+	<c:forEach var="restaurant" items="${restaurantList}">
+	    <div>
+	      <figure>
+	       <img src="/img/해목.png" alt="이미지1">
+	       <figcaption>
+	       <em><a href="/restaurantInfo?restaurant_idx=${restaurant.restaurant_idx}">${restaurant.brand_name}</a></em>
+	       <span>${restaurant.introduce}</span>
+	       <span>${restaurant.address}</span>
+	       </figcaption>
+	       </figure>
+		</div>
+	</c:forEach>
+    <!-- <div>
       <figure>
        <img src="/img/공담.png" alt="이미지1">
        <figcaption>
@@ -479,9 +481,10 @@
        <span>부산부산부산부산</span>
        </figcaption>
        </figure>
-	</div>
+	</div> -->
   </div>
 </div>
+
   <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/js/bootstrap.bundle.min.js"></script>
