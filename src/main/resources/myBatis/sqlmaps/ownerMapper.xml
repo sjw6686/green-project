@@ -220,4 +220,39 @@
 		)
 	</insert>
 	
+	<insert id="insertReview">
+		INSERT INTO
+			board(
+				board_idx,
+				board_type,
+				board_title,
+				board_content,
+				review_avg,
+				reg_date,
+				restaurant_idx,
+				view_cnt,
+				user_id,
+				cnt_like,
+				cnt_hate,
+				table_type
+			)
+		VALUES(
+			(SELECT
+				MAX(board_idx) + 1
+			FROM
+				board),
+			2,
+			#{title},
+			#{content},
+			#{review_avg},
+			SYSDATE,
+			#{restaurant_idx},
+			0,
+			#{user_id},
+			0,
+			0,
+			1
+		)
+	</insert>
+	
 </mapper>

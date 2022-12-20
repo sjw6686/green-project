@@ -45,4 +45,6 @@ public interface OwnerDao {
 
 	List<OwnerRestaurantJoinImgFileVo> selectRestaurantList();
 
+	void insertReview(HashMap<String, Object> map);
+
 }

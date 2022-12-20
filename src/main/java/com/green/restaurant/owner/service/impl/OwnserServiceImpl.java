@@ -137,5 +137,11 @@ public class OwnserServiceImpl implements OwnerService {
 		return restaurantList;
 	}
 
+	@Override
+	public void writeReview(HashMap<String, Object> map) {
+		System.out.println("OwnerService.writeReview>>>>>>>>>>>>>>>>>map: " + map);
+		this.ownerDao.insertReview(map);
+	}
+
 
 }

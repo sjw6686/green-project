@@ -47,4 +47,6 @@ public interface OwnerService {
 
 	List<OwnerRestaurantJoinImgFileVo> getRestaurantList();
 
+	void writeReview(HashMap<String, Object> map);
+
 }

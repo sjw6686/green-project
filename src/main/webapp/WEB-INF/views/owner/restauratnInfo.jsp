@@ -198,6 +198,7 @@ ul{
 			</tr>
 		</c:forEach>
 	</table>
+	<button type="button" onclick="location.href='restaurant/owner/writeReview?restaurant_idx=${restaurantInfo[0].restaurant_idx}'">리뷰쓰기</button>
 </div>
 </body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4c7e8b5181a619680766ee94de5ed015&libraries=services"></script>

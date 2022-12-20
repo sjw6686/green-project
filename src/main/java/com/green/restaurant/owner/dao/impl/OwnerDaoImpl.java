@@ -157,4 +157,10 @@ public class OwnerDaoImpl implements OwnerDao {
 		return restaurantList;
 	}
 
+	@Override
+	public void insertReview(HashMap<String, Object> map) {
+		System.out.println("OwnerDao.insertReview>>>>>>>>>>>>>>>>map: " + map);
+		this.sqlSession.insert("Owner.insertReview", map);
+	}
+
 }

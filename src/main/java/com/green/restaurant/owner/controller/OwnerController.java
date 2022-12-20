@@ -244,6 +244,33 @@ public class OwnerController {
 		return "redirect:/owner/reviewComment";
 	}
 	
+	@RequestMapping("/writeReview")
+	public String writeReview(
+				@SessionAttribute("login") OwnerUserVo userVo,
+				int restaurant_idx,
+				Model model
+			) {
+		System.out.println("user_id: " + userVo.getUserId() + ", restaurant_idx: " +  restaurant_idx);
+		
+		model.addAttribute("user_id", userVo.getUserId());
+		model.addAttribute("restaurant_idx", restaurant_idx);
+		
+		return "/owner/writeReview";
+	}
+	
+	@RequestMapping("/writeReviewProcess")
+	public String writeReviewProcess(
+			@RequestParam  HashMap<String, Object> map,
+			RedirectAttributes re
+			) {
+		System.out.println("OwnerCtrl.writeReviewProcess>>>>>>>>>>>>>>>>>>>>>>>>>map: " + map);
+		
+		this.ownerService.writeReview(map);
+		
+		re.addAttribute("restaurant_idx", map.get("restaurant_idx"));
+		return "redirect:/restaurantInfo";
+	}
+	
 //	@RequestMapping("/updateRestaurant")
 //	public String updateRestaurant(
 //			Model model,
