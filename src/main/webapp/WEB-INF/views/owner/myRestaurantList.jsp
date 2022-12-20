@@ -10,7 +10,7 @@
 <body>
 	<h2>내가게 목록</h2>
 	<a href="/">홈으로</a>
-	<table>
+	<table border="1">
 		<tr>
 			<th>restaurantIdx</th>
 			<th>brandName</th>

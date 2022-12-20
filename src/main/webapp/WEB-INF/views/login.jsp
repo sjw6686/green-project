@@ -32,7 +32,7 @@
 	<div class="login">
 		<form action="/restaurant/user/loginProcess" method="post">
 			<label>아이디입력</label><br>
-			<input type="text" name="userId" value="manager1234" /><br>
+			<input type="text" name="userId" value="owner1234" /><br>
 			<label>비밀번호입력</label><br>
 			<input type="password" name="userPw" value="qwer1234" /><br>
 			<input type="submit" value="로그인" />

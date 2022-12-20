@@ -137,6 +137,6 @@
 		    function setBounds() {
 		        map.setBounds(bounds, 90, 30, 10, 30);
 		    }
-		    </script>    
+	</script>    
 </body>
 </html>

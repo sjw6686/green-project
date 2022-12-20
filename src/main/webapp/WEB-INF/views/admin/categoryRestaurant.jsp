@@ -49,7 +49,7 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">안녕하세요!</h5>
-        <h5 class="text-white h4"></h5>${ sessionScope.login.username } 님 환영합니다.<a href="/logout">로그아웃</a>
+        <h5 class="text-white h4"></h5>${ sessionScope.login.userId } 님 환영합니다.<a href="/logout">로그아웃</a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -110,11 +110,11 @@
                     </c:forEach>
                 </div>
             </div>
-   <div>
+   		</div>
    </div>
  </div>
+<div class="your-class">음식점 목록
  <c:forEach var="category" items="${ categoryVo }">
-   <div class="your-class">음식점 목록
     <div>
       <figure>
        <img src="/img/해목.png" alt="이미지1">
@@ -125,160 +125,8 @@
        </figcaption>
        </figure>
 	</div>
-    <div>
-      <figure>
-       <img src="/img/공담.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/국제통닭.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/깐풍집.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/꼬꼬닭.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/웨이브온.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/톤쇼우.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/해목.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-  </div>
-  <div class="your-class">음식점 랭킹
-    <div>
-      <figure>
-       <img src="/img/해목.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-    <div>
-      <figure>
-       <img src="/img/공담.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/국제통닭.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/깐풍집.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/꼬꼬닭.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/웨이브온.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/톤쇼우.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/해목.png" alt="이미지1">
-       <figcaption>
-        <em><a href="#">${ category.brand_name }</a></em>
-       <span>${ category.introduce }</span>
-       <span>${ category.address }</span>
-       </figcaption>
-       </figure>
-	</div>
-  </div>
   </c:forEach>
+</div>
      
    <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
