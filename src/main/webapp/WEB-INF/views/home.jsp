@@ -114,40 +114,34 @@
           </li>
           <li class="nav-item dropdown">
           <c:if test="${sessionScope.login.userRole eq 'USER' }">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             관리자 메뉴
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">닫기</a></li>
-            </ul>
+	            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	             관리자 메뉴
+	            </a>
+	            <ul class="dropdown-menu">
+	              
+	              <li>
+	                <hr class="dropdown-divider">
+	              </li>
+	              <li><a class="dropdown-item" href="#">닫기</a></li>
+	            </ul>
             </c:if>
             <c:if test="${sessionScope.login.userRole eq 'OWNER' }">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             관리자 메뉴
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">닫기</a></li>
-            </ul>
+	            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	             관리자 메뉴
+	            </a>
+	            <ul class="dropdown-menu">
+	              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
+	               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
+	              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
+	               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
+	              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
+	              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
+	              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
+	              <li>
+	                <hr class="dropdown-divider">
+	              </li>
+	              <li><a class="dropdown-item" href="#">닫기</a></li>
+	            </ul>
             </c:if>
           <c:if test="${sessionScope.login.userRole eq 'ADMIN' }">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -167,6 +161,8 @@
               <li><a class="dropdown-item" href="#">닫기</a></li>
             </ul>
             </c:if>
+            
+            
           </li>
         </ul>
         <form class="d-flex mt-3" role="search">
@@ -210,291 +206,40 @@
                     </c:forEach>
                 </div>
             </div>
-<!--  
-            <div class="restaurant-lists">
-                <h4 class="tag-filter_title1" style="margin-left: 5%;">전체 음식점</h4>
-                <div class="restaurant-list">
-                    <div class="restaurant-list_tag"></div>
-                    <div class="restaurant-list_tag"></div>
-                </div>
-
-                <div class="restaurantInfo" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/해목.png">
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">해목</span>
-                            <span class="restaurant-list_textBox_sub">일식당</span>
-                            <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/국제통닭.png">
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">국제통닭</span>
-                            <span class="restaurant-list_textBox_sub">치킨</span>
-                            <tr>
-                                <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/톤쇼우.png">
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">톤쇼우</span>
-                            <span class="restaurant-list_textBox_sub">돈까스</span>
-                            <tr>
-                                <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/해목.png">해목 일식당 부산
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">해목</span>
-                            <span class="restaurant-list_textBox_sub">일식당</span>
-                            <tr>
-                                <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-            </div>
-
-
-            <div class="restaurantrank-lists">
-                <h4 class="tag-filter_title2" style="margin-left: 5%;">음식점 랭킹!</h4>
-                <div class="restaurantrank-list"></div>
-                <div class="restaurantInfo">
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/해목.png">
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">해목</span>
-                            <span class="restaurant-list_textBox_sub">일식당</span>
-                            <tr>
-                                <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/해목.png">
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">해목</span>
-                            <span class="restaurant-list_textBox_sub">일식당</span>
-                            <tr>
-                                <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/해목.png">
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">해목</span>
-                            <span class="restaurant-list_textBox_sub">일식당</span>
-                            <tr>
-                                <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-                    <div class="Info">
-                        <div class="restaurant-list_imgBox">
-                            <img class="restaurant-list_img" src="/img/해목.png">
-                        </div>
-                        <div class="restaurant-list_textBox">
-                            <span class="restaurant-list_textBox_name">해목</span>
-                            <span class="restaurant-list_textBox_sub">일식당</span>
-                            <tr>
-                                <span class="restaurant-list_textBox_">부산 부산진구 연수로54번길</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
--->
-<div class="allyc">
-  <div class="your-class" style="background-color: #EFF5F5;">음식점 목록
-	<c:forEach var="restaurant" items="${restaurantList}">
-	    <div>
-	      <figure>
-	       <img src="/img/해목.png" alt="이미지1">
-	       <figcaption>
-	       <em><a href="/restaurantInfo?restaurant_idx=${restaurant.restaurant_idx}">${restaurant.brand_name}</a></em>
-	       <span>${restaurant.introduce}</span>
-	       <span>${restaurant.address}</span>
-	       </figcaption>
-	       </figure>
+            
+            <div class="allyc">
+			  <div class="your-class" style="background-color: #EFF5F5;">음식점 목록
+			  <c:forEach var="restaurant" items="${restaurantList}">
+			    <div>
+			      <figure>
+			       <img src="/img/해목.png" alt="이미지1">
+			       <figcaption>
+			       <em><a href="/restaurantInfo?restaurant_idx=${restaurant.restaurant_idx}">${restaurant.brand_name}</a></em>
+			       <span>${restaurant.introduce}</span>
+			       <span>${restaurant.address}</span>
+			       </figcaption>
+			       </figure>
+			   </div>
+			   </c:forEach>
+			  </div>
+			 <div class="your-class" style="background-color: #EEEEEE;">음식점 랭킹
+			   <c:forEach var="restaurant" items="${restaurantList}">
+			    <div>
+			      <figure>
+			       <img src="/img2/${restaurant.sfile_name}" />
+			       <figcaption>
+			       <em><a href="/restaurantInfo?restaurant_idx=${restaurant.restaurant_idx}">${restaurant.brand_name}</a></em>
+			       <span>${restaurant.introduce}</span>
+			       <span>${restaurant.address}</span>
+			       </figcaption>
+			       </figure>
+			   	</div>
+			   </c:forEach>
+			  </div>
+  			</div>
 		</div>
-	</c:forEach>
-    <!-- <div>
-      <figure>
-       <img src="/img/공담.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">공담</a></em>
-       <span>카페</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
 	</div>
-	<div>
-      <figure>
-       <img src="/img/국제통닭.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">국제통닭</a></em>
-       <span>치킨이 맛있는집</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/깐풍집.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">깐풍집</a></em>
-       <span>특별한 치킨을 만나보세요!</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/꼬꼬닭.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">꼬꼬닭</a></em>
-       <span>후라이드가 맛있는 집</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/웨이브온.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">웨이브온</a></em>
-       <span>카페</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/톤쇼우.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">톤쇼우</a></em>
-       <span>돈까스가 맛있는 집</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/해목.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">해목</a></em>
-       <span>쏼라쏼라</span>
-       <span>부산부산부산부산</span>
-       </figcaption>
-       </figure>
-	</div>
-  </div>
-  <div class="your-class" style="background-color: #EEEEEE;">음식점 랭킹
-    <div>
-      <figure>
-       <img src="/img/해목.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">해목</a></em>
-       <span>일식당</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-    <div>
-      <figure>
-       <img src="/img/공담.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">공담</a></em>
-       <span>카페</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/국제통닭.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">국제통닭</a></em>
-       <span>치킨이 맛있는집</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/깐풍집.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">깐풍집</a></em>
-       <span>특별한 치킨을 만나보세요!</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/꼬꼬닭.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">꼬꼬닭</a></em>
-       <span>후라이드가 맛있는 집</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/웨이브온.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">웨이브온</a></em>
-       <span>카페</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/톤쇼우.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">톤쇼우</a></em>
-       <span>돈까스가 맛있는 집</span>
-       <span>부산 부산진구 연수로54번길</span>
-       </figcaption>
-       </figure>
-	</div>
-	<div>
-      <figure>
-       <img src="/img/해목.png" alt="이미지1">
-       <figcaption>
-       <em><a href="#">해목</a></em>
-       <span>쏼라쏼라</span>
-       <span>부산부산부산부산</span>
-       </figcaption>
-       </figure>
-	</div> -->
-  </div>
-</div>
-
+</div>	
   <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/js/bootstrap.bundle.min.js"></script>

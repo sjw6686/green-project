@@ -17,6 +17,7 @@
     <mvc:resources location="/WEB-INF/resources/css/"  mapping="/css/**" />
     <mvc:resources location="/WEB-INF/resources/js/"   mapping="/js/**" />
     <mvc:resources location="/WEB-INF/resources/img/"  mapping="/img/**" />
+    <mvc:resources location="file:///c:\\upload\\"  mapping="/img2/**" />
     <!--  html 추가 -->
     <!-- <mvc:resources location="/WEB-INF/static/"         mapping="/static/**" /> -->
     
