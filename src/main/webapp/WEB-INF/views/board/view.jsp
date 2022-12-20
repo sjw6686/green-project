@@ -64,7 +64,7 @@
 				</tr>
 				<tr>
 					<td>
-					<a href="/BoardComment/CommentUpdateForm?comment_idx=
+					<a href="/restaurant/BoardComment/CommentUpdateForm?comment_idx=
 								${ commentList.comment_idx}">글 수정</a>
 					<a href="#">글 삭제</a>
 					</td>
@@ -72,9 +72,8 @@
 			</c:forEach>
 			
 		</table>
-		 <form method="post" action="/BoardComment/Write">
-			<%--<input type="hidden" name="user_id" value="${ boardVo.user_id }" />
-			<input type="hidden" name="Comment_idx" value="${ commentList.comment_idx }" /> --%>
+		 <form method="post" action="/restaurant/BoardComment/Write">
+			<input type="hidden" name="board_idx" value="${boardVo.board_idx}" />
 			<input type="hidden" name="lvl" value="0" /> 
 			<input type="hidden"name="step" value="0" /> 
 			<input type="hidden" name="cnum" value="0" />

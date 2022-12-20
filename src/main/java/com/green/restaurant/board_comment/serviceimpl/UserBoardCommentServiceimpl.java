@@ -34,6 +34,12 @@ public class UserBoardCommentServiceimpl implements UserBoardCommentService{
 		boardCommentDao.boardCommentUpdate(map);
 		
 	}
+
+	@Override
+	public void writeComment(HashMap<String, Object> map) {
+		System.out.println("BoardService.writeComment>>>>>>>>>>>>>>>>>>>map: " + map);
+		this.boardCommentDao.insertComment(map);
+	}
 	
 
 }

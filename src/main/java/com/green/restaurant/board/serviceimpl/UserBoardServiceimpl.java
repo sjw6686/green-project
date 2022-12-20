@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.restaurant.board.dao.UserBoardDao;
 import com.green.restaurant.board.service.UserBoardService;
@@ -34,9 +35,9 @@ public class UserBoardServiceimpl implements UserBoardService {
 
 
 	@Override
-	public void getwritesave(UserBoardVo boardVo) {
-		//System.out.println("bService.getwritesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + boardVo);
-		this.boardDao.getwritesave(boardVo);
+	public void getwritesave(@RequestParam HashMap<Integer, Object> map) {
+		System.out.println("bService.getwritesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + map);
+		this.boardDao.getwritesave(map);
 	}
 
 	@Override

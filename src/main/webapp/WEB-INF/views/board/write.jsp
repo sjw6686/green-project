@@ -43,7 +43,8 @@
 		</nav>
 		<section>
 			<article>
-				<form name="frm" method="post" action="WriteSave">
+				<form name="frm" method="post" action="/Board/WriteSave">
+					<input type="hidden" name="user_id" value="${map.user_id}" />
 					<table>
 						<caption>게시판 입력화면</caption>
 						<colgroup>
@@ -55,15 +56,15 @@
 									placeholder="제목을 입력하세요."></td>
 							</tr>
 							<tr>
+								<td><input type="text" name="review_avg" placeholder="평점을 입력해주세요"></td>
+							</tr>
+							<tr>
 								<td><input type="text" id="address_kakao" name="address"
 									readonly placeholder="주소를 입력하세요." /></td>
 							</tr>
 							<tr>
 								<td><textarea name="board_content" rows="7" cols="50"
 										class="box_name" placeholder="내용을 입력하세요."></textarea></td>
-							</tr>
-							<tr>
-								<td colspan="5"><input type="file" name="fileName"></td>
 							</tr>
 						</tbody>
 					</table>

@@ -31,12 +31,6 @@ public class UserBoardController {
 		return "board/list";
 	}
 
-	@RequestMapping("/Write")
-	public String write() {
-
-		return "board/write";
-	}
-
 	// <a href="/Board/View?board_idx=${board.board_idx}"
 	// http://localhost:8081/Board/View?board_idx=1
 	@RequestMapping("/View")
@@ -55,10 +49,9 @@ public class UserBoardController {
 	}
 
 	@RequestMapping("/WriteSave")
-	public String writesave(UserBoardVo boardVo) {
-		// System.out.println("bCtrl.writesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo:
-		// " + boardVo);
-		this.boardService.getwritesave(boardVo);
+	public String writesave(@RequestParam HashMap<Integer, Object> map) {
+		System.out.println("WriteSave>>>>>>>>>>>>>>>>>>>>>>>>>map:" +map);
+		this.boardService.getwritesave(map);
 		return "redirect:/Board/List";
 	}
 

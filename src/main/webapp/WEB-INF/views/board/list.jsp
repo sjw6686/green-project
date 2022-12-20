@@ -47,7 +47,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<a href="/Board/Write" class="btn btn-primary pull right">글쓰기</a>
+				<a href="/restaurant/BoardComment/boardWrite" class="btn btn-primary pull right">글쓰기</a>
 			</article>
 		</section>
 	</div>

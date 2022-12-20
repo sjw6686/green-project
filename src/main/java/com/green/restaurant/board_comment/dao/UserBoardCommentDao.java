@@ -12,6 +12,8 @@ public interface UserBoardCommentDao {
 
 	void boardCommentUpdate(HashMap<String, Object> map);
 
+	void insertComment(HashMap<String, Object> map);
+
 
 
 

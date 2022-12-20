@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.restaurant.board.dao.UserBoardDao;
 import com.green.restaurant.board.vo.UserBoardVo;
@@ -35,9 +36,9 @@ public class UserBoardDaoImpl implements UserBoardDao {
 
 
 	@Override
-	public void getwritesave(UserBoardVo boardVo) {
-		//System.out.println("bDao.getwritesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + boardVo);
-		this.sqlSession.insert("Board.getwriesave", boardVo);
+	public void getwritesave(@RequestParam HashMap<Integer, Object> map) {
+		System.out.println("bDao.getwritesave>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>boardVo: " + map);
+		this.sqlSession.insert("Board.getwriesave", map);
 	}
 
 	@Override

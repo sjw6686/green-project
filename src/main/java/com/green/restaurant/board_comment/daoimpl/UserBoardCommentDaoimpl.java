@@ -42,6 +42,12 @@ public class UserBoardCommentDaoimpl implements UserBoardCommentDao{
 		sqlSession.update("Board.BoardCommentUpdate",map);
 		System.out.println("boardCommentDao.boardCommentUpdate>>>>>>>>>>>>>>>>>>>>update:" + map);
 	}
+
+	@Override
+	public void insertComment(HashMap<String, Object> map) {
+		System.out.println("boardCommentDao.insertComment>>>>>>>>>>>>>>>>>>>>map:" + map);
+		this.sqlSession.insert("Board.insertComment", map);
+	}
 	
 	
 	

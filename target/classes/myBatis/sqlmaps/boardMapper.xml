@@ -45,33 +45,35 @@
    	<insert id = "getwriesave">
 		INSERT INTO
 		    board(
-		        BOARD_IDX,
-		        BOARD_TYPE,
-		        BOARD_TITLE,
-		        BOARD_CONTENT,
-		        REVIEW_AVG,
-		        REG_DATE,
-		        VIEW_CNT,
-		        USER_ID,
-		        CNT_LIKE,
-		        CNT_HATE,
-		        address
+		        board_idx,
+				board_type,
+				board_title,
+				board_content,
+				review_avg,
+				reg_date,
+				view_cnt,
+				user_id,
+				cnt_like,
+				cnt_hate,
+				address,
+				table_type
 		    )
 		VALUES(
 		    (SELECT
-		        MAX(BOARD_IDX) + 1
+		    	MAX(board_idx) + 1
 		    FROM
-		        board),
+		    	board),
 		    1,
 		    #{board_title},
-		    #{board_content},
-		    5,
-		    SYSDATE,
-		    0,
-		    'admin1234',
-		    0,
-		    0,
-		    #{address}
+		   	#{board_content},
+		   	#{review_avg},
+		   	SYSDATE,
+		   	0,
+		   	#{user_id},
+		   	0,
+		   	0,
+		   	#{address},
+		   	1
 		)
    	</insert>
    	
@@ -84,6 +86,31 @@
         WHERE
         	board_idx  = #{board_idx}        
     </update>
+    
+   	<insert id="insertComment">
+   		INSERT INTO
+   			board_comment
+   		VALUES(
+   			(SELECT
+   				MAX(comment_idx) + 1
+   			FROM
+   				board_comment),
+   			#{user_id},
+   			#{comment_content},
+   			#{board_idx},
+   			SYSDATE,
+   			0,
+   			0,
+   			(SELECT
+   				MAX(comment_idx) + 1
+   			FROM
+   				board_comment),
+   			(SELECT
+   				MAX(comment_idx) + 1
+   			FROM
+   				board_comment)
+   		)
+   	</insert>
     
     <insert id="BoardInsert">       
     	INSERT INTO board_comment (
