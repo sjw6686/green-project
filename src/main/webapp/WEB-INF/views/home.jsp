@@ -27,13 +27,23 @@
 
     <style>
         #autoMaker{
-            padding : 3px;
             position: absolute; width: 200px;
             height: auto; background: white;
             margin-top: 3px; cursor:pointer;
-        }
+            top: 51px;
+   			left: 16px;
+   			font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",helvetica,"Apple SD Gothic Neo",'나눔바른고딕 옛한글','NanumBarunGothic YetHangul',sans-serif;
+		    border: 1px solid #e4e7e8;
+		    border-top: 0;
+		    border-radius: 0 0 6px 6px;
+		    -webkit-box-shadow: 0 2px 3px 0 rgb(0 1 3 / 7%);
+		    box-shadow: 0 2px 3px 0 rgb(0 1 3 / 7%);
+		    letter-spacing: -.25px;
+		    line-height: 1.8rem;
+		    background-color: #fff;
+		        }
         #autoMaker > div{
-            border : 1px solid #e6e6e6;
+            border : 1px solid #ffffff;
             margin-top : 3px;
         }
         #autoMaker > div:hover{
@@ -63,7 +73,7 @@
     <nav class="navbar bg-light">
 	  <div class="container-fluid">
 	    <form class="d-flex mt-2" role="search">
-	    <input type="text" id='insert_target' readonly style='background: #cacaca'>
+	    <input type="hidden" id='insert_target' readonly style='background: #cacaca'>
 	      <input class="form-control me-2 me-width1 form-control" type="text" placeholder="Search" aria-label="Search" id="search_area" name="recv_id" >
 		    <div id='autoMaker'></div>
 	      <button class="btn btn-outline-success" type="submit">Search</button>
@@ -510,6 +520,13 @@ var ref = [
     {key:2, name:'해목'},
     {key:3, name:'국제통닭'},
     {key:4, name:'깐풍집'},
+    {key:5, name:'한국정'},
+    {key:6, name:'호로롯쿠'},
+    {key:7, name:'라라코스트 서면'},
+    {key:8, name:'한식당'},
+    {key:9, name:'짬뽕관 서면점'},
+    {key:10, name:'한국정정정'},
+    {key:11, name:'한국정정'},
 ];
 
 var isComplete = false;  //autoMaker 자식이 선택 되었는지 여부
