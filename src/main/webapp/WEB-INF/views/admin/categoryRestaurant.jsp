@@ -19,7 +19,7 @@
 </head>
 <body>
 <nav class="navbar bg-light fixed-top">
-  <div class="container-fluid">
+  <div class="container-fluid" style="background-color: #439A97;">
     <a class="navbar-brand" href="/">부산 맛집</a>
     <ul class="nav nav-tabs">
   <li class="nav-item">
@@ -113,7 +113,21 @@
    		</div>
    </div>
  </div>
-<div class="your-class">음식점 목록
+<div class="your-class" style="background-color: #EFF5F5;">음식점 목록
+ <c:forEach var="category" items="${ categoryVo }">
+    <div>
+      <figure>
+       <img src="/img/해목.png" alt="이미지1">
+       <figcaption>
+       <em><a href="#">${ category.brand_name }</a></em>
+       <span>${ category.introduce }</span>
+       <span>${ category.address }</span>
+       </figcaption>
+       </figure>
+	</div>
+  </c:forEach>
+</div>
+<div class="your-class" style="background-color: #EEEEEE;">음식점 랭킹
  <c:forEach var="category" items="${ categoryVo }">
     <div>
       <figure>

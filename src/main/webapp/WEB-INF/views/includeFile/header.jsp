@@ -213,7 +213,7 @@
 </style>
 </head>
 <body>
-<nav class="navbar bg-light fixed-top">
+   <nav class="navbar bg-light fixed-top">
   <div class="container-fluid" style="background-color: #439A97;">
     <a class="navbar-brand" href="/">부산 맛집</a>
     <ul class="nav nav-tabs">
@@ -233,7 +233,7 @@
     <nav class="navbar bg-light">
 	  <div class="container-fluid">
 	    <form class="d-flex mt-2" role="search">
-	    <input type="text" id='insert_target' readonly style='background: #cacaca'>
+	    <input type="hidden" id='insert_target' readonly style='background: #cacaca'>
 	      <input class="form-control me-2 me-width1 form-control" type="text" placeholder="Search" aria-label="Search" id="search_area" name="recv_id" >
 		    <div id='autoMaker'></div>
 	      <button class="btn btn-outline-success" type="submit">Search</button>
@@ -260,14 +260,7 @@
 	    	<a href="/signUp">회원가입</a><br>
 	    </c:when>
 	    <c:otherwise>
-	    	<c:if test="${sessionScope.login.userRole eq 'OWNER' }">
-	    		<a href="/restaurant/owner/myRestaurantList">내가게 보기</a><br>	  
-   	 			<a href="/restaurant/owner/enrollRestaurant">가게등록</a><br>
-	    	</c:if>
-	    	<c:if test="${sessionScope.login.userRole eq 'USER' }">
-	    		<a href="/restaurant/owner/requestUserUpgrade">등업신청</a><br>
-	    	</c:if>
-	    	<a href="/logOut">로그아웃</a><br>	  
+	    	<a href="/logOut">로그아웃</a>
 	    </c:otherwise>
     	</c:choose>
             <a class="nav-link active" aria-current="page" href="/">홈으로 돌아가기</a>
@@ -275,16 +268,14 @@
           <li class="nav-item dropdown">
           <c:if test="${sessionScope.login.userRole eq 'USER' }">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             관리자 메뉴
+             사용자 메뉴
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
+              <li><a class="dropdown-item" href="/Board/List">게시판</a></li>
+              <li><a class="dropdown-item" href="/restaurant/owner/requestUserUpgrade">등업신청</a></li>
+              <li><a class="dropdown-item" href="/restaurant/mypage/comment">내가 쓴 댓글</a></li>
+              <li><a class="dropdown-item" href="/restaurant/mypage/board">내가 쓴 게시글</a></li>
+              <li><a class="dropdown-item" href="/restaurant/mypage/reviewList">내가 쓴 리뷰</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -293,16 +284,11 @@
             </c:if>
             <c:if test="${sessionScope.login.userRole eq 'OWNER' }">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             관리자 메뉴
+             사장 메뉴
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
-               <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
-              <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
-              <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
+              <li><a class="dropdown-item" href="/restaurant/owner/myRestaurantList">내가게 보기</a></li>
+               <li><a class="dropdown-item" href="/restaurant/owner/enrollRestaurant">가게등록</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -314,13 +300,12 @@
              관리자 메뉴
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/User/List">유저 관리</a></li>
+              <li><a class="dropdown-item" href=/admin/usersearch>유저조회</a><br></li>
                <li><a class="dropdown-item" href="/admin/search">사용자 활동 조회</a></li>
               <li><a class="dropdown-item" href="/admin/ReviewList">리뷰 관리</a></li>
                <li><a class="dropdown-item" href="/admin/reviewsearch">리뷰 조회</a></li>
               <li><a class="dropdown-item" href="/admin/RestaurantList">가게 관리</a></li>
               <li><a class="dropdown-item" href="/admin/index/category/list">카테고리 관리</a></li>
-              <li><a class="dropdown-item" href=/restaurant/owner/requestUserUpgradeList>등업신청목록보기</a><br></li>
               <li><a class="dropdown-item" href="/admin/index2">관리자 메뉴2로 가기</a></li>
               <li>
                 <hr class="dropdown-divider">
